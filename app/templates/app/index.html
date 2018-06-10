@@ -1,0 +1,479 @@
+  
+  {% extends 'app/base.html'%}
+  {% load staticfiles %}
+  {% block content %}
+  <!DOCTYPE html>
+  <section id="intro">
+    <div class="intro-container">
+      <div id="introCarousel" class="carousel  slide carousel-fade" data-ride="carousel">
+
+        <ol class="carousel-indicators"></ol>
+
+        <div class="carousel-inner" role="listbox">
+
+          <div class="carousel-item active">
+            <div class="carousel-background"><img src="{% static 'app/img/intro-carousel/blockchain-3440455__340.jpg'%}" alt=""></div>
+            <div class="carousel-container">
+              <div class="carousel-content">
+                <h2>Welcome to Galviny</h2>
+                <p>Galviny is an investment platform with numerous trading communities.</p>
+                <a href="{% url 'login' %}" class="btn-get-started scrollto">Get Started</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="carousel-item">
+            <div class="carousel-background"><img src="{% static 'app/img/intro-carousel/oil-rig-514035__340.jpg'%}" alt=""></div>
+            <div class="carousel-container">
+              <div class="carousel-content">
+                <h2>Invest in Oil and Gas</h2>
+                <h3 style="color:white;">Daily profit: 2.25 - 3% </h3>
+                <a href="#featured-services" class="btn-get-started scrollto">Get Started</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="carousel-item">
+            <div class="carousel-background"><img src="{% static 'app/img/intro-carousel/chart-1905225__340.jpg'%}" alt=""></div>
+            <div class="carousel-container">
+              <div class="carousel-content">
+                <h2>Invest in Forex</h2>
+                <h3 style="color:white;">Daily profit: 1.7 – 2% </h3>
+                <a href="#featured-services" class="btn-get-started scrollto">Get Started</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="carousel-item">
+            <div class="carousel-background"><img src="{% static 'app/img/intro-carousel/bitcoin-3024279__340.jpg'%}" alt=""></div>
+            <div class="carousel-container">
+              <div class="carousel-content">
+                <h2>Invest in Cryptocurrency</h2>
+                <h3 style="color:white;">Daily profit: 2.4 – 3.5%  </h3>
+                <a href="#featured-services" class="btn-get-started scrollto">Get Started</a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <a class="carousel-control-prev" href="#introCarousel" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon ion-chevron-left" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+
+        <a class="carousel-control-next" href="#introCarousel" role="button" data-slide="next">
+          <span class="carousel-control-next-icon ion-chevron-right" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+
+      </div>
+    </div>
+  </section><!-- #intro -->
+
+  <main id="main">
+
+    <!--==========================
+      Featured Services Section
+    ============================-->
+    <section id="featured-services">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-lg-4 box">
+            <i class="ion-ios-bookmarks-outline"></i>
+            <h4 class="title"><a href="">Register</a></h4>
+            <p class="description">To become a partner you need to register and verify your mail, after which you proceed to fund your wallet with any amount you wish to invest by clicking on the fund wallet button.</p>
+          </div>
+
+          <div class="col-lg-4 box box-bg">
+            <i class="ion-ios-stopwatch-outline"></i>
+            <h4 class="title"><a href="">Fund Wallet</a></h4>
+            <p class="description">Pay money into your wallet</p>
+          </div>
+
+          <div class="col-lg-4 box">
+            <i class="ion-ios-heart-outline"></i>
+            <h4 class="title"><a href="">Lending</a></h4>
+            <p class="description">After your wallet have been funded, click on the lend button if you want the fund in your wallet to be invested. If you decide not to lend it you can always withdraw the money back at any time. Lending us your money qualifies you into getting our daily profit depending on the trade group you have decided to invest in.</p>
+          </div>
+
+        </div>
+      </div>
+    </section><!-- #featured-services -->
+
+    <!--==========================
+      About Us Section
+    ============================-->
+    <section id="about">
+      <div class="container">
+
+        <header class="section-header">
+          <h3>About Us</h3>
+          <p>Breaking boundaries have been our dream and goal over the years filled with various successful trade. 
+            Having deemed it right, our team of successful, hardworking and enthusiastic entrepreneurs in various trade we engage in with depth knowledge and prevailing understanding of various markets decided to make greater impact in the business sector. We saw a need to raise huge capital that may be adequate to take advantage of daily opportunities in our trade of expertise. </p>
+        </header>
+
+        <div class="row about-cols">
+
+          <div class="col-md-4 wow fadeInUp">
+            <div class="about-col">
+              <div class="img">
+                <img src="{% static 'app/img/images4.jpg'%}" alt="" class="img-fluid">
+                <div class="icon"><i class="fa fa-btc"></i></div>
+              </div>
+              <h2 class="title"><a href="#">Cryptocurrency</a></h2>
+              <ul>
+                <li>Minimum investment: 50,000 Naira </li>
+                <li>Maximum investment: 1,000,000 Naira </li>
+                <li>Capitalization Fund: 10 million naira </li>
+                <li>Daily profit: 2.4 – 3.5% </li>
+                <li>Duration: 60 days</li>
+              </ul><br>
+            </div>
+          </div>
+
+          <div class="col-md-4 wow fadeInUp" data-wow-delay="0.1s">
+            <div class="about-col">
+              <div class="img">
+                <img src="{% static 'app/img/entrepreneur-1340649__340.jpg'%}" alt="" class="img-fluid">
+                <div class="icon"><i class="fa fa-usd" aria-hidden="true"></i></div>
+              </div>
+              <h2 class="title"><a href="#">Forex</a></h2>
+              <ul>
+                <li>Minimum investment: 50,000 Naira </li>
+                <li>Maximum investment: 600,000 Naira </li>
+                <li>Capitalization Fund: 14 million naira </li>
+                <li>Daily profit: 1.7 – 2% </li>
+                <li>Duration: 90 days</li>
+              </ul>
+              <br>
+            </div>
+          </div>
+
+          <div class="col-md-4 wow fadeInUp" data-wow-delay="0.2s">
+            <div class="about-col">
+              <div class="img">
+                <img src="{% static 'app/img/refinery-109025__340.jpg'%}" alt="" class="img-fluid">
+                <div class="icon"><i class="ion-ios-eye-outline"></i></div>
+              </div>
+              <h2 class="title"><a href="#">Oil & Gas</a></h2>
+              <ul>
+                <li>Minimum investment: 20,000 Naira</li>
+                <li>Maximum investment: 400,000 Naira</li>
+                <li>Capitalization Fund: 5 million naira</li>
+                <li>Daily profit: 2.25 - 3%</li>
+                <li>Duration: 60 days</li>
+              </ul>
+              <br>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- #about -->
+
+    <!--==========================
+      Services Section
+    ============================-->
+    <section id="services">
+      <div class="container">
+
+        <header class="section-header wow fadeInUp">
+          <h3>How it works</h3>
+           </header>
+
+        <div class="row">
+          <div class="col-lg-4 col-md-6 box wow bounceInUp" data-wow-duration="1.4s">
+            <div class="icon"><i class="ion-ios-analytics-outline"></i></div>
+            <h4 class="title"><a href="">WITHDRAWAL </a></h4>
+            <p class="description">Investment profit can be withdrawn daily. The minimum that can be withdrawn per day is 1,000 Naira. Withdrawal is done once a day. A commission of 200 Naira is deducted for every withdrawal made. This fee is used for logistics.</p>
+          </div>
+          <div class="col-lg-4 col-md-6 box wow bounceInUp" data-wow-duration="1.4s">
+            <div class="icon"><i class="ion-ios-bookmarks-outline"></i></div>
+            <h4 class="title"><a href="">RE-INVESTMENT</a></h4>
+            <p class="description">Once investment in a trade group is made, it is locked for the duration of time stated for the trade group. However, if you wish to re-invest before the period elapses, you are free to pick another trade group to invest in.</p>
+          </div>
+          <div class="col-lg-4 col-md-6 box wow bounceInUp" data-wow-duration="1.4s">
+            <div class="icon"><i class="ion-ios-paper-outline"></i></div>
+            <h4 class="title"><a href="">REFERRAL</a></h4>
+            <p class="description">This is to encourage participants to invite friends to invest with us. This is not mandatory. For every referral made, you get 3% of the FIRST CAPITAL your referral invested. This referral bonus will be added to the amount you can withdraw, so you can choose to withdraw it anytime you wish. </p>
+          </div>
+        </div>
+
+      </div>
+    </section><!-- #services -->
+
+    <!--==========================
+      Call To Action Section
+    ============================-->
+    <section id="call-to-action" class="wow fadeIn">
+      <div class="container text-center">
+        <h3>Operating hours</h3>
+        <p> TWENTY FOUR HOURS OPERATING TIME</p>
+        <a class="cta-btn" href="#">REGISTER NOW!</a>
+      </div>
+    </section><!-- #call-to-action -->
+
+    <!--==========================
+      Skills Section
+    ============================-->
+    <section id="skills">
+      <div class="container">
+
+        <header class="section-header">
+          <h3>WITHDRAWAL</h3>
+          <p>Withdrawal can be made anytime of the day. Payment is effected within 48 hours from the time of withdrawal.</p>
+        </header>
+      </div>
+    </section>
+
+    <!--==========================
+      Facts Section
+    ============================-->
+    <section id="facts"  class="wow fadeIn">
+      <div class="container">
+
+        <header class="section-header">
+          <h3>Our working plans</h3>
+        </header>
+
+        <div class="row counters">
+
+  				<div class="col-lg-4 col-6 text-center">
+            <span style="font-size:20px;">Cryptocurrency</span><br>
+            <table class="table table-resonsive table-bordered table-hover" style="color:black;">
+              <tr>
+                <td>50k</td> <td>1,200 daily</td>
+              </tr>
+              <tr>
+                <td>100k</td> <td>2,400 daily</td>
+              </tr>
+              <tr>
+                <td>200k</td> <td>4,800 daily</td>
+              </tr>
+              <tr>
+                <td>300k</td><td>7,200 daily</td>
+              </tr>
+              <tr>
+                <td>400k</td> <td>9,600 daily</td>
+              </tr>
+              <tr>
+                <td>500k</td> <td>12,000 daily</td>
+              </tr>
+              <tr>
+                <td>1 Million</td> <td>24,000 daily</td>
+              </tr>
+            </table>
+            <p>( 2.4% daily interest on invested amount for 60 days)</p>
+  				</div>
+
+          <div class="col-lg-4 col-6 text-center">
+             <span style="font-size:20px;">Forex</span><br>
+             <table class="table table-resonsive table-bordered table-hover" style="color:black;">
+              <tr>
+                <td>100k</td> <td>1,700 daily</td>
+              </tr>
+              <tr>
+                <td>200k</td> <td>3,400 daily</td>
+              </tr>
+              <tr>
+                <td>300k</td> <td>5,100 daily</td>
+              </tr>
+              <tr>
+                <td>400k</td><td>6,800 daily</td>
+              </tr>
+              <tr>
+                <td>500k</td> <td> 8,500 daily</td>
+              </tr>
+              <tr>
+                <td>600k</td> <td>10,200 daily</td>
+              </tr>
+            </table><br><br>
+            <p>( 1.7% daily interest on invested amount for 60 days)</p>
+  				</div>
+          <div class="col-lg-4 col-6 text-center">
+            <span style="font-size:20px;">Oil &amp; Gas</span><br>
+            <table class="table table-resonsive table-bordered table-hover" style="color:black;">
+                <tr>
+                  <td>40k</td> <td>900 daily</td>
+                </tr>
+                <tr>
+                  <td>60k</td> <td>1,350 daily</td>
+                </tr>
+                <tr>
+                  <td>80k</td> <td>1,800 daily</td>
+                </tr>
+                <tr>
+                  <td>100k</td><td>2,250 daily</td>
+                </tr>
+                <tr>
+                  <td>200k</td> <td> 4,500 daily</td>
+                </tr>
+                <tr>
+                  <td>300k</td> <td>6,750 daily</td>
+                </tr>
+                <tr>
+                    <td>400k</td> <td>9,000 daily</td>
+                  </tr>
+              </table>
+              <p>( 2.25% daily interest on invested amount for 60 days)</p>
+  				</div>
+
+  			</div>
+
+       
+
+      </div>
+    </section><!-- #facts -->
+
+    <!--==========================
+      Portfolio Section
+    ============================-->
+    
+    <!--==========================
+      Clients Section
+    ============================--
+    <!--==========================
+      Clients Section
+    ============================-->
+    <section id="testimonials" class="section-bg wow fadeInUp">
+      <div class="container">
+
+        <header class="section-header">
+          <h3>Testimonials</h3>
+        </header>
+
+        <div class="owl-carousel testimonials-carousel">
+
+          <div class="testimonial-item">
+            <img src="{% static 'app/img/testimonial-1.jpg'%}" class="testimonial-img" alt="">
+            <h3>Saul Goodman</h3>
+            <h4>Ceo &amp; Founder</h4>
+            <p>
+              <img src="{% static 'app/img/quote-sign-left.png'%}" class="quote-sign-left" alt="">
+              Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.
+              <img src="{% static 'app/img/quote-sign-right.png'%}" class="quote-sign-right" alt="">
+            </p>
+          </div>
+
+          <div class="testimonial-item">
+            <img src="{% static 'app/img/testimonial-2.jpg'%}" class="testimonial-img" alt="">
+            <h3>Sara Wilsson</h3>
+            <h4>Designer</h4>
+            <p>
+              <img src="img/quote-sign-left.png" class="quote-sign-left" alt="">
+              Export tempor illum tamen malis malis eram quae irure esse labore quem cillum quid cillum eram malis quorum velit fore eram velit sunt aliqua noster fugiat irure amet legam anim culpa.
+              <img src="img/quote-sign-right.png" class="quote-sign-right" alt="">
+            </p>
+          </div>
+
+          <div class="testimonial-item">
+            <img src="img/testimonial-3.jpg" class="testimonial-img" alt="">
+            <h3>Jena Karlis</h3>
+            <h4>Store Owner</h4>
+            <p>
+              <img src="img/quote-sign-left.png" class="quote-sign-left" alt="">
+              Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla quem veniam duis minim tempor labore quem eram duis noster aute amet eram fore quis sint minim.
+              <img src="img/quote-sign-right.png" class="quote-sign-right" alt="">
+            </p>
+          </div>
+
+          <div class="testimonial-item">
+            <img src="img/testimonial-4.jpg" class="testimonial-img" alt="">
+            <h3>Matt Brandon</h3>
+            <h4>Freelancer</h4>
+            <p>
+              <img src="img/quote-sign-left.png" class="quote-sign-left" alt="">
+              Fugiat enim eram quae cillum dolore dolor amet nulla culpa multos export minim fugiat minim velit minim dolor enim duis veniam ipsum anim magna sunt elit fore quem dolore labore illum veniam.
+              <img src="img/quote-sign-right.png" class="quote-sign-right" alt="">
+            </p>
+          </div>
+
+          <div class="testimonial-item">
+            <img src="img/testimonial-5.jpg" class="testimonial-img" alt="">
+            <h3>John Larson</h3>
+            <h4>Entrepreneur</h4>
+            <p>
+              <img src="img/quote-sign-left.png" class="quote-sign-left" alt="">
+              Quis quorum aliqua sint quem legam fore sunt eram irure aliqua veniam tempor noster veniam enim culpa labore duis sunt culpa nulla illum cillum fugiat legam esse veniam culpa fore nisi cillum quid.
+              <img src="img/quote-sign-right.png" class="quote-sign-right" alt="">
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </section><!-- #testimonials -->
+
+
+    <!--==========================
+      Contact Section
+    ============================-->
+    <section id="contact" class="section-bg wow fadeInUp">
+      <div class="container">
+
+        <div class="section-header">
+          <h3>Contact Us</h3>
+          <p>We are ready to attend to you at any time</p>
+        </div>
+
+        <div class="row contact-info">
+
+          <div class="col-md-4">
+            <div class="contact-address">
+              <i class="ion-ios-location-outline"></i>
+              <h3>Address</h3>
+              <address>41, Freetown Street, Port Harcourt</address>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="contact-phone">
+              <i class="ion-ios-telephone-outline"></i>
+              <h3>Phone Number</h3>
+              <p><a href="tel:+155895548855">+Galviny phone</a></p>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="contact-email">
+              <i class="ion-ios-email-outline"></i>
+              <h3>Email</h3>
+              <p><a href="mailto:info@example.com">info@galviny.com</a></p>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="form">
+          <div id="sendmessage">Your message has been sent. Thank you!</div>
+          <div id="errormessage"></div>
+          <form action="" method="post" role="form" class="contactForm">
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                <div class="validation"></div>
+              </div>
+              <div class="form-group col-md-6">
+                <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" />
+                <div class="validation"></div>
+              </div>
+            </div>
+            <div class="form-group">
+              <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
+              <div class="validation"></div>
+            </div>
+            <div class="form-group">
+              <textarea class="form-control" name="message" rows="5" data-rule="required" data-msg="Please write something for us" placeholder="Message"></textarea>
+              <div class="validation"></div>
+            </div>
+            <div class="text-center"><button type="submit">Send Message</button></div>
+          </form>
+        </div>
+
+      </div>
+    </section><!-- #contact -->
+  </main>
+{% endblock %}

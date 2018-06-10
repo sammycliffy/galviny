@@ -1,0 +1,169 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>BizPage Bootstrap Template</title>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="" name="keywords">
+  <meta content="" name="description">
+
+  <!-- Favicons -->
+  <link href="img/favicon.png" rel="icon">
+  <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Montserrat:300,400,500,700" rel="stylesheet">
+
+  <!-- Bootstrap CSS File -->
+  <link href="{% static 'app/lib/bootstrap/css/bootstrap.min.css'%}" rel="stylesheet">
+
+  <!-- Libraries CSS Files -->
+  <link href="{% static 'app/lib/font-awesome/css/font-awesome.min.css'%}" rel="stylesheet">
+  <link href="{% static 'app/lib/animate/animate.min.css'%}" rel="stylesheet">
+  <link href="{% static 'app/lib/ionicons/css/ionicons.min.css'%}" rel="stylesheet">
+  <link href="{% static 'app/lib/owlcarousel/assets/owl.carousel.min.css'%}" rel="stylesheet">
+  <link href="{% static 'app/lib/lightbox/css/lightbox.min.css' %}" rel="stylesheet">
+  
+
+  <!-- Main Stylesheet File -->
+  <link href="{% static 'app/css/style.css'%}" rel="stylesheet">
+
+  <!-- =======================================================
+    Theme Name: BizPage
+    Theme URL: https://bootstrapmade.com/bizpage-bootstrap-business-template/
+    Author: BootstrapMade.com
+    License: https://bootstrapmade.com/license/
+  ======================================================= -->
+</head>
+
+<body>
+
+  <!--==========================
+    Header
+  ============================-->
+  <header id="header">
+    <div class="container-fluid">
+
+      <div id="logo" class="pull-left">
+        <h1><a href="#intro" class="scrollto">Galviny</a></h1>
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <!-- <a href="#intro"><img src="img/logo.png" alt="" title="" /></a>-->
+      </div>
+
+      <nav id="nav-menu-container">
+        <ul class="nav-menu">
+          <li class="menu-active"><a href="#intro">Login</a></li>
+          <li><a href="#about">Register</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav><!-- #nav-menu-container -->
+    </div>
+  </header><!-- #header -->
+
+  {% block content %}{% endblock %}
+  <!--==========================
+    Footer
+  ============================-->
+  <footer id="footer">
+    <div class="footer-top">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-lg-3 col-md-6 footer-info">
+            <h3>Galviny</h3>
+            <p>Opportunities have been given to partners by Galviny to lend their money to us so as to add up to the required huge capital needed to maximize profit. Galviny invest the capital of partners in diverse profitable ventures and the profit is shared daily.</p>
+          </div>
+
+          <div class="col-lg-3 col-md-6 footer-links">
+            <h4>Useful Links</h4>
+            <ul>
+              <li><i class="ion-ios-arrow-right"></i> <a href="#">Home</a></li>
+              <li><i class="ion-ios-arrow-right"></i> <a href="#">About us</a></li>
+              <li><i class="ion-ios-arrow-right"></i> <a href="#">Services</a></li>
+              <li><i class="ion-ios-arrow-right"></i> <a href="#">Terms of service</a></li>
+              <li><i class="ion-ios-arrow-right"></i> <a href="#">Privacy policy</a></li>
+            </ul>
+          </div>
+
+          <div class="col-lg-3 col-md-6 footer-contact">
+            <h4>Contact Us</h4>
+            <p>
+             41, Freetown Street,  <br>
+             Port Harcourt<br>
+              Rivers State <br>
+              <strong>Phone:</strong> galviny phone<br>
+              <strong>Email:</strong> info@galviny.com<br>
+            </p>
+
+            <div class="social-links">
+              <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
+              <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
+              <a href="#" class="instagram"><i class="fa fa-instagram"></i></a>
+              <a href="#" class="google-plus"><i class="fa fa-google-plus"></i></a>
+              <a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a>
+            </div>
+
+          </div>
+
+          <div class="col-lg-3 col-md-6 footer-newsletter">
+            <h4>Our Newsletter</h4>
+            <p>Get more information about us. suscribe to our newsletter</p>
+            <form action="" method="post">
+              <input type="email" name="email"><input type="submit"  value="Subscribe">
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="copyright">
+        &copy; Copyright <strong>Galviny</strong>. All Rights Reserved
+      </div>
+      <div class="credits">
+        <!--
+          All the links in the footer should remain intact.
+          You can delete the links only if you purchased the pro version.
+          Licensing information: https://bootstrapmade.com/license/
+          Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=BizPage
+        -->
+        Designed by <a href="https://galviny.com/">Galviny</a>
+      </div>
+    </div>
+  </footer><!-- #footer -->
+
+  <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+
+  <!-- JavaScript Libraries -->
+  <script src="{% static 'app/lib/jquery/jquery.min.js'%}"></script>
+  <script src="{% static 'app/lib/jquery/jquery-migrate.min.js'%}"></script>
+  <script src="{% static 'app/lib/bootstrap/js/bootstrap.bundle.min.js'%}"></script>
+  <script src="{% static 'app/lib/easing/easing.min.js'%}"></script>
+  <script src="{% static 'app/lib/superfish/hoverIntent.js'%}"></script>
+  <script src="{% static 'app/lib/superfish/superfish.min.js' %}"></script>
+  <script src="{% static 'app/lib/wow/wow.min.js' %}"></script>
+  <script src="{% static 'app/lib/waypoints/waypoints.min.js'%}"></script>
+  <script src="{% static 'app/lib/counterup/counterup.min.js'%}"></script>
+  <script src="{% static 'app/lib/owlcarousel/owl.carousel.min.js'%}"></script>
+  <script src="{% static 'app/lib/isotope/isotope.pkgd.min.js '%}"></script>
+  <script src="{% static 'app/lib/lightbox/js/lightbox.min.js'%}"></script>
+  <script src="{% static 'app/lib/touchSwipe/jquery.touchSwipe.min.js'%}"></script>
+  <!-- Contact Form JavaScript File -->
+  <script src="{% static 'app/contactform/contactform.js'%}"></script>
+
+  <!-- Template Main Javascript File -->
+  <script src="{% static 'app/js/main.js'%}"></script>
+
+</body>
+</html>
