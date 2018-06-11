@@ -68,7 +68,7 @@ def signup(request):
     return render(request, 'app/signup.html', {'form': form})
 
 @login_required
-def profile_page(request):
+def profile(request):
     return render(request, 'app/profile.html')
 
 
@@ -78,7 +78,7 @@ def profile_completion(request):
         form = ProfileForm(request.POST, instance=request.user.profile)
         if form.is_valid():
             user = form.save()
-            return redirect('profile_page')
+            return redirect('profile')
     else:
         form = ProfileForm()
     return render(request, 'app/profile_completion.html',{'form':form})
