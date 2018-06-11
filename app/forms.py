@@ -7,8 +7,8 @@ from .models import Profile
 class SignUpForm(UserCreationForm):
     email = forms.EmailField(max_length=254,widget=forms.TextInput(attrs={'class':'form-control'}))
     username = forms.CharField(max_length=254,widget=forms.TextInput(attrs={'class':'form-control'}))
-    password1 = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}))
-    password2 = forms.CharField(widget=forms.TextInput(attrs={'class':'form-control'}))
+    password1 = forms.CharField(widget=forms.PasswordInput(attrs={'class':'form-control'}))
+    password2 = forms.CharField(widget=forms.PasswordInput(attrs={'class':'form-control'}))
 
     class Meta:
         model = User

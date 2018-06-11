@@ -54,7 +54,6 @@ def signup(request):
                 'uid': urlsafe_base64_encode(force_bytes(user.pk)).decode(),
                 'token': account_activation_token.make_token(user),
             })
-
             send_mail(subject, message, 'Galviny', ['sammycliffy15@gmail.com'])
             return HttpResponse('Check your email, activation link has been sent. click on the link to continue')
             raw_password = form.cleaned_data.get('password1')
