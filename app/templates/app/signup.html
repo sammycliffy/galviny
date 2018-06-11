@@ -30,25 +30,43 @@
     <div class="col-lg-5">
       <div class="heading"><span>Galviny Registration</span></div>
       <div class="center-div">
-          <form method="post">
-              {% csrf_token %}
-              {% for field in form %}
-                <p>
-                  {{ field.label_tag }}<br>
-                  {{ field }}
-                  {% if field.help_text %}
-                    <small style="color: grey">{{ field.help_text }}</small>
-                  {% endif %}
-                  {% for error in field.errors %}
-                    <p style="color: red">{{ error }}</p>
-                  {% endfor %}
-                </p>
-              {% endfor %}
-                <center>
-                    <button type="submit" class="btn btn-info btn-lg">Sign up</button>
-                </center>
-             
-            </form>
+        <form method="post">
+          {% csrf_token %}
+          
+            <p>
+              <label for="id_username">Username:</label><br>
+              <input type="text" name="username" class="form-control" maxlength="254" autofocus required id="id_username" />
+              
+              
+            </p>
+          
+            <p>
+              <label for="id_email">Email:</label><br>
+              <input type="text" name="email" class="form-control" maxlength="254" required id="id_email" />
+              
+              
+            </p>
+          
+            <p>
+              <label for="id_password1">Password:</label><br>
+              <input type="password" name="password1" class="form-control" required id="id_password1" />
+              
+              
+            </p>
+          
+            <p>
+              <label for="id_password2">confirm password:</label><br>
+              <input type="password" name="password2" class="form-control" required id="id_password2" />
+              
+              
+            </p>
+          
+            <center>
+                <button type="submit" class="btn btn-info btn-lg">Sign up</button>
+            </center>
+         
+        </form>
+
   
       </div>
     </div>
