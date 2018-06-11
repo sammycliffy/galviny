@@ -36,6 +36,9 @@ def activate(request, uidb64, token):
     else:
         return render(request, 'account_activation_invalid.html')
 
+def send_email(request):
+    send_mail('Texting', 'Just want to be sure that this django thing is working', 'sammycliffy15@gmail.com', ['sammycliffy15@gmail.com',])
+    return HttpResponse('Message sent')
 
 
 def signup(request):

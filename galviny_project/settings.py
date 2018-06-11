@@ -115,7 +115,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
@@ -123,8 +123,9 @@ STATIC_URL = '/static/'
 STATIC_ROOT = posixpath.join(*(BASE_DIR.split(os.path.sep) + ['static']))
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'sammycliffy@gmail.com' 
-EMAIL_HOST_PASSWORD = 'sammy090'
+EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_PORT = 587
+EMAIL_HOST_USER = 'sammycliffy'
+EMAIL_HOST_PASSWORD = 'samuel1234'
 EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'Galviny'

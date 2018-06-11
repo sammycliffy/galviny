@@ -6,11 +6,11 @@ from django.dispatch import receiver
 
 class Profile (models.Model):
     user = models.OneToOneField(User, on_delete = models.CASCADE)
-    firstname = models.CharField(max_length=5, null=True, )
-    lastname = models.CharField(max_length=5, null=True)
-    address = models.CharField(max_length=5, null=True)
-    age = models.CharField(max_length=5, null=True)
-    sex = models.CharField(max_length=5, null=True)
+    firstname = models.CharField(max_length=255, null=True, )
+    lastname = models.CharField(max_length=255, null=True)
+    address = models.CharField(max_length=255, null=True)
+    age = models.CharField(max_length=255, null=True)
+    sex = models.CharField(max_length=255, null=True)
     bank = models.CharField(max_length=255, null=True)
     account_name = models.CharField(max_length = 255, null=True)
     account_number = models.CharField(max_length = 255, null=True)
