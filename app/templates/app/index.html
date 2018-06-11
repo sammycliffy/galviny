@@ -17,7 +17,7 @@
               <div class="carousel-content">
                 <h2>Welcome to Galviny</h2>
                 <p>Galviny is an investment platform with numerous trading communities.</p>
-                <a href="{% url 'login' %}" class="btn-get-started scrollto">Get Started</a>
+                <a href="{% if user.is_authenticated %} {% url 'profile'%} {% else %} {% url 'login'%} {% endif %}" class="btn-get-started scrollto">Get Started</a>
               </div>
             </div>
           </div>

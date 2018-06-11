@@ -12,6 +12,8 @@ from django.utils.http import urlsafe_base64_encode
 from django.utils.encoding import force_bytes
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from django.core.mail import send_mail
+from django.conf import settings
 
 def index(request):
     return render(request, 'app/index.html')
@@ -52,7 +54,8 @@ def signup(request):
                 'uid': urlsafe_base64_encode(force_bytes(user.pk)).decode(),
                 'token': account_activation_token.make_token(user),
             })
-            user.email_user(subject, message)
+
+            send_mail(subject, message, 'Galviny', ['sammycliffy15@gmail.com'])
             return HttpResponse('Check your email, activation link has been sent. click on the link to continue')
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=user.username, password=raw_password)

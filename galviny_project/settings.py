@@ -122,3 +122,9 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 STATIC_URL = '/static/'
 STATIC_ROOT = posixpath.join(*(BASE_DIR.split(os.path.sep) + ['static']))
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'sammycliffy@gmail.com' 
+EMAIL_HOST_PASSWORD = 'sammy090'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
