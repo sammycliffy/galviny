@@ -26,7 +26,7 @@ SECRET_KEY = '!4q4810=m97-3icmpv7_@=ua-)v0xfgh_06g(nk7!yniaeaors'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['galviny2.herokuapp.com']
+ALLOWED_HOSTS = ['galviny2.herokuapp.com', 'localhost']
 
 
 # Application definition
