@@ -55,7 +55,7 @@ def signup(request):
                 'token': account_activation_token.make_token(user),
             })
             send_mail(subject, message, 'Galviny', [user.email])
-            return HttpResponse('Check your email, activation link has been sent. click on the link to continue')
+            return HttpResponse('<h2>Check your email, activation link has been sent. click on the link to continue</h2>')
             raw_password = form.cleaned_data.get('password1')
             user = authenticate(username=user.username, password=raw_password)
             login(request, user)
