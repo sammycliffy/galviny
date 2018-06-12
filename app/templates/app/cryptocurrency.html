@@ -18,6 +18,17 @@
 
 	<!-- GOOGLE FONTS -->
 	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
+<style>
+    form li {
+        list-style-type: none;
+		font-size:19px;
+		padding-bottom:20px;
+	}
+	form li span{
+		padding-right:30px;
+		padding-left:30px;
+	}
+</style>
 </head>
 
 <body>
@@ -83,7 +94,7 @@
 				<nav>
 					<ul class="nav">
 						<li><a href="index.html" class="active"><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li>
-						<li><a href="{% url 'fundwallet' %}" class=""><i class="lnr lnr-code"></i> <span>Fund wallet</span></a></li>
+						<li><a href="" class=""><i class="lnr lnr-code"></i> <span>Fund wallet</span></a></li>
 						<li><a href="" class=""><i class="lnr lnr-chart-bars"></i> <span>Lend Money</span></a></li>
 						<li><a href="" class=""><i class="lnr lnr-cog"></i> <span>Withdraw</span></a></li>
 						<li><a href="" class=""><i class="lnr lnr-alarm"></i> <span>Testimony</span></a></li>
@@ -110,95 +121,45 @@
 					<!-- OVERVIEW -->
 					<div class="panel panel-headline">
 						<div class="panel-heading">
-							<h3 class="panel-title">Monthly Overview</h3>
-							<p class="panel-subtitle" style="color:red; font-size:15px;">You have not lent any money yet</p>
-						</div>
+                            <h2 class="panel-title">You have selected <strong style="color:rgb(17, 192, 17);">Cryptocurrency</strong></h2>
+                            <h4 style="color:rgb(150, 21, 12);">Please select a crypto-plan system</h4>
+								</div>
 						<div class="panel-body">
 							<div class="row">
-								<div class="col-md-3">
-									<div class="metric">
-										<span class="icon"><i class="fa fa-download"></i></span>
-										<p>
-											<span class="number">$0.00</span>
-											<span class="title">Wallet Balance</span>
-										</p>
-									</div>
-								</div>
-								<div class="col-md-3">
-									<div class="metric">
-										<span class="icon"><i class="fa fa-shopping-bag"></i></span>
-										<p>
-											<span class="number">$0.00</span>
-											<span class="title">Amount Lent</span>
-										</p>
-									</div>
-								</div>
-								<div class="col-md-3">
-									<div class="metric">
-										<span class="icon"><i class="fa fa-eye"></i></span>
-										<p>
-											<span class="number">$0.00</span>
-											<span class="title">Profit</span>
-										</p>
-									</div>
-								</div>
-								<div class="col-md-3">
-									<div class="metric">
-										<span class="icon"><i class="fa fa-bar-chart"></i></span>
-										<p>
-											<span class="number">$0.00</span>
-											<span class="title">withdrawal</span>
-										</p>
-									</div>
-								</div>
-								<h2 style="text-align:center">Our current plans</h2><br>
-								<div class="col-md-4">
-									<div class="metric" style="background-color:rgb(58, 170, 58)">
-										<span class="icon" style="color:green"><i class="fa fa-btc"></i></span>
-										<p>
-											<span class="number" style="color:white;">Cryptocurrency</span>
-											<span class="title" style="color:white;">withdrawal</span>
-										</p>
-									</div>
-								</div>
-								<div class="col-md-4">
-									<div class="metric" style="background-color:rgb(226, 106, 36)">
-										<span class="icon" style="color:green"><i class="fa fa-briefcase"></i></span>
-										<p>
-											<span class="number" style="color:white;">Forex</span>
-											<span class="title" style="color:white;">withdrawal</span>
-										</p>
-									</div>
-								</div>
-								<div class="col-md-4">
-									<div class="metric" style="background-color:rgb(87, 36, 226)">
-										<span class="icon" style="color:green"><i class="fa fa-diamond"></i></span>
-										<p>
-											<span class="number" style="color:white;">Oil &amp; Gas</span>
-											<span class="title" style="color:white;">withdrawal</span>
-										</p>
-									</div>
-								</div>
+                               <form action="" method="POST">
+										<p><label for="id_crypto_choice_0" style="font-size:20px;">Crypto choices:</label> 
+											<ul id="id_crypto_choice">
+    <li><label for="id_crypto_choice_0"><input type="radio" name="crypto_choice" value="1" required id="id_crypto_choice_0" />
+        <span>50,0000 </span> - <span>1,200 daily</span></label>
+
+</li>
+    <li><label for="id_crypto_choice_1"><input type="radio" name="crypto_choice" value="2" required id="id_crypto_choice_1" />
+		<span>100,0000 </span> - <span>2,400 daily</span></label>
+
+</li>
+    <li><label for="id_crypto_choice_2"><input type="radio" name="crypto_choice" value="3" required id="id_crypto_choice_2" />
+		<span>200,0000 </span> - <span>4,800 daily</span</label>
+
+</li>
+    <li><label for="id_crypto_choice_3"><input type="radio" name="crypto_choice" value="4" required id="id_crypto_choice_3" />
+		<span>300,0000 </span> - <span>7,200 daily</span</label></label>
+
+</li>
+    <li><label for="id_crypto_choice_4"><input type="radio" name="crypto_choice" value="5" required id="id_crypto_choice_4" />
+		<span>400,0000 </span> - <span>9,600 daily</span</label></label>
+
+</li>
+<li><label for="id_crypto_choice_5"><input type="radio" name="crypto_choice" value="6" required id="id_crypto_choice_5" />
+	<span>400,0000 </span> - <span>9,600 daily</span</label></label>
+
+</li>
+</ul></p>
+                               <center><button type="submit" class="btn btn-success">Submit</button></center> 
+                                </form>
+								
+							
 							</div>
-							<div class="row">
-								<div class="col-md-9">
-									<div id="headline-chart" class="ct-chart"></div>
-								</div>
-								<div class="col-md-3">
-									<div class="weekly-summary text-right">
-										<span class="number">2,315</span> <span class="percentage"><i class="fa fa-caret-up text-success"></i> 12%</span>
-										<span class="info-label">Total Sales</span>
-									</div>
-									<div class="weekly-summary text-right">
-										<span class="number">$5,758</span> <span class="percentage"><i class="fa fa-caret-up text-success"></i> 23%</span>
-										<span class="info-label">Monthly Income</span>
-									</div>
-									<div class="weekly-summary text-right">
-										<span class="number">$65,938</span> <span class="percentage"><i class="fa fa-caret-down text-danger"></i> 8%</span>
-										<span class="info-label">Total Income</span>
-									</div>
-								</div>
-							</div>
+							
 						</div>
 					</div>
 					<!-- END OVERVIEW -->

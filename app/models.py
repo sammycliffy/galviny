@@ -27,3 +27,11 @@ def create_user_profile(sender, instance, created, **kwargs):
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
+
+class Wallet(models.Model):
+    user = models.CharField(max_length=255, null= True)
+    email = models.EmailField(max_length=255, null = True)
+    plan = models.CharField( max_length = 255, null = True)
+    amount = models.CharField(max_length = 255, null= True)
+    date = models.DateField(max_length=255, null = True)
+    

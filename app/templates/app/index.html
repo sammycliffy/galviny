@@ -28,7 +28,7 @@
               <div class="carousel-content">
                 <h2>Invest in Oil and Gas</h2>
                 <h3 style="color:white;">Daily profit: 2.25 - 3% </h3>
-                <a href="{% url 'login' %}" class="btn-get-started scrollto">Get Started</a>
+                <a href="{% if user.is_authenticated %} {% url 'profile'%} {% else %} {% url 'login'%} {% endif %}" class="btn-get-started scrollto">Get Started</a>
               </div>
             </div>
           </div>
@@ -39,7 +39,7 @@
               <div class="carousel-content">
                 <h2>Invest in Forex</h2>
                 <h3 style="color:white;">Daily profit: 1.7 – 2% </h3>
-                <a href="{% url 'login' %}" class="btn-get-started scrollto">Get Started</a>
+                <a href="{% if user.is_authenticated %} {% url 'profile'%} {% else %} {% url 'login'%} {% endif %}" class="btn-get-started scrollto">Get Started</a>
               </div>
             </div>
           </div>
@@ -50,7 +50,7 @@
               <div class="carousel-content">
                 <h2>Invest in Cryptocurrency</h2>
                 <h3 style="color:white;">Daily profit: 2.4 – 3.5%  </h3>
-                <a href="{% url 'login' %}" class="btn-get-started scrollto">Get Started</a>
+                <a href="{% if user.is_authenticated %} {% url 'profile'%} {% else %} {% url 'login'%} {% endif %}" class="btn-get-started scrollto">Get Started</a>
               </div>
             </div>
           </div>

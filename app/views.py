@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
-from .forms import SignUpForm, ProfileForm
+from .forms import SignUpForm, ProfileForm, WalletForm
 from django.http import HttpResponse
 from django.utils.encoding import force_text
 from django.utils.http import urlsafe_base64_decode
@@ -85,6 +85,22 @@ def profile_completion(request):
 
 
 
+
+@login_required
+def fund_wallet(request):
+    return render (request, 'app/fund_wallet.html')
+
+
+
+def cryptocurrency(request):
+    if request.method == "POST":
+        form = WalletForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponse('saved successfully')
+    else:
+        form = WalletForm()
+    return render(request, 'app/cryptocurrency.html', {'form':WalletForm})
 
 @login_required
 def update_profile(request):
