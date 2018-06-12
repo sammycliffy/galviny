@@ -21,12 +21,13 @@ class ProfileForm(forms.ModelForm):
 
 class WalletForm (forms.Form):
     STATUS_CHOICES = (
-    (1, ("Not relevant")),
-    (2, ("Review")),
-    (3, ("Maybe relevant")),
-    (4, ("Relevant")),
-    (5, ("Leading candidate")),
-    (6, ("Leading candidate"))
+    (1, ("50,000   = 1,200 profit daily")),
+    (2, ("100,000  = 2,400 profit daily")),
+    (3, ("200,000  = 4,800 profit daily")),
+    (4, ("300,000  = 7,200 profit daily")),
+    (5, ("400,000  = 9,600 profit daily")),
+    (6, ("500,000  = 12,800 profit daily")),
+    (7, ("1,000,000  = 24,000 profit daily"))
     )
     crypto_choice = forms.ChoiceField(choices=STATUS_CHOICES, widget=forms.RadioSelect())
     class Meta:
