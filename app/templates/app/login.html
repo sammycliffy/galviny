@@ -22,6 +22,18 @@
     border-top-right-radius: 5px;
     border-top-left-radius:5px;
   }
+  input{
+    width:100%;
+    height:40px;
+    border: 1px solid rgb(204, 197, 197);
+    border-radius: 5px;
+    padding-left:15px;
+    padding-right:15px;
+  }
+  .errorlist{
+    color:red;
+    font-size:12px;
+  }
 </style>
 <br><br><br>
 <div class="container">
@@ -32,28 +44,10 @@
       <div class="center-div">
         <form method="post">
          {% csrf_token %}
-          
-            <p>
-              <label for="id_username">Username:</label><br>
-              
-              <input type="text" name="username" autofocus maxlength="254" required id="id_username" class="form-control" />
-    
-              
-            </p>
-          
-            <p>
-              <label for="id_password">Password:</label><br>
-              
-              <input type="password" name="password" required id="id_password" class="form-control" />
-              
-              
-            </p>
-          
-            <center>
-                <button type="submit" class="btn btn-info btn-lg">Log in</button><br><br>
-                <p>No account yet? <a href="/signup/">Sign up</a></p><a style="color:red" href="{% url 'password_reset'%}">Reset Password</a>
-                
-            </center>
+          {{form.as_p}}
+          <input type="submit" class="btn btn-primary"><br><br>
+          <center> <a href="{% url 'password_reset'%}" style=" color:darkslateblue;">Reset Password</a></center>
+         
         </form>
   
       </div>
