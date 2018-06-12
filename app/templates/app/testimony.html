@@ -87,7 +87,7 @@
 						<li><a href="" class=""><i class="lnr lnr-code"></i> <span>Fund wallet</span></a></li>
 						<li><a href="" class=""><i class="lnr lnr-chart-bars"></i> <span>Lend Money</span></a></li>
 						<li><a href="" class=""><i class="lnr lnr-cog"></i> <span>Withdraw</span></a></li>
-						<li><a href="{% url 'tes%" class=""><i class="lnr lnr-alarm"></i> <span>Testimony</span></a></li>
+						<li><a href="" class=""><i class="lnr lnr-alarm"></i> <span>Testimony</span></a></li>
 						<li>
 							<a href="#subPages" data-toggle="collapse" class="collapsed"><i class="lnr lnr-file-empty"></i> <span>Profile</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
 							<div id="subPages" class="collapse ">
@@ -111,57 +111,19 @@
 					<!-- OVERVIEW -->
 					<div class="panel panel-headline">
 						<div class="panel-heading">
-							<h2 class="panel-title" style="font-size:30px;">Withdraw your money</h2>
+							<h2 class="panel-title" style="font-size:30px;">Share your testimony with others</h2>
 								</div>
 						<div class="panel-body">
 							<div class="row">
+                                <div class="col-lg-6">
+                                        <form action="{% url 'testimony'%}" method ="POST">
+                                            {% csrf_token %}
+                                                <textarea name="" id="" cols="50" rows="10" name="testimony" ></textarea><br><br>
+                                                <input type="submit" class="btn btn-success" style="float:right">
+                                        </form>
+                                </div>
 								
-								<div class="col-md-3">
-									<div class="metric">
-										<span class="icon"><i class="fa fa-download"></i></span>
-										<p>
-											<span class="number">$0.00</span>
-											<span class="title">Wallet Balance</span>
-										</p>
-									</div>
-								</div>
-								<div class="col-md-3">
-									<div class="metric">
-										<span class="icon"><i class="fa fa-download"></i></span>
-										<p>
-											<span class="number">$0.00</span>
-											<span class="title">Profilt</span>
-										</p>
-									</div>
-								</div>
-								<div class="col-md-3">
-									<div class="metric">
-										<span class="icon"><i class="fa fa-download"></i></span>
-										<p>
-											<span class="number">$0.00</span>
-											<span class="title">Logistics</span>
-										</p>
-									</div>
-								</div>
-								<div class="col-md-3">
-									<div class="metric">
-										<span class="icon"><i class="fa fa-download"></i></span>
-										<p>
-											<span class="number">$0.00</span>
-											<span class="title">Withdraw Amount</span>
-										</p>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-4">
-								<dl>
-									<dt>Please Note</dt>
-									<dd> - Withdrawal less than the mature date will attract logistics fee </dd>
-									<dd> - You can only withdraw profits not capital before the mature date</dd>
-								</dl>
-							<a href="{% url 'withdrawal' %}" class="btn btn-success" style="float:right"> Withdraw</a>
 								
-							</div>
 						</div>
 					</div>
 					<!-- END OVERVIEW -->

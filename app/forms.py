@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import Profile, Wallet
+from .models import Profile, Wallet, Testimony
 
 
 class SignUpForm(UserCreationForm):
@@ -32,3 +32,5 @@ class WalletForm (forms.Form):
     crypto_choice = forms.ChoiceField(choices=STATUS_CHOICES, widget=forms.RadioSelect())
     class Meta:
         model = Wallet
+
+

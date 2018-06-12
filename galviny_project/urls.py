@@ -35,6 +35,8 @@ urlpatterns = [
     url(r'^sendmail/$',views.send_email, name="email"),
     url(r'^fund-wallet/$',views.fund_wallet, name="fundwallet"),
     url(r'^cryptocurrency/$',views.cryptocurrency, name="cryptocurrency"),
-    url(r'^withdrawal/$',views.withdrawal, name="withdrawal")
+    url(r'^withdrawal/$',views.withdrawal, name="withdrawal"),
+    url(r'^testimony/$',views.testimony, name="testimony"),
+    url(r'^password/$', views.change_password, name='change_password'),
 ]
         

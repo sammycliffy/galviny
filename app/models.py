@@ -34,4 +34,9 @@ class Wallet(models.Model):
     plan = models.CharField( max_length = 255, null = True)
     amount = models.CharField(max_length = 255, null= True)
     date = models.DateField(max_length=255, null = True)
+
+class Testimony(models.Model):
+    username = models.CharField(max_length = 255, null = True)
+    testimony = models.CharField(max_length = 255, null = True)
+    date = models.DateField(auto_now=True)
     

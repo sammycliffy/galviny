@@ -3,6 +3,7 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from .forms import SignUpForm, ProfileForm, WalletForm
 from django.http import HttpResponse
+from app.models import Testimony
 from django.utils.encoding import force_text
 from django.utils.http import urlsafe_base64_decode
 from app.token import account_activation_token
@@ -14,6 +15,9 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 from django.conf import settings
+from django.contrib import messages
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.forms import PasswordChangeForm
 
 def index(request):
     return render(request, 'app/index.html')
@@ -102,21 +106,38 @@ def cryptocurrency(request):
         form = WalletForm()
     return render(request, 'app/cryptocurrency.html', {'form':WalletForm})
 
-
-
+#Withdrawal
+@login_required
 def withdrawal(request):
     return render(request, 'app/withdrawal.html')
+
+
+
+
+def testimony(request):
+    if request.method == "POST":
+        testimony = request.POST.get('testmony')
+        username = request.user.username
+        if testimony and username is not None:
+            Testimony.objects.create(
+                username = username,
+                testimony = Testimony
+            )
+            return HttpResponse('Thank you for sharing your testimony with us')
+    return render(request, 'app/testimony.html')
+
+
 
 
 
 @login_required
 def update_profile(request):
     if request.method == 'POST':
-        user_form = UserForm(request.POST, instance=request.user)
+        user_form = SignupForm(request.POST, instance=request.user)
         profile_form = ProfileForm(request.POST, instance=request.user.profile)
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
-            profile_form.save()
+            Profile_form.save()
             messages.success(request, _('Your profile was successfully updated!'))
             return redirect('settings:profile')
         else:
@@ -124,7 +145,26 @@ def update_profile(request):
     else:
         user_form = UserForm(instance=request.user)
         profile_form = ProfileForm(instance=request.user.profile)
-    return render(request, 'profiles/profile.html', {
+    return render(request, 'app/editprofile.html', {
         'user_form': user_form,
         'profile_form': profile_form
+    })
+
+
+
+@login_required
+def change_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(request.user, request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)  # Important!
+            messages.success(request, 'Your password was successfully updated!')
+            return redirect('change_password')
+        else:
+            messages.error(request, 'Please correct the error below.')
+    else:
+        form = PasswordChangeForm(request.user)
+    return render(request, 'app/change_password.html', {
+        'form': form
     })
