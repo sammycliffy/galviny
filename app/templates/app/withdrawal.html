@@ -18,19 +18,7 @@
 
 	<!-- GOOGLE FONTS -->
 	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
-<style>
-    form li {
-        list-style-type: none;
-		font-size:19px;
-		padding-bottom:20px;
-		font-weight: normal;
-		font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-	}
-	form li span{
-		padding-right:30px;
-		padding-left:30px;
-	}
-</style>
+
 </head>
 
 <body>
@@ -96,9 +84,9 @@
 				<nav>
 					<ul class="nav">
 						<li><a href="index.html" class="active"><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li>
-						<li><a href="{% url 'fundwallet' %}" class=""><i class="lnr lnr-code"></i> <span>Fund wallet</span></a></li>
+						<li><a href="" class=""><i class="lnr lnr-code"></i> <span>Fund wallet</span></a></li>
 						<li><a href="" class=""><i class="lnr lnr-chart-bars"></i> <span>Lend Money</span></a></li>
-						<li><a href="{% url 'withdrawal' %}" class=""><i class="lnr lnr-cog"></i> <span>Withdraw</span></a></li>
+						<li><a href="" class=""><i class="lnr lnr-cog"></i> <span>Withdraw</span></a></li>
 						<li><a href="" class=""><i class="lnr lnr-alarm"></i> <span>Testimony</span></a></li>
 						<li>
 							<a href="#subPages" data-toggle="collapse" class="collapsed"><i class="lnr lnr-file-empty"></i> <span>Profile</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
@@ -123,43 +111,54 @@
 					<!-- OVERVIEW -->
 					<div class="panel panel-headline">
 						<div class="panel-heading">
-                            <h2 class="panel-title">You have selected <strong style="color:rgb(17, 192, 17);">Cryptocurrency</strong></h2>
-                            <h4 style="color:rgb(150, 21, 12);">Please select a crypto-plan system</h4>
+							<h2 class="panel-title" style="font-size:30px;">Please choose a plan</h2>
 								</div>
 						<div class="panel-body">
 							<div class="row">
-                               <form action="" method="POST">
-										<p><label for="id_crypto_choice_0" style="font-size:20px;">Crypto choices:</label> 
-											<ul id="id_crypto_choice">
-    <li><label for="id_crypto_choice_0"><input type="radio" name="crypto_choice" value="1" required id="id_crypto_choice_0" />
-        <span>50,0000 </span> - <span>1,200 daily</span></label>
-
-</li>
-    <li><label for="id_crypto_choice_1"><input type="radio" name="crypto_choice" value="2" required id="id_crypto_choice_1" />
-		<span>100,0000 </span> - <span>2,400 daily</span></label>
-
-</li>
-    <li><label for="id_crypto_choice_2"><input type="radio" name="crypto_choice" value="3" required id="id_crypto_choice_2" />
-		<span>200,0000 </span> - <span>4,800 daily</span</label>
-
-</li>
-    <li><label for="id_crypto_choice_3"><input type="radio" name="crypto_choice" value="4" required id="id_crypto_choice_3" />
-		<span>300,0000 </span> - <span>7,200 daily</span</label></label>
-
-</li>
-    <li><label for="id_crypto_choice_4"><input type="radio" name="crypto_choice" value="5" required id="id_crypto_choice_4" />
-		<span>400,0000 </span> - <span>9,600 daily</span</label></label>
-
-</li>
-<li><label for="id_crypto_choice_5"><input type="radio" name="crypto_choice" value="6" required id="id_crypto_choice_5" />
-	<span>400,0000 </span> - <span>9,600 daily</span</label></label>
-
-</li>
-</ul></p>
-                               <center><button type="submit" class="btn btn-success">Submit</button></center> 
-                                </form>
 								
-							
+								<div class="col-md-4 wow fadeInUp">
+									<div class="about-col">
+									  <h2 class="title"><a href="#">Cryptocurrency</a></h2>
+									  <ul>
+										<li>Minimum investment: 50,000 Naira </li>
+										<li>Maximum investment: 1,000,000 Naira </li>
+										<li>Capitalization Fund: 10 million naira </li>
+										<li>Daily profit: 2.4 – 3.5% </li>
+										<li>Duration: 60 days</li>
+									  </ul><br>
+									</div>
+									<a href="{% url 'cryptocurrency' %}" class="btn btn-success btn-md">Choose plan</a>
+								  </div>
+								  <div class="col-md-4 wow fadeInUp" data-wow-delay="0.1s">
+									<div class="about-col">
+									  <h2 class="title"><a href="#">Forex</a></h2>
+									  <ul>
+										<li>Minimum investment: 50,000 Naira </li>
+										<li>Maximum investment: 600,000 Naira </li>
+										<li>Capitalization Fund: 14 million naira </li>
+										<li>Daily profit: 1.7 – 2% </li>
+										<li>Duration: 90 days</li>
+									  </ul>
+									  <br>
+									</div>
+									<a href="{% url 'cryptocurrency' %}" class="btn btn-success btn-md">Choose plan</a>
+								
+								  </div>
+								  <div class="col-md-4 wow fadeInUp" data-wow-delay="0.2s">
+									<div class="about-col">
+									  <h2 class="title"><a href="#">Oil & Gas</a></h2>
+									  <ul>
+										<li>Minimum investment: 20,000 Naira</li>
+										<li>Maximum investment: 400,000 Naira</li>
+										<li>Capitalization Fund: 5 million naira</li>
+										<li>Daily profit: 2.25 - 3%</li>
+										<li>Duration: 60 days</li>
+									  </ul>
+									  <br>
+									</div>
+									<a href="{% url 'cryptocurrency' %}" class="btn btn-success btn-md">Choose plan</a>
+								
+								  </div>
 							</div>
 							
 						</div>
@@ -238,11 +237,7 @@
 						</div>
 					-->
 		<div class="clearfix"></div>
-		<footer>
-			<div class="container-fluid">
-				<p class="copyright">&copy; 2018 <a href="https://www.themeineed.com" target="_blank">Galviny</a>. All Rights Reserved.</p>
-			</div>
-		</footer>
+		
 	</div>
 	<!-- END WRAPPER -->
 	<!-- Javascript -->

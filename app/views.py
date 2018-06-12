@@ -91,7 +91,7 @@ def fund_wallet(request):
     return render (request, 'app/fund_wallet.html')
 
 
-
+@login_required
 def cryptocurrency(request):
     if request.method == "POST":
         form = WalletForm(request.POST)
@@ -101,6 +101,13 @@ def cryptocurrency(request):
     else:
         form = WalletForm()
     return render(request, 'app/cryptocurrency.html', {'form':WalletForm})
+
+
+
+def withdrawal(request):
+    return render(request, 'app/withdrawal.html')
+
+
 
 @login_required
 def update_profile(request):

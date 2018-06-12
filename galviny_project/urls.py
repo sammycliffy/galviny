@@ -34,6 +34,7 @@ urlpatterns = [
     url(r'^profile_completion/$', views.profile_completion, name="profile_completion"),
     url(r'^sendmail/$',views.send_email, name="email"),
     url(r'^fund-wallet/$',views.fund_wallet, name="fundwallet"),
-    url(r'^cryptocurrency/$',views.cryptocurrency, name="cryptocurrency")
+    url(r'^cryptocurrency/$',views.cryptocurrency, name="cryptocurrency"),
+    url(r'^withdrawal/$',views.withdrawal, name="withdrawal")
 ]
         
