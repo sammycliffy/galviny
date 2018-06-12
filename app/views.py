@@ -127,7 +127,8 @@ def testimony(request):
     return render(request, 'app/testimony.html')
 
 
-
+def forex(request):
+    return render(request, 'app/forex.html')
 
 
 @login_required

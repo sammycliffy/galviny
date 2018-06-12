@@ -22,6 +22,9 @@
     border-top-right-radius: 5px;
     border-top-left-radius:5px;
   }
+  .errorlist{
+    color:red;
+  }
 </style>
 <br><br><br>
 <div class="container">
@@ -33,34 +36,7 @@
         <form method="post">
           {% csrf_token %}
           
-            <p>
-              <label for="id_username">Username:</label><br>
-              <input type="text" name="username" class="form-control" maxlength="254" autofocus required id="id_username" />
-              
-              
-            </p>
-          
-            <p>
-              <label for="id_email">Email:</label><br>
-              <input type="text" name="email" class="form-control" maxlength="254" required id="id_email" />
-              
-              
-            </p>
-          
-            <p>
-              <label for="id_password1">Password:</label><br>
-              <input type="password" name="password1" class="form-control" required id="id_password1" />
-              
-              
-            </p>
-          
-            <p>
-              <label for="id_password2">confirm password:</label><br>
-              <input type="password" name="password2" class="form-control" required id="id_password2" />
-              
-              
-            </p>
-          
+           {{form.as_p}}
             <center>
                 <button type="submit" class="btn btn-info btn-lg">Sign up</button>
             </center>

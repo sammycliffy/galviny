@@ -15,10 +15,22 @@
 	<!-- MAIN CSS -->
 	<link rel="stylesheet" href="{% static 'app/css/main.css'%}">
 	<!-- FOR DEMO PURPOSES ONLY. You should remove this in your project -->
-
+	<script src="{% static 'app/js/voguepay.js'%}"></script>
 	<!-- GOOGLE FONTS -->
 	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
-
+<style>
+    form li {
+        list-style-type: none;
+		font-size:16px;
+		padding-bottom:20px;
+		font-weight: normal;
+		font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+	}
+	form li span{
+		padding-right:30px;
+		padding-left:30px;
+	}
+</style>
 </head>
 
 <body>
@@ -111,133 +123,104 @@
 					<!-- OVERVIEW -->
 					<div class="panel panel-headline">
 						<div class="panel-heading">
-							<h2 class="panel-title" style="font-size:30px;">Please choose a plan</h2>
+                            <h2 class="panel-title">You have selected <strong style="color:rgb(17, 192, 17);">Cryptocurrency</strong></h2>
+                            <h4 style="color:rgb(150, 21, 12);">Please select a crypto-plan system</h4>
 								</div>
 						<div class="panel-body">
 							<div class="row">
+								<form action="" name="myForm">
+								<p><label for="id_crypto_choice_0">Crypto choice:</label> <ul id="id_crypto_choice">
+									<li><label for="id_crypto_choice_0"><input type="radio" name="crypto_choice" value="50000" required id="id_crypto_choice_0" />
+								 50,000   = 1,200 profit daily</label>
 								
-								<div class="col-md-4 wow fadeInUp">
-									<div class="about-col">
-									  <h2 class="title"><a href="#">Cryptocurrency</a></h2>
-									  <ul>
-										<li>Minimum investment: 50,000 Naira </li>
-										<li>Maximum investment: 1,000,000 Naira </li>
-										<li>Capitalization Fund: 10 million naira </li>
-										<li>Daily profit: 2.4 – 3.5% </li>
-										<li>Duration: 60 days</li>
-									  </ul><br>
-									</div>
-									<a href="{% url 'cryptocurrency' %}" class="btn btn-success btn-md">Choose plan</a>
-								  </div>
-								  <div class="col-md-4 wow fadeInUp" data-wow-delay="0.1s">
-									<div class="about-col">
-									  <h2 class="title"><a href="#">Forex</a></h2>
-									  <ul>
-										<li>Minimum investment: 100,000 Naira </li>
-										<li>Maximum investment: 600,000 Naira </li>
-										<li>Capitalization Fund: 14 million naira </li>
-										<li>Daily profit: 1.7 – 2% </li>
-										<li>Duration: 90 days</li>
-									  </ul>
-									  <br>
-									</div>
-									<a href="{% url 'forex' %}" class="btn btn-success btn-md">Choose plan</a>
+								</li>
+									<li><label for="id_crypto_choice_1"><input type="radio" name="crypto_choice" value="100000" required id="id_crypto_choice_1" />
+								 100,000  = 2,400 profit daily</label>
 								
-								  </div>
-								  <div class="col-md-4 wow fadeInUp" data-wow-delay="0.2s">
-									<div class="about-col">
-									  <h2 class="title"><a href="#">Oil & Gas</a></h2>
-									  <ul>
-										<li>Minimum investment: 20,000 Naira</li>
-										<li>Maximum investment: 400,000 Naira</li>
-										<li>Capitalization Fund: 5 million naira</li>
-										<li>Daily profit: 2.25 - 3%</li>
-										<li>Duration: 60 days</li>
-									  </ul>
-									  <br>
-									</div>
-									<a href="{% url 'cryptocurrency' %}" class="btn btn-success btn-md">Choose plan</a>
+								</li>
+									<li><label for="id_crypto_choice_2"><input type="radio" name="crypto_choice" value="200000" required id="id_crypto_choice_2" />
+								 200,000  = 4,800 profit daily</label>
 								
-								  </div>
+								</li>
+									<li><label for="id_crypto_choice_3"><input type="radio" name="crypto_choice" value="300000" required id="id_crypto_choice_3" />
+								 300,000  = 7,200 profit daily</label>
+								
+								</li>
+									<li><label for="id_crypto_choice_4"><input type="radio" name="crypto_choice" value="400000" required id="id_crypto_choice_4" />
+								 400,000  = 9,600 profit daily</label>
+								
+								</li>
+									<li><label for="id_crypto_choice_5"><input type="radio" name="crypto_choice" value="500000" required id="id_crypto_choice_5" />
+								 500,000  = 12,800 profit daily</label>
+								
+								</li>
+									<li><label for="id_crypto_choice_6"><input type="radio" name="crypto_choice" value="10000000" required id="id_crypto_choice_6" />
+								 1,000,000  = 24,000 profit daily</label>
+								
+								</li>
+								</ul></p>
+							  
+                               <center> 
+                                </form>
+								
+							
 							</div>
 							
-						</div>
-					</div>
-					<!-- END OVERVIEW -->
-					<div class="row">
-						<div class="col-md-6">
-							<!-- RECENT PURCHASES -->
-							<!--
-							<div class="panel">
-								<div class="panel-heading">
-									<h3 class="panel-title">Recent Transaction</h3>
-									<div class="right">
-										<button type="button" class="btn-toggle-collapse"><i class="lnr lnr-chevron-up"></i></button>
-										<button type="button" class="btn-remove"><i class="lnr lnr-cross"></i></button>
-									</div>
-								</div>
-								<div class="panel-body no-padding">
-									<table class="table table-striped">
-										<thead>
-											<tr>
-												<th>Order No.</th>
-												<th>Name</th>
-												<th>Amount</th>
-												<th>Date &amp; Time</th>
-												<th>Status</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<td><a href="#">763648</a></td>
-												<td>Steve</td>
-												<td>$122</td>
-												<td>Oct 21, 2016</td>
-												<td><span class="label label-success">COMPLETED</span></td>
-											</tr>
-											<tr>
-												<td><a href="#">763649</a></td>
-												<td>Amber</td>
-												<td>$62</td>
-												<td>Oct 21, 2016</td>
-												<td><span class="label label-warning">PENDING</span></td>
-											</tr>
-											<tr>
-												<td><a href="#">763650</a></td>
-												<td>Michael</td>
-												<td>$34</td>
-												<td>Oct 18, 2016</td>
-												<td><span class="label label-danger">FAILED</span></td>
-											</tr>
-											<tr>
-												<td><a href="#">763651</a></td>
-												<td>Roger</td>
-												<td>$186</td>
-												<td>Oct 17, 2016</td>
-												<td><span class="label label-success">SUCCESS</span></td>
-											</tr>
-											<tr>
-												<td><a href="#">763652</a></td>
-												<td>Smith</td>
-												<td>$362</td>
-												<td>Oct 16, 2016</td>
-												<td><span class="label label-success">SUCCESS</span></td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
-								<div class="panel-footer">
-									<div class="row">
-										<div class="col-md-6"><span class="panel-note"><i class="fa fa-clock-o"></i> Last 24 hours</span></div>
-										<div class="col-md-6 text-right"><a href="#" class="btn btn-primary">View All Purchases</a></div>
-									</div>
-								</div>
-							</div>
 						
-						</div>
-					-->
-		<div class="clearfix"></div>
-		
+					<script>
+						closedFunction=function() {
+							alert('window closed');
+						}
+					
+						 successFunction=function(transaction_id) {
+							alert('Transaction was successful, Ref: '+transaction_id)
+						}
+					
+						 failedFunction=function(transaction_id) {
+							 alert('Transaction was not successful, Ref: '+transaction_id)
+						}
+					</script>
+													
+					  <script>
+						 function pay3() {
+							var selected = document.forms.myForm.crypto_choice.value;
+							 Voguepay.init({
+								 v_merchant_id: 'demo',
+								 total: selected,
+								 notify_url: 'http://domain.com/notification.php',
+								 cur: 'NGN',
+								 merchant_ref: 'ref123',
+								 memo: 'Cryptocurrency',
+								 recurrent: true,
+								 frequency: 10,
+								 developer_code: '5b1fe41cab8af',
+								 store_id: 1,
+								 loadText:'Custom load text',
+								
+								 customer: {
+									name: 'Customer name',
+									address: 'Customer address',
+									city: 'Customer city',
+									state: 'Customer state',
+									zipcode: 'Customer zip/post code',
+									email: 'Customer email',
+									phone: 'Customer phone'
+								},
+								 closed:closedFunction,
+								 success:successFunction,
+								 failed:failedFunction
+							 });
+						 }
+					  </script>
+					  <button type="submit" class="btn btn-success" onclick="pay3()" style="float:right;">Submit</button></center>
+					</div>
+				</div>
+					  <div class="clearfix"></div>
+		<footer>
+			<div class="container-fluid">
+				<p class="copyright">&copy; 2018 <a href="https://www.themeineed.com" target="_blank">Galviny</a>. All Rights Reserved.</p>
+			</div>
+		</footer>
 	</div>
 	<!-- END WRAPPER -->
 	<!-- Javascript -->
