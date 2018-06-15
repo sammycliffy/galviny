@@ -39,4 +39,17 @@ class Testimony(models.Model):
     username = models.CharField(max_length = 255, null = True)
     testimony = models.CharField(max_length = 255, null = True)
     date = models.DateField(auto_now=True)
+
+
+class Plan(models.Model):
+    username = models.CharField(max_length = 255, null = True)
+    plan = models.CharField(max_length = 255)
+    amount = models.PositiveIntegerField()
+    confirmed = models.BooleanField(default=False)
+    date = models.DateTimeField()
+    new_date = models.DateTimeField(max_length = 255, null = True)
+    profit = models.PositiveIntegerField(null=True)
+    def __str__(self):
+        return self.username
+
     

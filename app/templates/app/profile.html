@@ -84,7 +84,6 @@
 					<ul class="nav">
 						<li><a href="index.html" class="active"><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li>
 						<li><a href="{% url 'fundwallet' %}" class=""><i class="lnr lnr-code"></i> <span>Fund wallet</span></a></li>
-						<li><a href="" class=""><i class="lnr lnr-chart-bars"></i> <span>Lend Money</span></a></li>
 						<li><a href="{% url 'withdrawal' %}" class=""><i class="lnr lnr-cog"></i> <span>Withdraw</span></a></li>
 						<li><a href="" class=""><i class="lnr lnr-alarm"></i> <span>Testimony</span></a></li>
 						<li>
@@ -137,7 +136,7 @@
 									<div class="metric">
 										<span class="icon"><i class="fa fa-eye"></i></span>
 										<p>
-											<span class="number">$0.00</span>
+											<span class="number">${{profit}}</span>
 											<span class="title">Profit</span>
 										</p>
 									</div>
@@ -149,7 +148,9 @@
 											<span class="number">$0.00</span>
 											<span class="title">withdrawal</span>
 										</p>
+									
 									</div>
+									<a href="" class="btn btn-success" style="float:right">Lend Money</a>
 								</div>
 								<h2 style="text-align:center">Our current plans</h2><br>
 								<div class="col-md-4">
@@ -180,25 +181,7 @@
 									</div>
 								</div>
 							</div>
-							<div class="row">
-								<div class="col-md-9">
-									<div id="headline-chart" class="ct-chart"></div>
-								</div>
-								<div class="col-md-3">
-									<div class="weekly-summary text-right">
-										<span class="number">2,315</span> <span class="percentage"><i class="fa fa-caret-up text-success"></i> 12%</span>
-										<span class="info-label">Total Sales</span>
-									</div>
-									<div class="weekly-summary text-right">
-										<span class="number">$5,758</span> <span class="percentage"><i class="fa fa-caret-up text-success"></i> 23%</span>
-										<span class="info-label">Monthly Income</span>
-									</div>
-									<div class="weekly-summary text-right">
-										<span class="number">$65,938</span> <span class="percentage"><i class="fa fa-caret-down text-danger"></i> 8%</span>
-										<span class="info-label">Total Income</span>
-									</div>
-								</div>
-							</div>
+							
 						</div>
 					</div>
 					<!-- END OVERVIEW -->

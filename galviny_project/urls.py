@@ -39,5 +39,6 @@ urlpatterns = [
     url(r'^testimony/$',views.testimony, name="testimony"),
     url(r'^password/$', views.change_password, name='change_password'),
     url(r'^forex/$', views.forex, name='forex'),
+    url(r'^oil/$', views.oil, name='oil'),
 ]
         
