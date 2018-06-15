@@ -23,11 +23,7 @@ from datetime import timedelta
 import pytz
 from django.utils import timezone
 from django.db.models import F, Count, Value
-from celery.task.schedules import crontab
-from celery.decorators import periodic_task
-from celery import Celery
-from celery.schedules import crontab
-from django.core.exceptions import ObjectDoesNotExist
+
 
 
 
@@ -83,7 +79,6 @@ def signup(request):
         form = SignUpForm()
     return render(request, 'app/signup.html', {'form': form})
 
-app = Celery()
 
 
 @periodic_task(run_every=(crontab(minute='*/10')), name="some_task", ignore_result=True)

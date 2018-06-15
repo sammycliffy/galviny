@@ -33,7 +33,6 @@ ALLOWED_HOSTS = ['galviny2.herokuapp.com', 'localhost']
 
 INSTALLED_APPS = [
     'app',
-    'django_celery_beat',
     'background_task',
     'django.contrib.admin',
     'django.contrib.auth',
