@@ -33,7 +33,7 @@ ALLOWED_HOSTS = ['galviny2.herokuapp.com', 'localhost']
 
 INSTALLED_APPS = [
     'app',
-    'djcelery',
+    'celery',
     'django_celery_beat',
     'background_task',
     'django.contrib.admin',
@@ -117,6 +117,19 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+
+
+from celery import Celery
+celery = Celery( 'redis://localhost:6379')
+
+celery.conf.update(
+    CELERY_DEFAULT_QUEUE = "galviny_project",
+    CELERY_DEFAULT_EXCHANGE = "galviny_project",
+    CELERY_DEFAULT_EXCHANGE_TYPE = "direct",
+    CELERY_DEFAULT_ROUTING_KEY = "galviny_project",
+)
+
 from datetime import timedelta
 CELERYBEAT_SCHEDULE = {
     'add-every-30-seconds': {
@@ -125,6 +138,7 @@ CELERYBEAT_SCHEDULE = {
         'args': (16, 16)
     },
 }
+
 
 CELERY_TIMEZONE = 'UTC'  
 CELERY_BROKER_URL = 'redis://localhost:6379'
