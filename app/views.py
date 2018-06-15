@@ -23,6 +23,8 @@ from datetime import timedelta
 import pytz
 from django.utils import timezone
 from django.db.models import F, Count, Value
+from django.core.exceptions import ObjectDoesNotExist
+
 
 
 
@@ -107,6 +109,7 @@ def profile(request):
         profit = 1200 * profit_days
         data = {
                 'profit':profit,
+                'wallet_balance':profile.choice,
                 'date':profile.date
             }  
         return render(request, 'app/profile.html', data)
