@@ -81,10 +81,7 @@ def signup(request):
 
 
 
-@periodic_task(run_every=(crontab(minute='*/10')), name="some_task", ignore_result=True)
-def update_crypto():
-      Cryptocurrency.objects.filter(choice=50000, confirmed=True).update(profit =F('profit')+1200)
-     
+
 
 
 @login_required
