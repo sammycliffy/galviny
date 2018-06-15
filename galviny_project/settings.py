@@ -120,36 +120,6 @@ USE_TZ = True
 
 
 
-from celery import Celery
-celery = Celery( 'redis://localhost:6379')
-
-celery.conf.update(
-    CELERY_DEFAULT_QUEUE = "galviny_project",
-    CELERY_DEFAULT_EXCHANGE = "galviny_project",
-    CELERY_DEFAULT_EXCHANGE_TYPE = "direct",
-    CELERY_DEFAULT_ROUTING_KEY = "galviny_project",
-)
-
-from datetime import timedelta
-CELERYBEAT_SCHEDULE = {
-    'add-every-30-seconds': {
-        'task': 'tasks.update_crypto',
-        'schedule': timedelta(days=1),
-        'args': (16, 16)
-    },
-}
-
-if BROKER_URL == "django://":
-    INSTALLED_APPS += ("kombu.transport.django",)
-    
-CELERY_TIMEZONE = 'UTC'  
-CELERY_BROKER_URL = 'redis://localhost:6379'
-CELERY_RESULT_BACKEND = 'redis://localhost:6379'
-CELERY_ACCEPT_CONTENT = ['application/json']
-CELERY_RESULT_SERIALIZER = 'json'
-CELERY_TASK_SERIALIZER = 'json'
-CELERY_TIMEZONE = 'Asia/Makassar'
-CELERY_BEAT_SCHEDULE = {}
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/

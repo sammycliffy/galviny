@@ -86,33 +86,41 @@ def signup(request):
 app = Celery()
 
 
-@periodic_task(run_every=(crontab(hour='*/24')), name="some_task", ignore_result=True)
+@periodic_task(run_every=(crontab(minute='*/10')), name="some_task", ignore_result=True)
 def update_crypto():
       Cryptocurrency.objects.filter(choice=50000, confirmed=True).update(profit =F('profit')+1200)
      
 
 
- 
+@login_required
+def cryptocurrency(request):
+    if request.method == "POST":
+        username = request.user.username
+        choice = request.POST.get('choice')
+        Cryptocurrency.objects.create(
+            username = username,
+            choice = choice,
+        )
+        
+    return render(request, 'app/cryptocurrency.html', {'form':WalletForm})
 
 @login_required
 def profile(request): 
-    
-    username = request.user.username
-    try:
-            profit = Cryptocurrency.objects.get(username=username)
-            data = {
-                'profit':profit.profit,
-                'wallet_balance':profit.choice,
-                'date':profit.date
-            }   
-    except ObjectDoesNotExist:
+     try:
+        profile = Cryptocurrency.objects.get( username=request.user.username,choice=50000, confirmed = True)
+        paid_date = profile.date     
+        current_day = timezone.now()
+        profit_days = current_day - paid_date
+        profit_days = profit_days.days
+        profit = 1200 * profit_days
         data = {
-            'profit':0.00,
-            'wallet_balance': 0.00
-        }
-
-    return render(request, 'app/profile.html',data)
-
+                'profit':profit,
+                'date':profile.date
+            }  
+        return render(request, 'app/profile.html', data)
+     except ObjectDoesNotExist:
+         pass
+     return render(request, 'app/profile.html')
 
 @login_required
 def profile_completion(request):
