@@ -33,7 +33,6 @@ ALLOWED_HOSTS = ['galviny2.herokuapp.com', 'localhost']
 
 INSTALLED_APPS = [
     'app',
-    'background_task',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -69,7 +68,7 @@ TEMPLATES = [
         },
     },
 ]
-BACKGROUND_TASK_RUN_ASYNC=True
+
 WSGI_APPLICATION = 'galviny_project.wsgi.application'
 
 
