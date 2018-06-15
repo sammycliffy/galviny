@@ -139,7 +139,9 @@ CELERYBEAT_SCHEDULE = {
     },
 }
 
-
+if BROKER_URL == "django://":
+    INSTALLED_APPS += ("kombu.transport.django",)
+    
 CELERY_TIMEZONE = 'UTC'  
 CELERY_BROKER_URL = 'redis://localhost:6379'
 CELERY_RESULT_BACKEND = 'redis://localhost:6379'
