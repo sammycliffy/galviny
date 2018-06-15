@@ -1,9 +1,9 @@
 from django.contrib import admin
-from app.models import Plan
+from app.models import Cryptocurrency
 
 # Register your models here.
 class Planadmin(admin.ModelAdmin):
-    list_display = ['username', 'plan','date', 'amount','confirmed', 'new_date']
+    list_display = ['username', 'choice', 'confirmed',]
 
 
-admin.site.register(Plan, Planadmin)
+admin.site.register(Cryptocurrency, Planadmin)

@@ -3,7 +3,7 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from .forms import SignUpForm, ProfileForm, WalletForm
 from django.http import HttpResponse
-from app.models import Testimony, Plan
+from app.models import Testimony, Cryptocurrency
 from django.utils.encoding import force_text
 from django.utils.http import urlsafe_base64_decode
 from app.token import account_activation_token
@@ -23,12 +23,11 @@ from datetime import timedelta
 import pytz
 from django.utils import timezone
 from django.db.models import F, Count, Value
-from background_task import background
-import time
 from celery.task.schedules import crontab
 from celery.decorators import periodic_task
 from celery import Celery
 from celery.schedules import crontab
+from django.core.exceptions import ObjectDoesNotExist
 
 
 
@@ -86,44 +85,28 @@ def signup(request):
 
 app = Celery()
 
-@app.on_after_configure.connect
-def setup_periodic_tasks(sender, **kwargs):
-    # Calls test('hello') every 10 seconds.
-    sender.add_periodic_task(10.0, test(), name='add every 10')
 
-    # Calls test('world') every 30 seconds
-    #sender.add_periodic_task(30.0, test.s('world'), expires=10)
-
-    # Executes every Monday morning at 7:30 a.m.
-    #sender.add_periodic_task(
-     #   crontab(hour=7, minute=30, day_of_week=1),
-   #     test.s('Happy Mondays!'),
-    #)
-
-@app.task
-#def test():
-     # Plan.objects.filter(plan__iexact='cryptocurrency',amount=50000, confirmed =True).update(profit =F('profit')+1200)
-
-#test.s()
-
-
-@periodic_task(run_every=(crontab(minute='*/3')), name="some_task", ignore_result=True)
+#@periodic_task(run_every=(crontab(minute='*/3')), name="some_task", ignore_result=True)
 def test():
-      Plan.objects.filter(plan__iexact='cryptocurrency',amount=50000, confirmed =True).update(profit =F('profit')+1200)
-      Plan.objects.filter(plan__iexact='cryptocurrency',amount=100000, confirmed =True).update(profit =F('profit')+2400)
-      Plan.objects.filter(plan__iexact='cryptocurrency',amount=200000, confirmed =True).update(profit =F('profit')+4800)
-      Plan.objects.filter(plan__iexact='cryptocurrency',amount=300000, confirmed =True).update(profit =F('profit')+7200)
-      Plan.objects.filter(plan__iexact='cryptocurrency',amount=400000, confirmed =True).update(profit =F('profit')+9600)
-      Plan.objects.filter(plan__iexact='cryptocurrency',amount=500000, confirmed =True).update(profit =F('profit')+12000)
-      Plan.objects.filter(plan__iexact='cryptocurrency',amount=100000, confirmed =True).update(profit =F('profit')+24000)
-test()
+      Cryptocurrency.objects.filter(confirmed =True).update(profit =F('profit')+1200)
+          
+
 @login_required
-def profile(request):  
+def profile(request): 
+    test() 
     username = request.user.username
-    profit = Plan.objects.get(username=username)
-    data = {
-        'profit':profit.profit
-    }
+    try:
+            profit = Cryptocurrency.objects.get(username=username)
+            data = {
+                'profit':profit.profit,
+                'wallet_balance':profit.choice,
+                'date':profit.date
+            }   
+    except ObjectDoesNotExist:
+        data = {
+            'profit':0.00,
+            'wallet_balance': 0.00
+        }
 
     return render(request, 'app/profile.html',data)
 
@@ -150,12 +133,13 @@ def fund_wallet(request):
 @login_required
 def cryptocurrency(request):
     if request.method == "POST":
-        form = WalletForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return HttpResponse('saved successfully')
-    else:
-        form = WalletForm()
+        username = request.user.username
+        choice = request.POST.get('choice')
+        Cryptocurrency.objects.create(
+            username = username,
+            choice = choice,
+        )
+        
     return render(request, 'app/cryptocurrency.html', {'form':WalletForm})
 
 #Withdrawal

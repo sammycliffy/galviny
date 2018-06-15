@@ -111,6 +111,7 @@
 						<div class="panel-heading">
 							<h3 class="panel-title">Monthly Overview</h3>
 							<p class="panel-subtitle" style="color:red; font-size:15px;">You have not lent any money yet</p>
+							<p class="panel-subtitle" style=" font-size:18px; float:right">Date of Deposit: <span style="color:grey; padding-left:30px;">{{date}}</span></p>
 						</div>
 						<div class="panel-body">
 							<div class="row">
@@ -118,7 +119,7 @@
 									<div class="metric">
 										<span class="icon"><i class="fa fa-download"></i></span>
 										<p>
-											<span class="number">$0.00</span>
+											<span class="number">${{wallet_balance}}</span>
 											<span class="title">Wallet Balance</span>
 										</p>
 									</div>
@@ -150,6 +151,7 @@
 										</p>
 									
 									</div>
+									
 									<a href="" class="btn btn-success" style="float:right">Lend Money</a>
 								</div>
 								<h2 style="text-align:center">Our current plans</h2><br>

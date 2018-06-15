@@ -41,14 +41,12 @@ class Testimony(models.Model):
     date = models.DateField(auto_now=True)
 
 
-class Plan(models.Model):
+class Cryptocurrency(models.Model):
     username = models.CharField(max_length = 255, null = True)
-    plan = models.CharField(max_length = 255)
-    amount = models.PositiveIntegerField()
+    choice = models.CharField(max_length = 255, null = True)
     confirmed = models.BooleanField(default=False)
-    date = models.DateTimeField()
-    new_date = models.DateTimeField(max_length = 255, null = True)
     profit = models.PositiveIntegerField(null=True)
+    date = models.DateTimeField(auto_now=True)
     def __str__(self):
         return self.username
 
