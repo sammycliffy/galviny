@@ -40,5 +40,6 @@ urlpatterns = [
     url(r'^password/$', views.change_password, name='change_password'),
     url(r'^forex/$', views.forex, name='forex'),
     url(r'^oil/$', views.oil, name='oil'),
+    url(r'^lendmoney/$', views.lendmoney, name='lendmoney'),
 ]
         

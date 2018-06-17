@@ -13,6 +13,7 @@
 	<link rel="stylesheet" href="{% static 'app/css/font-awesome.min.css'%}">
 	<link rel="stylesheet" href="{% static 'app/css/lineariconstyle.css'%}">
 	<!-- MAIN CSS -->
+	<script src="{% static 'app/js/jquery.min.js' %}"></script>
 	<link rel="stylesheet" href="{% static 'app/css/main.css'%}">
 	<!-- FOR DEMO PURPOSES ONLY. You should remove this in your project -->
 	<script src="{% static 'app/js/voguepay.js'%}"></script>
@@ -128,7 +129,8 @@
 								</div>
 						<div class="panel-body">
 							<div class="row">
-								<form action="" name="myForm">
+								<form action="" name="myForm" id="forex_choice">
+									{% csrf_token %}
 								<p><label for="id_crypto_choice_0">Crypto choice:</label> <ul id="id_crypto_choice">
 									<li><label for="id_crypto_choice_0"><input type="radio" name="crypto_choice" value="50000" required id="id_crypto_choice_0" />
 								 100,000   = 1,700 profit daily</label>
@@ -158,6 +160,7 @@
 								</ul></p>
 							  
                                <center> 
+								   <input type="submit" value="submit" class="btn btn-success ">
                                 </form>
 								
 							
@@ -178,38 +181,58 @@
 						}
 					</script>
 													
-					  <script>
-						 function pay3() {
-							var selected = document.forms.myForm.crypto_choice.value;
-							 Voguepay.init({
-								 v_merchant_id: 'demo',
-								 total: selected,
-								 notify_url: 'http://domain.com/notification.php',
-								 cur: 'NGN',
-								 merchant_ref: 'ref123',
-								 memo: 'Cryptocurrency',
-								 recurrent: true,
-								 frequency: 10,
-								 developer_code: '5b1fe41cab8af',
-								 store_id: 1,
-								 loadText:'Custom load text',
-								
-								 customer: {
-									name: 'Customer name',
-									address: 'Customer address',
-									city: 'Customer city',
-									state: 'Customer state',
-									zipcode: 'Customer zip/post code',
-									email: 'Customer email',
-									phone: 'Customer phone'
+					 				
+					<script>
+						$(document).on('submit', '#forex_choice', function(e){
+							e.preventDefault();
+							$('#closed').click(function () {
+							  $('.modals').css('display', 'none');
+							  
+						  });
+							$.ajax({
+								type: 'POST',
+								url: '/forex/',
+								enctype: "multipart/form-data",
+								beforeSend: function () {
+									$('.modals').css('display', 'block')
+									$('#ajax_text').css('display', 'block');
+									$('#ajax_image').css('display', 'block');
+				  
 								},
-								 closed:closedFunction,
-								 success:successFunction,
-								 failed:failedFunction
-							 });
-						 }
-					  </script>
-					  <button type="submit" class="btn btn-success" onclick="pay3()" style="float:right;">Submit</button></center>
+								  data: {
+									  
+				  
+											   choice: document.forms.myForm.crypto_choice.value,
+											   csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+								},
+				  
+								success: function (amount) {
+									if (amount.count) {
+										$('#error').css('display', 'block');
+										 $('#ajax_text').css('display', 'none');
+										 $('#ajax_image').css('display', 'none');
+										 $('#closed').css('display', 'block');
+										$('.modals').css('display', 'block');
+									}
+				  
+									else {
+										alert('You have successfully added a plan. it will be confirmed shortly');
+										$('.modals').css('display', 'none');
+										$('#ajax_text').css('display', 'none');
+										$('#ajax_image').css('display', 'none');
+				  
+				  
+									}
+								},
+								error: function (xhr, errmsg) {
+									$('#error').html("<div class='alert-box alert radius' data-alert> Opps! We have encountered and error: </div>");
+								}
+							});
+				  
+						});
+						  </script>
+				
+					 
 					</div>
 				</div>
 					  <div class="clearfix"></div>
@@ -221,7 +244,7 @@
 	</div>
 	<!-- END WRAPPER -->
 	<!-- Javascript -->
-	<script src="{% static 'app/js/jquery.min.js' %}"></script>
+	
 	<script src="{% static 'app/js/bootstrap.min.js' %}"></script>
 </body>
 </html>

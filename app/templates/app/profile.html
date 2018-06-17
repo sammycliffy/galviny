@@ -13,6 +13,7 @@
 	<link rel="stylesheet" href="{% static 'app/css/font-awesome.min.css'%}">
 	<link rel="stylesheet" href="{% static 'app/css/lineariconstyle.css'%}">
 	<!-- MAIN CSS -->
+	<script src="{% static 'app/js/jquery.min.js' %}"></script>
 	<link rel="stylesheet" href="{% static 'app/css/main.css'%}">
 	<!-- FOR DEMO PURPOSES ONLY. You should remove this in your project -->
 
@@ -37,28 +38,10 @@
 				</div>
 				<div id="navbar-menu">
 					<ul class="nav navbar-nav navbar-right">
+		
 						<li class="dropdown">
-							<a href="#" class="dropdown-toggle icon-menu" data-toggle="dropdown">
-								<i class="lnr lnr-alarm"></i>
-								<span class="badge bg-danger">5</span>
-							</a>
-							<ul class="dropdown-menu notifications">
-								<li><a href="#" class="notification-item"><span class="dot bg-warning"></span>System space is almost full</a></li>
-								<li><a href="#" class="notification-item"><span class="dot bg-danger"></span>You have 9 unfinished tasks</a></li>
-								<li><a href="#" class="notification-item"><span class="dot bg-success"></span>Monthly report is available</a></li>
-								<li><a href="#" class="notification-item"><span class="dot bg-warning"></span>Weekly meeting in 1 hour</a></li>
-								<li><a href="#" class="notification-item"><span class="dot bg-success"></span>Your request has been approved</a></li>
-								<li><a href="#" class="more">See all notifications</a></li>
-							</ul>
-						</li>
-						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="lnr lnr-question-circle"></i> <span>Help</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
-							<ul class="dropdown-menu">
-								<li><a href="#">Basic Use</a></li>
-								<li><a href="#">Working With Data</a></li>
-								<li><a href="#">Security</a></li>
-								<li><a href="#">Troubleshooting</a></li>
-							</ul>
+							<a href="{% url 'logout'%}" >Logout</a>
+
 						</li>
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="{% static 'app/img/user.png'%}" class="img-circle" alt="Avatar"> <span>{{user.username}}</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
@@ -151,8 +134,12 @@
 										</p>
 									
 									</div>
+									<form action="" id="lend_form">
+										{% csrf_token %}
+										<input type="hidden" value='True' id="lend">
+										<input type="submit" class="btn btn-success" style="float:right" value="Lend Money">
+									</form>
 									
-									<a href="" class="btn btn-success" style="float:right">Lend Money</a>
 								</div>
 								<h2 style="text-align:center">Our current plans</h2><br>
 								<div class="col-md-4">
@@ -186,79 +173,47 @@
 							
 						</div>
 					</div>
-					<!-- END OVERVIEW -->
-					<div class="row">
-						<div class="col-md-6">
-							<!-- RECENT PURCHASES -->
-							<!--
-							<div class="panel">
-								<div class="panel-heading">
-									<h3 class="panel-title">Recent Transaction</h3>
-									<div class="right">
-										<button type="button" class="btn-toggle-collapse"><i class="lnr lnr-chevron-up"></i></button>
-										<button type="button" class="btn-remove"><i class="lnr lnr-cross"></i></button>
-									</div>
-								</div>
-								<div class="panel-body no-padding">
-									<table class="table table-striped">
-										<thead>
-											<tr>
-												<th>Order No.</th>
-												<th>Name</th>
-												<th>Amount</th>
-												<th>Date &amp; Time</th>
-												<th>Status</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<td><a href="#">763648</a></td>
-												<td>Steve</td>
-												<td>$122</td>
-												<td>Oct 21, 2016</td>
-												<td><span class="label label-success">COMPLETED</span></td>
-											</tr>
-											<tr>
-												<td><a href="#">763649</a></td>
-												<td>Amber</td>
-												<td>$62</td>
-												<td>Oct 21, 2016</td>
-												<td><span class="label label-warning">PENDING</span></td>
-											</tr>
-											<tr>
-												<td><a href="#">763650</a></td>
-												<td>Michael</td>
-												<td>$34</td>
-												<td>Oct 18, 2016</td>
-												<td><span class="label label-danger">FAILED</span></td>
-											</tr>
-											<tr>
-												<td><a href="#">763651</a></td>
-												<td>Roger</td>
-												<td>$186</td>
-												<td>Oct 17, 2016</td>
-												<td><span class="label label-success">SUCCESS</span></td>
-											</tr>
-											<tr>
-												<td><a href="#">763652</a></td>
-												<td>Smith</td>
-												<td>$362</td>
-												<td>Oct 16, 2016</td>
-												<td><span class="label label-success">SUCCESS</span></td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
-								<div class="panel-footer">
-									<div class="row">
-										<div class="col-md-6"><span class="panel-note"><i class="fa fa-clock-o"></i> Last 24 hours</span></div>
-										<div class="col-md-6 text-right"><a href="#" class="btn btn-primary">View All Purchases</a></div>
-									</div>
-								</div>
-							</div>
-						
-						</div>
-					-->
+					<script>
+						$(document).on('submit', '#lend_form', function(e){
+							e.preventDefault();
+							$('#closed').click(function () {
+							  $('.modals').css('display', 'none');
+							  
+						  });
+							$.ajax({
+								type: 'POST',
+								url: '/lendmoney/',
+								enctype: "multipart/form-data",
+								beforeSend: function () {
+									$('.modals').css('display', 'block')
+									$('#ajax_text').css('display', 'block');
+									$('#ajax_image').css('display', 'block');
+				  
+								},
+								  data: {
+									  
+				  
+											   lendmoney :$('#lend').val,
+											   csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+								},
+				  
+								success: function (data) {
+									if (data.lent) {
+										alert('you do not have any money to lend. Please pay in money')
+									}
+				  
+									else {
+										alert('You have successfully lent your money. Your profit will start counting');
+									}
+								},
+								error: function (xhr, errmsg) {
+									$('#error').html("<div class='alert-box alert radius' data-alert> Opps! We have encountered and error: </div>");
+								}
+							});
+				  
+						});
+						  </script>
+
 		<div class="clearfix"></div>
 		<footer>
 			<div class="container-fluid">

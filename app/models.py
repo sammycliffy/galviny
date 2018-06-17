@@ -43,11 +43,34 @@ class Testimony(models.Model):
 
 class Cryptocurrency(models.Model):
     username = models.CharField(max_length = 255, null = True)
-    choice = models.CharField(max_length = 255, null = True)
+    choice = models.PositiveIntegerField( null = True)
+    lent = models.CharField(max_length = 255, blank=True, )
     confirmed = models.BooleanField(default=False)
-    profit = models.PositiveIntegerField(null=True)
-    date = models.DateTimeField(auto_now=True)
+    profit = models.PositiveIntegerField(null=True, default=0)
+    deposit_date = models.DateTimeField(auto_now=True)
+    lend_date = models.DateTimeField(null=True, blank=True)
+
     def __str__(self):
         return self.username
 
-    
+class Forex(models.Model):
+    username = models.CharField(max_length = 255, null = True)
+    choice = models.PositiveIntegerField( null = True)
+    lent = models.CharField(max_length = 255, blank=True, )
+    confirmed = models.BooleanField(default=False)
+    profit = models.PositiveIntegerField(null=True, default=0)
+    deposit_date = models.DateTimeField(auto_now=True)
+    lend_date = models.DateTimeField(null=True, blank=True)
+    def __str__(self):
+        return self.username
+
+class Oil(models.Model):
+    username = models.CharField(max_length = 255, null = True)
+    choice = models.PositiveIntegerField( null = True)
+    lent = models.CharField(max_length = 255, blank=True, )
+    confirmed = models.BooleanField(default=False)
+    profit = models.PositiveIntegerField(null=True, default=0)
+    deposit_date = models.DateTimeField(auto_now=True)
+    lend_date = models.DateTimeField(null=True, blank=True)
+    def __str__(self):
+        return self.username
