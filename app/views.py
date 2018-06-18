@@ -3,7 +3,7 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from .forms import SignUpForm, ProfileForm, WalletForm
 from django.http import HttpResponse
-from app.models import Testimony, Cryptocurrency, Forex, Oil
+from app.models import Testimony, Cryptocurrency, Forex, Oil, Withdraw
 from django.utils.encoding import force_text
 from django.utils.http import urlsafe_base64_decode
 from app.token import account_activation_token
@@ -150,6 +150,7 @@ def profile(request):
         profit_days = profit_days.days
         if choice == 50000 and paid_date <= end_date:
             profit = 1200 * profit_days
+            Cryptocurrency.objects.filter( username=request.user.username,  lent= True).update(profit = profit)
             data = {
                         'profit':profit,
                         'wallet_balance':profile.choice,
@@ -158,6 +159,7 @@ def profile(request):
                     } 
         elif choice == 100000 and paid_date <= end_date:
             profit = 2400 * profit_days
+            Cryptocurrency.objects.filter( username=request.user.username,  lent= True).update(profit = profit)
             data = {
                         'profit':profit,
                         'wallet_balance':profile.choice,
@@ -165,6 +167,7 @@ def profile(request):
                     } 
         elif choice == 200000 and paid_date <= end_date:
             profit = 4800 * profit_days
+            Cryptocurrency.objects.filter( username=request.user.username,  lent= True).update(profit = profit)
             data = {
                         'profit':profit,
                         'wallet_balance':profile.choice,
@@ -172,6 +175,7 @@ def profile(request):
                     } 
         elif choice == 300000 and paid_date <= end_date:
             profit = 7200 * profit_days
+            Cryptocurrency.objects.filter( username=request.user.username,  lent= True).update(profit = profit)
             data = {
                         'profit':profit,
                         'wallet_balance':profile.choice,
@@ -179,6 +183,7 @@ def profile(request):
                     } 
         elif choice == 400000 and paid_date <= end_date:
             profit = 9600 * profit_days
+            Cryptocurrency.objects.filter( username=request.user.username,  lent= True).update(profit = profit)
             data = {
                         'profit':profit,
                         'wallet_balance':profile.choice,
@@ -186,6 +191,7 @@ def profile(request):
                     } 
         elif choice == 500000 and paid_date <= end_date:
             profit = 12000 * profit_days
+            Cryptocurrency.objects.filter( username=request.user.username,  lent= True).update(profit = profit)
             data = {
                         'profit':profit,
                         'wallet_balance':profile.choice,
@@ -193,6 +199,7 @@ def profile(request):
                     } 
         elif choice == 1000000 and paid_date <= end_date:
             profit = 24000 * profit_days
+            Cryptocurrency.objects.filter( username=request.user.username,  lent= True).update(profit = profit)
             data = {
                         'profit':profit,
                         'wallet_balance':profile.choice,
@@ -251,6 +258,7 @@ def profile(request):
                                 'wallet_balance':profile.choice,
                                 'date':paid_date
                             } 
+                return render(request, 'app/profile.html', data)
             except ObjectDoesNotExist:
             #Oil and gas
                 try:
@@ -310,9 +318,10 @@ def profile(request):
                                     'wallet_balance':profile.choice,
                                     'date':paid_date
                                 } 
+                    return render(request, 'app/profile.html', data)
                 except ObjectDoesNotExist:
                     profit = 0
-
+                    
                     data = {
                                     'profit':profit,
                                     'wallet_balance':0,
@@ -322,6 +331,16 @@ def profile(request):
                     return render(request, 'app/profile.html', data)
      
      return render(request, 'app/profile.html')
+
+
+
+
+
+
+
+
+
+
 
 @login_required
 def profile_completion(request):
@@ -346,6 +365,80 @@ def fund_wallet(request):
 #Withdrawal
 @login_required
 def withdrawal(request):
+    try:
+        payment = Cryptocurrency.objects.get(username = request.user.username, lent=True)
+        expiry_date = payment.lend_date + timedelta(days = 60)
+        before_ten_days = payment.lend_date + timedelta(days=10)
+        current_date = timezone.now()
+        if current_date >= expiry_date:
+            withdraw_amount = payment.profit + payment.choice - 200
+            Withdraw.objects.create(
+                username = request.user.username,
+                withdraw_amount = withdraw_amount,
+                plan = 'cryptocurrency'
+            )
+            Cryptocurrency.objects.get(username = request.user.username, lent=True).delete()
+        elif current_date >= before_ten_days:
+            withdraw_amount = payment.profit + payment.choice - 2000
+            Withdraw.objects.create(
+                username = request.user.username,
+                withdraw_amount = withdraw_amount,
+                plan = 'cryptocurrency'
+            )
+            Cryptocurrency.objects.get(username = request.user.username, lent=True).delete()
+    except ObjectDoesNotExist:
+        try:
+            payment = Forex.objects.get(username = request.user.username, lent=True)
+            expiry_date = payment.lend_date + timedelta(days = 60)
+            before_ten_days = payment.lend_date + timedelta(days=10)
+            current_date = timezone.now()
+            if current_date >= expiry_date:
+                withdraw_amount = payment.profit + payment.choice - 200
+                Withdraw.objects.create(
+                    username = request.user.username,
+                    withdraw_amount = withdraw_amount,
+                    plan = 'cryptocurrency'
+                )
+                Forex.objects.get(username = request.user.username, lent=True).delete()
+            elif current_date >= before_ten_days:
+                withdraw_amount = payment.profit + payment.choice - 2000
+                Withdraw.objects.create(
+                    username = request.user.username,
+                    withdraw_amount = withdraw_amount,
+                    plan = 'cryptocurrency'
+                )
+                Forex.objects.get(username = request.user.username, lent=True).delete()
+        except ObjectDoesNotExist:
+            try:
+                payment = Oil.objects.get(username = request.user.username, lent=True)
+                expiry_date = payment.lend_date + timedelta(days = 60)
+                before_ten_days = payment.lend_date + timedelta(days=10)
+                current_date = timezone.now()
+                if current_date >= expiry_date:
+                    withdraw_amount = payment.profit + payment.choice - 200
+                    Withdraw.objects.create(
+                        username = request.user.username,
+                        withdraw_amount = withdraw_amount,
+                        plan = 'cryptocurrency'
+                    )
+                    Oil.objects.get(username = request.user.username, lent=True).delete()
+                elif current_date >= before_ten_days:
+                    withdraw_amount = payment.profit + payment.choice - 2000
+                    Withdraw.objects.create(
+                        username = request.user.username,
+                        withdraw_amount = withdraw_amount,
+                        plan = 'cryptocurrency'
+                    )
+                    Oil.objects.get(username = request.user.username, lent=True).delete()
+            except ObjectDoesNotExist:
+                data = {
+                    'error':'You don\'t have any money to withdraw'
+                }
+                if data['error']:
+                    data['error_message'] = 'You don\'t have any money to withdraw'
+                    return JsonResponse(data)
+
+
     return render(request, 'app/withdrawal.html')
 
 

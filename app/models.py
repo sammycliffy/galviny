@@ -74,3 +74,13 @@ class Oil(models.Model):
     lend_date = models.DateTimeField(null=True, blank=True)
     def __str__(self):
         return self.username
+
+
+
+class Withdraw(models.Model):
+    username = models.CharField(max_length = 255, null = True)
+    plan = models.CharField(max_length = 255, null = True)
+    withdraw_amount = models.PositiveIntegerField(null = True)
+    date_paid = models.DateTimeField(null = True, blank=True)
+    def __str__(self):
+        return self.username

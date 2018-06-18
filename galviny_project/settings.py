@@ -28,6 +28,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['galviny2.herokuapp.com', 'localhost']
 
+DATABASE_URL = 'postgres://nkdzkmlyivqcbo:2c0556073437d1daef640fc667906a977598188fc7a451bd1710d58e545b49ed@ec2-54-235-109-37.compute-1.amazonaws.com:5432/degrmrvmi8rjd1'
 
 # Application definition
 
