@@ -49,6 +49,7 @@ class Cryptocurrency(models.Model):
     profit = models.PositiveIntegerField(null=True, default=0)
     deposit_date = models.DateTimeField(auto_now=True)
     lend_date = models.DateTimeField(null=True, blank=True)
+    amount_lent = models.PositiveIntegerField(null=True, default=0)
 
     def __str__(self):
         return self.username
@@ -61,6 +62,7 @@ class Forex(models.Model):
     profit = models.PositiveIntegerField(null=True, default=0)
     deposit_date = models.DateTimeField(auto_now=True)
     lend_date = models.DateTimeField(null=True, blank=True)
+    amount_lent = models.PositiveIntegerField(null=True, default=0)
     def __str__(self):
         return self.username
 
@@ -72,6 +74,7 @@ class Oil(models.Model):
     profit = models.PositiveIntegerField(null=True, default=0)
     deposit_date = models.DateTimeField(auto_now=True)
     lend_date = models.DateTimeField(null=True, blank=True)
+    amount_lent = models.PositiveIntegerField(null=True, default=0)
     def __str__(self):
         return self.username
 
