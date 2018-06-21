@@ -34,8 +34,8 @@
       <div class="heading"><span>Galviny Registration</span></div>
       <div class="center-div">
         <form method="post">
-          {% csrf_token %}
-          
+          {% csrf_token %}   
+          <input type="hidden" value="{{request.get_full_path}}" name="referrer">   
            {{form.as_p}}
             <center>
                 <button type="submit" class="btn btn-info btn-lg">Sign up</button>

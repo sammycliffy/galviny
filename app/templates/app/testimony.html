@@ -15,7 +15,7 @@
 	<!-- MAIN CSS -->
 	<link rel="stylesheet" href="{% static 'app/css/main.css'%}">
 	<!-- FOR DEMO PURPOSES ONLY. You should remove this in your project -->
-
+	<script src="{% static 'app/js/jquery.min.js' %}"></script>
 	<!-- GOOGLE FONTS -->
 	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
 
@@ -84,10 +84,9 @@
 				<nav>
 					<ul class="nav">
 						<li><a href="index.html" class="active"><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li>
-						<li><a href="" class=""><i class="lnr lnr-code"></i> <span>Fund wallet</span></a></li>
-						<li><a href="" class=""><i class="lnr lnr-chart-bars"></i> <span>Lend Money</span></a></li>
-						<li><a href="" class=""><i class="lnr lnr-cog"></i> <span>Withdraw</span></a></li>
-						<li><a href="" class=""><i class="lnr lnr-alarm"></i> <span>Testimony</span></a></li>
+						<li><a href="{% url 'fundwallet' %}" class=""><i class="lnr lnr-code"></i> <span>Fund wallet</span></a></li>
+						<li><a href="{% url 'withdrawal' %}" class=""><i class="lnr lnr-cog"></i> <span>Withdraw</span></a></li>
+						<li><a href="{% url 'testimony'%}" class=""><i class="lnr lnr-alarm"></i> <span>Testimony</span></a></li>
 						<li>
 							<a href="#subPages" data-toggle="collapse" class="collapsed"><i class="lnr lnr-file-empty"></i> <span>Profile</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
 							<div id="subPages" class="collapse ">
@@ -116,9 +115,9 @@
 						<div class="panel-body">
 							<div class="row">
                                 <div class="col-lg-6">
-                                        <form action="{% url 'testimony'%}" method ="POST">
+                                        <form id="testimony_form" method ="POST">
                                             {% csrf_token %}
-                                                <textarea name="" id="" cols="50" rows="10" name="testimony" ></textarea><br><br>
+                                                <textarea name="" id="testimony" cols="50" rows="10" " ></textarea><br><br>
                                                 <input type="submit" class="btn btn-success" style="float:right">
                                         </form>
                                 </div>
@@ -127,78 +126,55 @@
 						</div>
 					</div>
 					<!-- END OVERVIEW -->
-					<div class="row">
-						<div class="col-md-6">
-							<!-- RECENT PURCHASES -->
-							<!--
-							<div class="panel">
-								<div class="panel-heading">
-									<h3 class="panel-title">Recent Transaction</h3>
-									<div class="right">
-										<button type="button" class="btn-toggle-collapse"><i class="lnr lnr-chevron-up"></i></button>
-										<button type="button" class="btn-remove"><i class="lnr lnr-cross"></i></button>
-									</div>
-								</div>
-								<div class="panel-body no-padding">
-									<table class="table table-striped">
-										<thead>
-											<tr>
-												<th>Order No.</th>
-												<th>Name</th>
-												<th>Amount</th>
-												<th>Date &amp; Time</th>
-												<th>Status</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr>
-												<td><a href="#">763648</a></td>
-												<td>Steve</td>
-												<td>$122</td>
-												<td>Oct 21, 2016</td>
-												<td><span class="label label-success">COMPLETED</span></td>
-											</tr>
-											<tr>
-												<td><a href="#">763649</a></td>
-												<td>Amber</td>
-												<td>$62</td>
-												<td>Oct 21, 2016</td>
-												<td><span class="label label-warning">PENDING</span></td>
-											</tr>
-											<tr>
-												<td><a href="#">763650</a></td>
-												<td>Michael</td>
-												<td>$34</td>
-												<td>Oct 18, 2016</td>
-												<td><span class="label label-danger">FAILED</span></td>
-											</tr>
-											<tr>
-												<td><a href="#">763651</a></td>
-												<td>Roger</td>
-												<td>$186</td>
-												<td>Oct 17, 2016</td>
-												<td><span class="label label-success">SUCCESS</span></td>
-											</tr>
-											<tr>
-												<td><a href="#">763652</a></td>
-												<td>Smith</td>
-												<td>$362</td>
-												<td>Oct 16, 2016</td>
-												<td><span class="label label-success">SUCCESS</span></td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
-								<div class="panel-footer">
-									<div class="row">
-										<div class="col-md-6"><span class="panel-note"><i class="fa fa-clock-o"></i> Last 24 hours</span></div>
-										<div class="col-md-6 text-right"><a href="#" class="btn btn-primary">View All Purchases</a></div>
-									</div>
-								</div>
-							</div>
-						
-						</div>
-					-->
+					<script>
+						$(document).on('submit', '#testimony_form', function(e){
+							e.preventDefault();
+							$('#closed').click(function () {
+							  $('.modals').css('display', 'none');
+							  
+						  });
+							$.ajax({
+								type: 'POST',
+								url: '/testimony/',
+								enctype: "multipart/form-data",
+								beforeSend: function () {
+									$('.modals').css('display', 'block')
+									$('#ajax_text').css('display', 'block');
+									$('#ajax_image').css('display', 'block');
+				  
+								},
+								  data: {
+									  
+				  
+											   testimony: $('#testimony').val(),
+											   csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+								},
+				  
+								success: function (amount) {
+									if (amount.count) {
+										$('#error').css('display', 'block');
+										 $('#ajax_text').css('display', 'none');
+										 $('#ajax_image').css('display', 'none');
+										 $('#closed').css('display', 'block');
+										$('.modals').css('display', 'block');
+									}
+				  
+									else {
+										alert('You have successfully shared a testimony');
+										$('.modals').css('display', 'none');
+										$('#ajax_text').css('display', 'none');
+										$('#ajax_image').css('display', 'none');
+				  
+				  
+									}
+								},
+								error: function (xhr, errmsg) {
+									$('#error').html("<div class='alert-box alert radius' data-alert> Opps! We have encountered and error: </div>");
+								}
+							});
+				  
+						});
+						  </script>
 		<div class="clearfix"></div>
 		
 	</div>

@@ -44,9 +44,9 @@
 			<div class="sidebar-scroll">
 				<nav>
 					<ul class="nav">
-						<li><a href="{% url 'profile'%}" class="active"><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li>
-						<li><a href="{% url 'fundwallet'%}" class=""><i class="lnr lnr-code"></i> <span>Fund wallet</span></a></li>
-						<li><a href="{% url 'withdrawal'%}" class=""><i class="lnr lnr-cog"></i> <span>Withdraw</span></a></li>
+						<li><a href="index.html" class="active"><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li>
+						<li><a href="{% url 'fundwallet' %}" class=""><i class="lnr lnr-code"></i> <span>Fund wallet</span></a></li>
+						<li><a href="{% url 'withdrawal' %}" class=""><i class="lnr lnr-cog"></i> <span>Withdraw</span></a></li>
 						<li><a href="{% url 'testimony'%}" class=""><i class="lnr lnr-alarm"></i> <span>Testimony</span></a></li>
 						<li>
 							<a href="#subPages" data-toggle="collapse" class="collapsed"><i class="lnr lnr-file-empty"></i> <span>Profile</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
@@ -71,57 +71,13 @@
 					<!-- OVERVIEW -->
 					<div class="panel panel-headline">
 						<div class="panel-heading">
-							<h2 class="panel-title" style="font-size:30px;">Withdraw your money</h2>
+							<h2 class="panel-title" style="font-size:30px;">Sorry!!!</h2>
+							<h3 style="color:red">You do not have enough money to withdraw.</h3>
 								</div>
 						<div class="panel-body">
 							<div class="row">
 								
-								<div class="col-md-3">
-									<div class="metric">
-										<span class="icon"><i class="fa fa-download"></i></span>
-										<p>
-											<span class="number">$0.00</span>
-											<span class="title">Wallet Balance</span>
-										</p>
-									</div>
-								</div>
-								<div class="col-md-3">
-									<div class="metric">
-										<span class="icon"><i class="fa fa-download"></i></span>
-										<p>
-											<span class="number">$0.00</span>
-											<span class="title">Profilt</span>
-										</p>
-									</div>
-								</div>
-								<div class="col-md-3">
-									<div class="metric">
-										<span class="icon"><i class="fa fa-download"></i></span>
-										<p>
-											<span class="number">$0.00</span>
-											<span class="title">Logistics</span>
-										</p>
-									</div>
-								</div>
-								<div class="col-md-3">
-									<div class="metric">
-										<span class="icon"><i class="fa fa-download"></i></span>
-										<p>
-											<span class="number">$0.00</span>
-											<span class="title">Withdraw Amount</span>
-										</p>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-4">
-								<dl>
-									<dt>Please Note</dt>
-									<dd> - Withdrawal less than the mature date will attract logistics fee </dd>
-									<dd> - You can only withdraw profits not capital before the mature date</dd>
-								</dl>
-							<a href="{% url 'withdrawal_success' %}" class="btn btn-success" style="float:right"> Withdraw</a>
 								
-							</div>
 						</div>
 					</div>
 					<!-- END OVERVIEW -->

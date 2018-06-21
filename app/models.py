@@ -50,6 +50,7 @@ class Cryptocurrency(models.Model):
     deposit_date = models.DateTimeField(auto_now=True)
     lend_date = models.DateTimeField(null=True, blank=True)
     amount_lent = models.PositiveIntegerField(null=True, default=0)
+    previous_withdraw = models.PositiveIntegerField(null = True, default = 0)
 
     def __str__(self):
         return self.username
@@ -84,6 +85,15 @@ class Withdraw(models.Model):
     username = models.CharField(max_length = 255, null = True)
     plan = models.CharField(max_length = 255, null = True)
     withdraw_amount = models.PositiveIntegerField(null = True)
-    date_paid = models.DateTimeField(null = True, blank=True)
+    date = models.DateTimeField(null = True, blank=True)
+    previous_withdraw = models.PositiveIntegerField(null = True, default = 0)
     def __str__(self):
         return self.username
+
+
+
+
+class Referrer(models.Model):
+    referee = models.CharField(max_length = 255, null = True)
+    referred = models.CharField(max_length = 255, null = True)
+    date = models.DateTimeField(auto_now=True)

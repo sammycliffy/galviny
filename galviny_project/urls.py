@@ -42,5 +42,7 @@ urlpatterns = [
     url(r'^oil/$', views.oil, name='oil'),
     url(r'^lendmoney/$', views.lendmoney, name='lendmoney'),
     url(r'^success/$', views.withdrawal_success, name='withdrawal_success'),
+    url(r'^failed/$', views.withdrawal_failed, name='withdrawal_success'),
+    url(r'^referral/$', views.referral, name='referral'),
 ]
         

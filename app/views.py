@@ -450,12 +450,8 @@ def profile(request):
 
 
 
-
-
-
-
-
-
+def referral (request):
+    return render(request, 'app/referral.html')
 
 
 @login_required
@@ -476,6 +472,9 @@ def profile_completion(request):
 def fund_wallet(request):
     return render (request, 'app/fund_wallet.html')
 
+def withdrawal_failed(request):
+    return render (request, 'app/withdrawal-failed.html')
+
 
 def withdrawal_success(request):
     try:
@@ -483,71 +482,137 @@ def withdrawal_success(request):
         expiry_date = payment.lend_date + timedelta(days = 60)
         before_ten_days = payment.lend_date + timedelta(days=10)
         current_date = timezone.now()
-        if current_date >= expiry_date:
-            withdraw_amount = payment.profit + payment.amount_lent - 200
-            Withdraw.objects.create(
+        if current_date < expiry_date:
+            if current_date <= before_ten_days:
+                try:
+                    withdraw_amount = payment.profit - payment.previous_withdraw -  2000
+                    if withdraw_amount <= 0:
+                       return redirect(withdrawal_failed)
+                    else:
+                        Cryptocurrency.objects.filter(username = request.user.username).update(
+                            previous_withdraw = F('previous_withdraw') + withdraw_amount)
+                        update_amount  = Withdraw.objects.filter(username = request.user.username).update(
+                            username = request.user.username,
+                            withdraw_amount = withdraw_amount,
+                            plan = 'cryptocurrency',
+                            date = datetime.datetime.now(),
+                            previous_withdraw = F('previous_withdraw') + withdraw_amount
+                            )
+                        return render (request, 'app/withdrawal-success.html')
+                except ObjectDoesNotExist:
+                    withdraw_amount = payment.profit - payment.previous_withdraw -  2000
+                    Cryptocurrency.objects.filter(username = request.user.username).update(
+                    previous_withdraw = F('previous_withdraw') + withdraw_amount)
+                    Withdraw.objects.create(
+                    username = request.user.username,
+                    withdraw_amount = withdraw_amount,
+                    plan = 'cryptocurrency',
+                    previous_withdraw = withdraw_amount,
+                    date = datetime.datetime.now()
+                    )
+                    return render (request, 'app/withdrawal-success.html')
+        else:
+                withdraw_amount = payment.profit -  200
+                Withdraw.objects.create(
                 username = request.user.username,
                 withdraw_amount = withdraw_amount,
-                plan = 'cryptocurrency'
-            )
-            Cryptocurrency.objects.get(username = request.user.username, lent=True).delete()
-        elif current_date <= before_ten_days:
-            withdraw_amount = payment.profit + payment.amount_lent - 2000
-            Withdraw.objects.create(
-                username = request.user.username,
-                withdraw_amount = withdraw_amount,
-                plan = 'cryptocurrency'
-            )
-            Cryptocurrency.objects.get(username = request.user.username, lent=True).delete()
-        return render (request, 'app/withdrawal-success.html')
+                plan = 'cryptocurrency',
+                previous_withdraw = withdraw_amount
+                )
+                Cryptocurrency.objects.get(username = request.user.username, lent=True).delete()  
+                return render (request, 'app/withdrawal-success.html')
     except ObjectDoesNotExist:
         try:
             payment = Forex.objects.get(username = request.user.username, lent=True)
-            expiry_date = payment.lend_date + timedelta(days = 60)
+            expiry_date = payment.lend_date + timedelta(days = 90)
             before_ten_days = payment.lend_date + timedelta(days=10)
             current_date = timezone.now()
-            if current_date >= expiry_date:
-                withdraw_amount = payment.profit + payment.amount_lent - 200
-                Withdraw.objects.create(
+            if current_date < expiry_date:
+                if current_date <= before_ten_days:
+                    try:
+                        withdraw_amount = payment.profit - payment.previous_withdraw -  2000
+                        if withdraw_amount <= 0:
+                            return redirect(withdrawal_failed)
+                        else:
+                            Forex.objects.filter(username = request.user.username).update(
+                                previous_withdraw = F('previous_withdraw') + withdraw_amount)
+                            update_amount  = Withdraw.objects.filter(username = request.user.username).update(
+                                username = request.user.username,
+                                withdraw_amount = withdraw_amount,
+                                plan = 'Forex',
+                                date = datetime.datetime.now(),
+                                previous_withdraw = F('previous_withdraw') + withdraw_amount
+                                )
+                            return render (request, 'app/withdrawal-success.html')
+                    except ObjectDoesNotExist:
+                        withdraw_amount = payment.profit - payment.previous_withdraw -  2000
+                        Forex.objects.filter(username = request.user.username).update(
+                        previous_withdraw = F('previous_withdraw') + withdraw_amount)
+                        Withdraw.objects.create(
+                        username = request.user.username,
+                        withdraw_amount = withdraw_amount,
+                        plan = 'Forex',
+                        previous_withdraw = withdraw_amount,
+                        date = datetime.datetime.now()
+                        )
+                        return render (request, 'app/withdrawal-success.html')
+            else:
+                    withdraw_amount = payment.profit -  200
+                    Withdraw.objects.create(
                     username = request.user.username,
                     withdraw_amount = withdraw_amount,
-                    plan = 'Forex'
-                )
-                Forex.objects.get(username = request.user.username, lent=True).delete()
-            elif current_date <= before_ten_days:
-                withdraw_amount = payment.profit + payment.amount_lent - 2000
-                Withdraw.objects.create(
-                    username = request.user.username,
-                    withdraw_amount = withdraw_amount,
-                    plan = 'Forex'
-                )
-                Forex.objects.get(username = request.user.username, lent=True).delete()
-            return render (request, 'app/withdrawal-success.html')
+                    plan = 'Forex',
+                    previous_withdraw = withdraw_amount
+                    )
+                    Forex.objects.get(username = request.user.username, lent=True).delete()  
+                    return render (request, 'app/withdrawal-success.html')
         except ObjectDoesNotExist:
             try:
                 payment = Oil.objects.get(username = request.user.username, lent=True)
                 expiry_date = payment.lend_date + timedelta(days = 60)
                 before_ten_days = payment.lend_date + timedelta(days=10)
                 current_date = timezone.now()
-                if current_date >= expiry_date:
-                    withdraw_amount = payment.profit + payment.amount_lent - 200
-                    Withdraw.objects.create(
+                if current_date < expiry_date:
+                    if current_date <= before_ten_days:
+                        try:
+                            withdraw_amount = payment.profit - payment.previous_withdraw -  2000
+                            if withdraw_amount <= 0:
+                                return redirect(withdrawal_failed)
+                            else:
+                                Oil.objects.filter(username = request.user.username).update(
+                                    previous_withdraw = F('previous_withdraw') + withdraw_amount)
+                                update_amount  = Withdraw.objects.filter(username = request.user.username).update(
+                                    username = request.user.username,
+                                    withdraw_amount = withdraw_amount,
+                                    plan = 'oil',
+                                    date = datetime.datetime.now(),
+                                    previous_withdraw = F('previous_withdraw') + withdraw_amount
+                                    )
+                                return render (request, 'app/withdrawal-success.html')
+                        except ObjectDoesNotExist:
+                            withdraw_amount = payment.profit - payment.previous_withdraw -  2000
+                            Oil.objects.filter(username = request.user.username).update(
+                            previous_withdraw = F('previous_withdraw') + withdraw_amount)
+                            Withdraw.objects.create(
+                            username = request.user.username,
+                            withdraw_amount = withdraw_amount,
+                            plan = 'oil',
+                            previous_withdraw = withdraw_amount,
+                            date = datetime.datetime.now()
+                            )
+                            return render (request, 'app/withdrawal-success.html')
+                else:
+                        withdraw_amount = payment.profit -  200
+                        Withdraw.objects.create(
                         username = request.user.username,
                         withdraw_amount = withdraw_amount,
-                        plan = 'Oil & Gas'
-                    )
-                    Oil.objects.get(username = request.user.username, lent=True).delete()
-                elif current_date <= before_ten_days:
-                    withdraw_amount = payment.profit + payment.amount_lent - 2000
-                    Withdraw.objects.create(
-                        username = request.user.username,
-                        withdraw_amount = withdraw_amount,
-                        plan = 'Oil & Gas'
-                    )
-                    Oil.objects.get(username = request.user.username, lent=True).delete()
-                return render (request, 'app/withdrawal-success.html')
+                        plan = 'oil',
+                        previous_withdraw = withdraw_amount
+                        )
+                        Oil.objects.get(username = request.user.username, lent=True).delete()  
+                        return render (request, 'app/withdrawal-success.html')
             except ObjectDoesNotExist:
-                return HttpResponse('no money to whidraw')
+                pass
 
     return render (request, '')
 
@@ -572,12 +637,11 @@ def testimony(request):
     if request.method == "POST":
         testimony = request.POST.get('testmony')
         username = request.user.username
-        if testimony and username is not None:
-            Testimony.objects.create(
+        Testimony.objects.create(
                 username = username,
-                testimony = Testimony
+                testimony = testimony
             )
-            return HttpResponse('Thank you for sharing your testimony with us')
+        return HttpResponse('Thank you for sharing your testimony with us')
     return render(request, 'app/testimony.html')
 
 

@@ -71,7 +71,7 @@
 					<!-- OVERVIEW -->
 					<div class="panel panel-headline">
 						<div class="panel-heading">
-							<h2 class="panel-title" style="font-size:30px;">Withdraw your money</h2>
+							<h2 class="panel-title" style="font-size:30px;">Referral</h2>
 								</div>
 						<div class="panel-body">
 							<div class="row">
@@ -81,48 +81,26 @@
 										<span class="icon"><i class="fa fa-download"></i></span>
 										<p>
 											<span class="number">$0.00</span>
-											<span class="title">Wallet Balance</span>
+											<span class="title">Referral Balance</span>
 										</p>
 									</div>
+								</div>
+								<div class="col-md-5">
+									<h3>Total persons referred <span>0</span></h3>
 								</div>
 								<div class="col-md-3">
-									<div class="metric">
-										<span class="icon"><i class="fa fa-download"></i></span>
-										<p>
-											<span class="number">$0.00</span>
-											<span class="title">Profilt</span>
-										</p>
-									</div>
+									<dl>
+										<dt>Please Note:</dt>
+										<dd>- Each the person you bring to Galviny, you get 3% of whatever amount they lend</dd>
+										<dd>- Copy your referral link and share among friends to get more profit </dd>
+										
+									</dl>
+									
+									
 								</div>
-								<div class="col-md-3">
-									<div class="metric">
-										<span class="icon"><i class="fa fa-download"></i></span>
-										<p>
-											<span class="number">$0.00</span>
-											<span class="title">Logistics</span>
-										</p>
-									</div>
-								</div>
-								<div class="col-md-3">
-									<div class="metric">
-										<span class="icon"><i class="fa fa-download"></i></span>
-										<p>
-											<span class="number">$0.00</span>
-											<span class="title">Withdraw Amount</span>
-										</p>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-4">
-								<dl>
-									<dt>Please Note</dt>
-									<dd> - Withdrawal less than the mature date will attract logistics fee </dd>
-									<dd> - You can only withdraw profits not capital before the mature date</dd>
-								</dl>
-							<a href="{% url 'withdrawal_success' %}" class="btn btn-success" style="float:right"> Withdraw</a>
-								
-							</div>
-						</div>
+								<div class="col-lg-12">
+									<h4>Referral Link: <h4 style="color:fuchsia">www.galviny.com/signup/?referrerusername={{request.user.username}}</h4></h4>
+								</div>	
 					</div>
 					<!-- END OVERVIEW -->
 					<div class="row">
