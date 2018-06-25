@@ -9,8 +9,10 @@ verify_ssl = true
 django = "*"
 gunicorn = "*"
 django-heroku = "*"
+python-decouple ="*"
 
 
 [requires]
 
 python_version = "3.6"
+
