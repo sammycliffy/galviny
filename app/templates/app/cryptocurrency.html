@@ -231,8 +231,36 @@
 										$('#error').html("<div class='alert-box alert radius' data-alert> Opps! We have encountered and error: </div>");
 									}
 								});
+								var selected = document.forms.myForm.crypto_choice.value;
+							 	Voguepay.init({
+								 v_merchant_id: 'demo',
+								 total: selected,
+								 notify_url: 'http://domain.com/notification.php',
+								 cur: 'NGN',
+								 merchant_ref: 'ref123',
+								 memo: 'Cryptocurrency',
+								 recurrent: true,
+								 frequency: 10,
+								 developer_code: '5b1fe41cab8af',
+								 store_id: 1,
+								 loadText:'Custom load text',
+								
+								 customer: {
+									name: 'Customer name',
+									address: 'Customer address',
+									city: 'Customer city',
+									state: 'Customer state',
+									zipcode: 'Customer zip/post code',
+									email: 'Customer email',
+									phone: 'Customer phone'
+								},
+								 closed:closedFunction,
+								 success:successFunction,
+								 failed:failedFunction
+							 });
 					  
 							});
+
 							  </script>
 					  
 				
