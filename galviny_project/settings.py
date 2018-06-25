@@ -85,14 +85,9 @@ WSGI_APPLICATION = 'galviny_project.wsgi.application'
     #}
 #}
 
-
-db_from_env = dj_database_url.config()
-DATABASE = {
-    'default':dj_database_url.config(
-        default = config('DATABASE_URL')
-    )
+DATABASES = {
+    'default': dj_database_url.config()
 }
-
 
 
 
