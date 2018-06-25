@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 
 import os
 import posixpath
+import dj_database_url
+from decouple import config
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -83,10 +85,7 @@ WSGI_APPLICATION = 'galviny_project.wsgi.application'
     #}
 #}
 
-import dj_database_url
-from decouple import Csv, config
-import dj_database_url
-from decouple import config
+
 db_from_env = dj_database_url.config()
 DATABASE = {
     'default':dj_database_url.config(
