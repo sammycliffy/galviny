@@ -83,11 +83,14 @@ WSGI_APPLICATION = 'galviny_project.wsgi.application'
     #}
 #}
 
-
-DEBUG = config('DEBUG', default=False, cast=bool)
-DATABASES = {
-    'default': dj_database_url.config(
-        default=config('DATABASE_URL')
+import dj_database_url
+from decouple import Csv, config
+import dj_database_url
+from decouple import config
+db_from_env = dj_database_url.config()
+DATABASE = {
+    'default':dj_database_url.config(
+        default = config('DATABASE_URL')
     )
 }
 
