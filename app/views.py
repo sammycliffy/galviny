@@ -91,6 +91,12 @@ def cryptocurrency(request):
     if request.method == "POST":
         username = request.user.username
         choice = request.POST.get('choice')
+        data = {
+            'already_done': Cryptocurrency.objects.filter(username__iexact=username).exists(),
+        }
+        if data['already_done']:
+            data['error_message'] = 'sorry you cannot do more than once'
+            return JsonResponse(data)
         Cryptocurrency.objects.create(
             username = username,
             choice = choice,
