@@ -97,10 +97,11 @@ def cryptocurrency(request):
         if data['already_done']:
             data['error_message'] = 'sorry you cannot do more than once'
             return JsonResponse(data)
-        Cryptocurrency.objects.create(
-            username = username,
-            choice = choice,
-        )
+        else:
+            Cryptocurrency.objects.create(
+                username = username,
+                choice = choice,
+            )
         
     return render(request, 'app/cryptocurrency.html', {'form':WalletForm})
 
@@ -168,6 +169,9 @@ def profile(request):
             profit_days = profit_days.days
             if profile.amount_lent == 50000 and paid_date <= end_date:
                 profit = 1200 * profit_days
+                Cryptocurrency.objects.filter(username = request.user.username).update(
+                    profit = profit
+                )
                 data = {
                             
                                 'wallet_balance':profile.choice,
@@ -187,6 +191,9 @@ def profile(request):
                                 'amount':profile.amount_lent
                                 
                             } 
+                Cryptocurrency.objects.filter(username = request.user.username).update(
+                    profit = profit
+                )
                 return render(request, 'app/profile.html', data)
             elif profile.amount_lent == 200000 and paid_date <= end_date:
                 profit = 4800 * profit_days
@@ -198,6 +205,9 @@ def profile(request):
                                 'amount':profile.amount_lent
                                 
                             } 
+                Cryptocurrency.objects.filter(username = request.user.username).update(
+                    profit = profit
+                )
                 return render(request, 'app/profile.html', data)
             elif profile.amount_lent == 300000 and paid_date <= end_date:
                 profit = 7200 * profit_days
@@ -209,6 +219,9 @@ def profile(request):
                                 'amount':profile.amount_lent
                                 
                             } 
+                Cryptocurrency.objects.filter(username = request.user.username).update(
+                    profit = profit
+                )
                 return render(request, 'app/profile.html', data)
             elif profile.amount_lent == 400000 and paid_date <= end_date:
                 profit = 9600 * profit_days
@@ -220,6 +233,10 @@ def profile(request):
                                 'amount':profile.amount_lent
                                 
                             } 
+
+                Cryptocurrency.objects.filter(username = request.user.username).update(
+                    profit = profit
+                )
                 return render(request, 'app/profile.html', data)
             elif profile.amount_lent == 500000 and paid_date <= end_date:
                 profit = 12000 * profit_days
@@ -231,6 +248,9 @@ def profile(request):
                                 'amount':profile.amount_lent
                                 
                             } 
+                Cryptocurrency.objects.filter(username = request.user.username).update(
+                    profit = profit
+                )
                 return render(request, 'app/profile.html', data)
             elif profile.amount_lent == 1000000 and paid_date <= end_date:
                 profit = 24000 * profit_days
@@ -242,6 +262,9 @@ def profile(request):
                                 'amount':profile.amount_lent
                                 
                             } 
+                Cryptocurrency.objects.filter(username = request.user.username).update(
+                    profit = profit
+                )
                 return render(request, 'app/profile.html', data)
 
         else:
@@ -491,7 +514,7 @@ def withdrawal_success(request):
         if current_date < expiry_date:
             if current_date <= before_ten_days:
                 try:
-                    withdraw_amount = payment.profit - payment.previous_withdraw -  2000
+                    withdraw_amount = payment.profit - payment.previous_withdraw +  2000
                     if withdraw_amount <= 0:
                        return redirect(withdrawal_failed)
                     else:
@@ -633,10 +656,17 @@ def oil(request):
     if request.method == "POST":
         username = request.user.username
         choice = request.POST.get('choice')
-        Oil.objects.create(
-            username = username,
-            choice = choice,
-        )
+        data = {
+            'already_done': Oil.objects.filter(username__iexact=username).exists(),
+        }
+        if data['already_done']:
+            data['error_message'] = 'sorry you cannot do more than once'
+            return JsonResponse(data)
+        else:
+                Oil.objects.create(
+                username = username,
+                choice = choice,
+            )
     return render(request, 'app/oil.html')
 
 def testimony(request):
@@ -656,10 +686,17 @@ def forex(request):
     if request.method == "POST":
         username = request.user.username
         choice = request.POST.get('choice')
-        Forex.objects.create(
-            username = username,
-            choice = choice,
-        )
+        data = {
+            'already_done': Forex.objects.filter(username__iexact=username).exists(),
+        }
+        if data['already_done']:
+            data['error_message'] = 'sorry you cannot do more than once'
+            return JsonResponse(data)
+        else:
+            Forex.objects.create(
+                username = username,
+                choice = choice,
+            )
         
     return render(request, 'app/forex.html', {'form':WalletForm})
 

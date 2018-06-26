@@ -40,7 +40,7 @@
 		<!-- NAVBAR -->
 		<nav class="navbar navbar-default navbar-fixed-top">
 			<div class="brand">
-				<a href="index.html">Galviny</a>
+				<a href="">Galviny</a>
 			</div>
 			<div class="container-fluid">
 				<div class="navbar-btn">
@@ -56,23 +56,10 @@
 								<i class="lnr lnr-alarm"></i>
 								<span class="badge bg-danger">5</span>
 							</a>
-							<ul class="dropdown-menu notifications">
-								<li><a href="#" class="notification-item"><span class="dot bg-warning"></span>System space is almost full</a></li>
-								<li><a href="#" class="notification-item"><span class="dot bg-danger"></span>You have 9 unfinished tasks</a></li>
-								<li><a href="#" class="notification-item"><span class="dot bg-success"></span>Monthly report is available</a></li>
-								<li><a href="#" class="notification-item"><span class="dot bg-warning"></span>Weekly meeting in 1 hour</a></li>
-								<li><a href="#" class="notification-item"><span class="dot bg-success"></span>Your request has been approved</a></li>
-								<li><a href="#" class="more">See all notifications</a></li>
-							</ul>
+							
 						</li>
 						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="lnr lnr-question-circle"></i> <span>Help</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
-							<ul class="dropdown-menu">
-								<li><a href="#">Basic Use</a></li>
-								<li><a href="#">Working With Data</a></li>
-								<li><a href="#">Security</a></li>
-								<li><a href="#">Troubleshooting</a></li>
-							</ul>
+							
 						</li>
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="{% static 'app/img/user.png'%}" class="img-circle" alt="Avatar"> <span>{{user.username}}</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
@@ -96,13 +83,12 @@
 			<div class="sidebar-scroll">
 				<nav>
 					<ul class="nav">
-						<li><a href="index.html" class="active"><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li>
-						<li><a href="{% url 'fundwallet' %}" class=""><i class="lnr lnr-code"></i> <span>Fund wallet</span></a></li>
-						<li><a href="" class=""><i class="lnr lnr-chart-bars"></i> <span>Lend Money</span></a></li>
-						<li><a href="{% url 'withdrawal' %}" class=""><i class="lnr lnr-cog"></i> <span>Withdraw</span></a></li>
-						<li><a href="" class=""><i class="lnr lnr-alarm"></i> <span>Testimony</span></a></li>
+						<li><a href="{% url 'profile' %}" class="active"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
+						<li><a href="{% url 'fundwallet' %}" class=""><i class="fa fa-cart-arrow-down"></i> <span>Fund wallet</span></a></li>
+						<li><a href="{% url 'withdrawal' %}" class=""><i class="fa fa fa-key"></i> <span>Withdraw</span></a></li>
+						<li><a href="{% url 'testimony'%} " class=""><i class="fa fa-microphone"></i> <span>Testimony</span></a></li>
 						<li>
-							<a href="#subPages" data-toggle="collapse" class="collapsed"><i class="lnr lnr-file-empty"></i> <span>Profile</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
+							<a href="#subPages" data-toggle="collapse" class="collapsed"><i class="fa fa-user-circle"></i><span>Profile</span> <i class="icon-submenu fa fa-bars"></i></i></a>
 							<div id="subPages" class="collapse ">
 								<ul class="nav">
 									<li><a href="" class="">Edit Profile</a></li>
@@ -110,7 +96,7 @@
 								</ul>
 							</div>
 						</li>
-						<li><a href="" class=""><i class="lnr lnr-dice"></i> <span>Contact us</span></a></li>
+						<li><a href="" class=""><i class="fa fa-bell"></i> <span>Contact us</span></a></li>
 					</ul>
 				</nav>
 			</div>
@@ -210,7 +196,7 @@
 									},
 					  
 									success: function (data) {
-										if (data.already_taken) {
+										if (data.already_done) {
 											alert('You cannot do more than one plan at a time')
 										}
 					  
@@ -256,18 +242,6 @@
 
 							  </script>
 					  
-				
-
-
-
-
-
-
-
-
-
-					 
-					  
 					</div>
 				</div>
 					  <div class="clearfix"></div>
@@ -281,5 +255,6 @@
 	<!-- Javascript -->
 	<script src="{% static 'app/js/jquery.min.js' %}"></script>
 	<script src="{% static 'app/js/bootstrap.min.js' %}"></script>
+	<script src="{% static 'app/js/klorofil-common.js' %}"></script>
 </body>
 </html>

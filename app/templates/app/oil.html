@@ -96,13 +96,12 @@
 			<div class="sidebar-scroll">
 				<nav>
 					<ul class="nav">
-						<li><a href="index.html" class="active"><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li>
-						<li><a href="{% url 'fundwallet' %}" class=""><i class="lnr lnr-code"></i> <span>Fund wallet</span></a></li>
-						<li><a href="" class=""><i class="lnr lnr-chart-bars"></i> <span>Lend Money</span></a></li>
-						<li><a href="{% url 'withdrawal' %}" class=""><i class="lnr lnr-cog"></i> <span>Withdraw</span></a></li>
-						<li><a href="" class=""><i class="lnr lnr-alarm"></i> <span>Testimony</span></a></li>
+						<li><a href="{% url 'profile' %}" class="active"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
+						<li><a href="{% url 'fundwallet' %}" class=""><i class="fa fa-cart-arrow-down"></i> <span>Fund wallet</span></a></li>
+						<li><a href="{% url 'withdrawal' %}" class=""><i class="fa fa fa-key"></i> <span>Withdraw</span></a></li>
+						<li><a href="{% url 'testimony'%} " class=""><i class="fa fa-microphone"></i> <span>Testimony</span></a></li>
 						<li>
-							<a href="#subPages" data-toggle="collapse" class="collapsed"><i class="lnr lnr-file-empty"></i> <span>Profile</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
+							<a href="#subPages" data-toggle="collapse" class="collapsed"><i class="fa fa-user-circle"></i><span>Profile</span> <i class="icon-submenu fa fa-bars"></i></i></a>
 							<div id="subPages" class="collapse ">
 								<ul class="nav">
 									<li><a href="" class="">Edit Profile</a></li>
@@ -110,7 +109,7 @@
 								</ul>
 							</div>
 						</li>
-						<li><a href="" class=""><i class="lnr lnr-dice"></i> <span>Contact us</span></a></li>
+						<li><a href="" class=""><i class="fa fa-bell"></i> <span>Contact us</span></a></li>
 					</ul>
 				</nav>
 			</div>
@@ -209,21 +208,40 @@
 											   csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
 								},
 				  
-								success: function (amount) {
-									if (amount.count) {
-										$('#error').css('display', 'block');
-										 $('#ajax_text').css('display', 'none');
-										 $('#ajax_image').css('display', 'none');
-										 $('#closed').css('display', 'block');
-										$('.modals').css('display', 'block');
+								success: function (data) {
+									if (data.already_done) {
+										alert('You cannot do more than one plan at a time')
 									}
 				  
 									else {
-										alert('You have successfully added a plan. it will be confirmed shortly');
-										$('.modals').css('display', 'none');
-										$('#ajax_text').css('display', 'none');
-										$('#ajax_image').css('display', 'none');
-				  
+											var selected = document.forms.myForm.crypto_choice.value;
+											Voguepay.init({
+											v_merchant_id: 'demo',
+											total: selected,
+											notify_url: 'http://domain.com/notification.php',
+											cur: 'NGN',
+											merchant_ref: 'ref123',
+											memo: 'Cryptocurrency',
+											recurrent: true,
+											frequency: 10,
+											developer_code: '5b1fe41cab8af',
+											store_id: 1,
+											loadText:'Custom load text',
+											
+											customer: {
+												name: 'Customer name',
+												address: 'Customer address',
+												city: 'Customer city',
+												state: 'Customer state',
+												zipcode: 'Customer zip/post code',
+												email: 'Customer email',
+												phone: 'Customer phone'
+											},
+											closed:closedFunction,
+											success:successFunction,
+											failed:failedFunction
+										});
+								
 				  
 									}
 								},
@@ -248,5 +266,6 @@
 	<!-- Javascript -->
 	
 	<script src="{% static 'app/js/bootstrap.min.js' %}"></script>
+	<script src="{% static 'app/js/klorofil-common.js' %}"></script>
 </body>
 </html>

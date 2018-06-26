@@ -13,12 +13,13 @@
 	<link rel="stylesheet" href="{% static 'app/css/font-awesome.min.css'%}">
 	<link rel="stylesheet" href="{% static 'app/css/lineariconstyle.css'%}">
 	<!-- MAIN CSS -->
+	
+	<script src="{% static 'app/js/jquery.min.js' %}"></script>
 	<link rel="stylesheet" href="{% static 'app/css/main.css'%}">
 	<!-- FOR DEMO PURPOSES ONLY. You should remove this in your project -->
 
 	<!-- GOOGLE FONTS -->
 	<link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
-
 </head>
 
 <body>
@@ -31,11 +32,27 @@
 			</div>
 			<div class="container-fluid">
 				<div class="navbar-btn">
-					<button type="button" class="btn-toggle-fullwidth"><i class="lnr lnr-arrow-left-circle"></i></button>
+					<button type="button" class="btn-toggle-fullwidth"><i class="fa fa-bars"></i></button>
 				</div>
 				<div class="navbar-btn navbar-btn-right">
-					<a class="btn btn-success update-pro" href="https://www.themeineed.com/downloads/klorofil-pro-bootstrap-admin-dashboard-template/?utm_source=klorofil&utm_medium=template&utm_campaign=KlorofilPro" title="Upgrade to Pro" target="_blank"> <span>Fund Wallet</span></a>
-				
+					<a class="btn btn-success update-pro" href="{% url 'fundwallet' %}" title="Upgrade to Pro" target="_blank"> <span>Fund Wallet</span></a>
+				</div>
+				<div id="navbar-menu">
+					<ul class="nav navbar-nav navbar-right">
+		
+						<li class="dropdown">
+							<a href="{% url 'logout'%}" >Logout</a>
+
+						</li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="{% static 'app/img/user.png'%}" class="img-circle" alt="Avatar"> <span>{{user.username}}</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
+							
+						</li>
+						<!-- <li>
+							<a class="update-pro" href="https://www.themeineed.com/downloads/klorofil-pro-bootstrap-admin-dashboard-template/?utm_source=klorofil&utm_medium=template&utm_campaign=KlorofilPro" title="Upgrade to Pro" target="_blank"><i class="fa fa-rocket"></i> <span>UPGRADE TO PRO</span></a>
+						</li> -->
+					</ul>
+				</div>
 			</div>
 		</nav>
 		<!-- END NAVBAR -->
@@ -44,12 +61,12 @@
 			<div class="sidebar-scroll">
 				<nav>
 					<ul class="nav">
-						<li><a href="{% url 'profile'%}" class="active"><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li>
-						<li><a href="{% url 'fundwallet'%}" class=""><i class="lnr lnr-code"></i> <span>Fund wallet</span></a></li>
-						<li><a href="{% url 'withdrawal'%}" class=""><i class="lnr lnr-cog"></i> <span>Withdraw</span></a></li>
-						<li><a href="{% url 'testimony'%}" class=""><i class="lnr lnr-alarm"></i> <span>Testimony</span></a></li>
+						<li><a href="{% url 'profile' %}" class="active"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
+						<li><a href="{% url 'fundwallet' %}" class=""><i class="fa fa-cart-arrow-down"></i> <span>Fund wallet</span></a></li>
+						<li><a href="{% url 'withdrawal' %}" class=""><i class="fa fa fa-key"></i> <span>Withdraw</span></a></li>
+						<li><a href="{% url 'testimony'%} " class=""><i class="fa fa-microphone"></i> <span>Testimony</span></a></li>
 						<li>
-							<a href="#subPages" data-toggle="collapse" class="collapsed"><i class="lnr lnr-file-empty"></i> <span>Profile</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
+							<a href="#subPages" data-toggle="collapse" class="collapsed"><i class="fa fa-user-circle"></i><span>Profile</span> <i class="icon-submenu fa fa-bars"></i></i></a>
 							<div id="subPages" class="collapse ">
 								<ul class="nav">
 									<li><a href="" class="">Edit Profile</a></li>
@@ -57,11 +74,13 @@
 								</ul>
 							</div>
 						</li>
-						<li><a href="" class=""><i class="lnr lnr-dice"></i> <span>Contact us</span></a></li>
+						<li><a href="" class=""><i class="fa fa-bell"></i> <span>Contact us</span></a></li>
 					</ul>
 				</nav>
 			</div>
 		</div>
+		<!-- END LEFT SIDEBAR -->
+		<!-- MAIN -->
 		<!-- END LEFT SIDEBAR -->
 		<!-- MAIN -->
 		<div class="main">
@@ -73,46 +92,35 @@
 						<div class="panel-heading">
 							<h2 class="panel-title" style="font-size:30px;">Withdraw your money</h2>
 								</div>
-						<div class="panel-body">
-							<div class="row">
-								
-								<div class="col-md-3">
-									<div class="metric">
-										<span class="icon"><i class="fa fa-download"></i></span>
-										<p>
-											<span class="number">$0.00</span>
-											<span class="title">Wallet Balance</span>
-										</p>
-									</div>
-								</div>
-								<div class="col-md-3">
-									<div class="metric">
-										<span class="icon"><i class="fa fa-download"></i></span>
-										<p>
-											<span class="number">$0.00</span>
-											<span class="title">Profilt</span>
-										</p>
-									</div>
-								</div>
-								<div class="col-md-3">
-									<div class="metric">
-										<span class="icon"><i class="fa fa-download"></i></span>
-										<p>
-											<span class="number">$0.00</span>
-											<span class="title">Logistics</span>
-										</p>
-									</div>
-								</div>
-								<div class="col-md-3">
-									<div class="metric">
-										<span class="icon"><i class="fa fa-download"></i></span>
-										<p>
-											<span class="number">$0.00</span>
-											<span class="title">Withdraw Amount</span>
-										</p>
-									</div>
-								</div>
-							</div>
+								<div class="panel-body">
+									<div class="row">
+										<div class="col-md-3">
+											<div class="metric">
+												<span class="icon"><i class="fa fa-cart-arrow-down"></i></span>
+												<p>
+													<span class="number">&#8358; {{wallet_balance}}</span>
+													<span class="title">Wallet Balance</span>
+												</p>
+											</div>
+										</div>
+										<div class="col-md-3">
+											<div class="metric">
+												<span class="icon"><i class="fa fa-shopping-bag"></i></span>
+												<p>
+													<span class="number">&#8358; {{amount}}</span>
+													<span class="title">Amount Lent</span>
+												</p>
+											</div>
+										</div>
+										<div class="col-md-3">
+											<div class="metric">
+												<span class="icon"><i class="fa fa-credit-card-alt"></i></span>
+												<p>
+													<span class="number">&#8358; {{profit}}</span>
+													<span class="title">Profit</span>
+												</p>
+											</div>
+										</div>
 							<div class="col-md-4">
 								<dl>
 									<dt>Please Note</dt>
@@ -204,5 +212,6 @@
 	<!-- Javascript -->
 	<script src="{% static 'app/js/jquery.min.js' %}"></script>
 	<script src="{% static 'app/js/bootstrap.min.js' %}"></script>
+	<script src="{% static 'app/js/klorofil-common.js' %}"></script>
 </body>
 </html>
