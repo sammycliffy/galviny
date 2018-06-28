@@ -43,32 +43,14 @@
 				<a href="">Galviny</a>
 			</div>
 			<div class="container-fluid">
-				<div class="navbar-btn">
-					<button type="button" class="btn-toggle-fullwidth"><i class="lnr lnr-arrow-left-circle"></i></button>
-				</div>
-				<div class="navbar-btn navbar-btn-right">
-					<a class="btn btn-success update-pro" href="https://www.themeineed.com/downloads/klorofil-pro-bootstrap-admin-dashboard-template/?utm_source=klorofil&utm_medium=template&utm_campaign=KlorofilPro" title="Upgrade to Pro" target="_blank"> <span>Fund Wallet</span></a>
-				</div>
+					<div class="navbar-btn">
+							<button type="button" class="btn-toggle-fullwidth"><i class="fa fa-bars"></i></button>
+						</div>
 				<div id="navbar-menu">
 					<ul class="nav navbar-nav navbar-right">
 						<li class="dropdown">
-							<a href="#" class="dropdown-toggle icon-menu" data-toggle="dropdown">
-								<i class="lnr lnr-alarm"></i>
-								<span class="badge bg-danger">5</span>
-							</a>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="{% static 'app/img/user.png'%}" class="img-circle" alt="Avatar"> <span>{{user.username}}</span> </a>
 							
-						</li>
-						<li class="dropdown">
-							
-						</li>
-						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown"><img src="{% static 'app/img/user.png'%}" class="img-circle" alt="Avatar"> <span>{{user.username}}</span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
-							<ul class="dropdown-menu">
-								<li><a href="#"><i class="lnr lnr-user"></i> <span>My Profile</span></a></li>
-								<li><a href="#"><i class="lnr lnr-envelope"></i> <span>Message</span></a></li>
-								<li><a href="#"><i class="lnr lnr-cog"></i> <span>Settings</span></a></li>
-								<li><a href="#"><i class="lnr lnr-exit"></i> <span>Logout</span></a></li>
-							</ul>
 						</li>
 						<!-- <li>
 							<a class="update-pro" href="https://www.themeineed.com/downloads/klorofil-pro-bootstrap-admin-dashboard-template/?utm_source=klorofil&utm_medium=template&utm_campaign=KlorofilPro" title="Upgrade to Pro" target="_blank"><i class="fa fa-rocket"></i> <span>UPGRADE TO PRO</span></a>
@@ -213,7 +195,7 @@
 												frequency: 10,
 												developer_code: '5b1fe41cab8af',
 												store_id: 1,
-												loadText:'Custom load text',
+												loadText:'Please wait',
 												
 												customer: {
 													name: 'Customer name',
@@ -247,7 +229,7 @@
 					  <div class="clearfix"></div>
 		<footer>
 			<div class="container-fluid">
-				<p class="copyright">&copy; 2018 <a href="https://www.themeineed.com" target="_blank">Galviny</a>. All Rights Reserved.</p>
+				<p class="copyright">&copy; 2018 <a href="" target="_blank">Galviny</a>. All Rights Reserved.</p>
 			</div>
 		</footer>
 	</div>
