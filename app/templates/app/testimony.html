@@ -97,8 +97,9 @@
                                 <div class="col-lg-6">
                                         <form id="testimony_form" method ="POST">
                                             {% csrf_token %}
-                                                <textarea name="" id="testimony" cols="50" rows="10" ></textarea><br><br>
-                                                <input type="submit" class="btn btn-success" style="float:right">
+												<textarea name="" id="testimony1" cols="50" rows="10" ></textarea><br><br>
+												<input type="submit" class="btn btn-success" style="float:right">
+												
                                         </form>
                                 </div>
 								
@@ -116,17 +117,8 @@
 							$.ajax({
 								type: 'POST',
 								url: '/testimony/',
-								enctype: "multipart/form-data",
-								beforeSend: function () {
-									$('.modals').css('display', 'block')
-									$('#ajax_text').css('display', 'block');
-									$('#ajax_image').css('display', 'block');
-				  
-								},
 								  data: {
-									  
-				  
-											   testimony: $('#testimony').val(),
+											   testimony1: $('#testimony1').val(),
 											   csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
 								},
 				  
@@ -141,10 +133,7 @@
 				  
 									else {
 										alert('You have successfully shared a testimony');
-										$('.modals').css('display', 'none');
-										$('#ajax_text').css('display', 'none');
-										$('#ajax_image').css('display', 'none');
-				  
+										
 				  
 									}
 								},
@@ -160,7 +149,7 @@
 	</div>
 	<!-- END WRAPPER -->
 	<!-- Javascript -->
-	<script src="{% static 'app/js/jquery.min.js' %}"></script>
+	
 	<script src="{% static 'app/js/bootstrap.min.js' %}"></script>
 	<script src="{% static 'app/js/klorofil-common.js' %}"></script>
 </body>

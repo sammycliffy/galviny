@@ -990,9 +990,12 @@ def testimony(request):
     if request.method == "POST":
         testimony = request.POST.get('testmony')
         username = request.user.username
+        testimony1 = request.POST.get('testimony1')
         Testimony.objects.create(
                 username = username,
-                testimony = testimony
+                testimony = testimony1,
+    
+
             )
         return HttpResponse('Thank you for sharing your testimony with us')
     return render(request, 'app/testimony.html')

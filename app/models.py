@@ -39,6 +39,7 @@ class Testimony(models.Model):
     username = models.CharField(max_length = 255, null = True)
     testimony = models.CharField(max_length = 255, null = True)
     date = models.DateField(auto_now=True)
+    confirmed = models.BooleanField(default=False)
 
 
 class Cryptocurrency(models.Model):
