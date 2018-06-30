@@ -28,7 +28,7 @@ SECRET_KEY = '!4q4810=m97-3icmpv7_@=ua-)v0xfgh_06g(nk7!yniaeaors'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['galviny2.herokuapp.com', 'localhost']
+ALLOWED_HOSTS = ['galviny2.herokuapp.com', 'localhost', 'galviny.com']
 
 DATABASE_URL = 'postgres://nkdzkmlyivqcbo:2c0556073437d1daef640fc667906a977598188fc7a451bd1710d58e545b49ed@ec2-54-235-109-37.compute-1.amazonaws.com:5432/degrmrvmi8rjd1'
 
@@ -79,10 +79,10 @@ WSGI_APPLICATION = 'galviny_project.wsgi.application'
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
 #DATABASES = {
- #   'default': {
-  #     'ENGINE': 'django.db.backends.sqlite3',
-   #   'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
- #}
+#   'default': {
+#     'ENGINE': 'django.db.backends.sqlite3',
+#   'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#}
 #}
 
 DATABASES = {
