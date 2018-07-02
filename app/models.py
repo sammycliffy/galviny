@@ -10,6 +10,7 @@ class Profile (models.Model):
     lastname = models.CharField(max_length=255, null=True)
     address = models.CharField(max_length=255, null=True)
     age = models.CharField(max_length=255, null=True)
+    phone = models.CharField(max_length=255, null=True)
     sex = models.CharField(max_length=255, null=True)
     bank = models.CharField(max_length=255, null=True)
     account_name = models.CharField(max_length = 255, null=True)

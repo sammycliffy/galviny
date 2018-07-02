@@ -130,7 +130,7 @@
 								
 								</li>
 								</ul></p>
-							  
+								<input type="hidden" id="username" value={{request.user.username}}>
                                <center> 
 								   <input type="submit" value="submit" class="btn btn-success" style="float:right">
                                 </form>
@@ -184,8 +184,9 @@
 					  
 										else {
 												var selected = document.forms.myForm.crypto_choice.value;
+												var username = document.getElementById(username).value;
 												Voguepay.init({
-												v_merchant_id: 'demo',
+												v_merchant_id: '1767-0065353',
 												total: selected,
 												notify_url: 'http://domain.com/notification.php',
 												cur: 'NGN',
@@ -198,7 +199,7 @@
 												loadText:'Please wait',
 												
 												customer: {
-													name: 'Customer name',
+													name: username,
 													address: 'Customer address',
 													city: 'Customer city',
 													state: 'Customer state',

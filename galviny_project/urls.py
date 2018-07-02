@@ -44,5 +44,8 @@ urlpatterns = [
     url(r'^success/$', views.withdrawal_success, name='withdrawal_success'),
     url(r'^failed/$', views.withdrawal_failed, name='withdrawal_success'),
     url(r'^referral/$', views.referral, name='referral'),
+    url(r'^faq/$', views.faq, name='faq'),
+    url(r'^privacy/$', views.privacy, name='privacy'),
+    url(r'^terms/$', views.terms, name='terms'),
 ]
         

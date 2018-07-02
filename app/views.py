@@ -3,7 +3,7 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from .forms import SignUpForm, ProfileForm, WalletForm
 from django.http import HttpResponse
-from app.models import Testimony, Cryptocurrency, Forex, Oil, Withdraw
+from app.models import Testimony, Cryptocurrency, Forex, Oil, Withdraw, Referrer
 from django.utils.encoding import force_text
 from django.utils.http import urlsafe_base64_decode
 from app.token import account_activation_token
@@ -58,6 +58,7 @@ def send_email(request):
 def signup(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
+        referrer_link = request.POST.get('referrer')
         if form.is_valid():
             user = form.save()
             user.refresh_from_db()  # load the profile instance created by the signal
@@ -71,6 +72,11 @@ def signup(request):
                 'uid': urlsafe_base64_encode(force_bytes(user.pk)).decode(),
                 'token': account_activation_token.make_token(user),
             })
+            if rerrer_link != '':
+                Referrer.objects.create(
+                    referrer = referrer_link,
+                    
+                )
             send_mail(subject, message, 'Galviny', [user.email])
             return HttpResponse('<h2>Check your email, activation link has been sent. click on the link to continue</h2>')
             raw_password = form.cleaned_data.get('password1')
@@ -483,12 +489,12 @@ def referral (request):
     return render(request, 'app/referral.html')
 
 
-@login_required
+
 def profile_completion(request):
     if request.method == "POST":
         form = ProfileForm(request.POST, instance=request.user.profile)
         if form.is_valid():
-            user = form.save()
+            form.save()
             return redirect('profile')
     else:
         form = ProfileForm()
@@ -1060,3 +1066,13 @@ def change_password(request):
     return render(request, 'app/change_password.html', {
         'form': form
     })
+
+
+def faq(request):
+    return render(request,'app/faq.html' )
+
+def privacy(request):
+    return render(request,'app/privacy.html' )
+
+def terms(request):
+    return render(request, 'app/terms.html')
