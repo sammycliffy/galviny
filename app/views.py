@@ -485,7 +485,7 @@ def profile(request):
 
 
 
-def referral (request):
+def referrer (request):
     return render(request, 'app/referral.html')
 
 
