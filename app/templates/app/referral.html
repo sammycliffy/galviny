@@ -34,7 +34,7 @@
 					<button type="button" class="btn-toggle-fullwidth"><i class="lnr lnr-arrow-left-circle"></i></button>
 				</div>
 				<div class="navbar-btn navbar-btn-right">
-					<a class="btn btn-success update-pro" href="https://www.themeineed.com/downloads/klorofil-pro-bootstrap-admin-dashboard-template/?utm_source=klorofil&utm_medium=template&utm_campaign=KlorofilPro" title="Upgrade to Pro" target="_blank"> <span>Fund Wallet</span></a>
+					<a class="btn btn-success update-pro" href="{% url 'fund-wallet'%}"> <span>Fund Wallet</span></a>
 				
 			</div>
 		</nav>
@@ -44,10 +44,11 @@
 			<div class="sidebar-scroll">
 				<nav>
 					<ul class="nav">
-						<li><a href="{% url 'profile'%}" class="active"><i class="lnr lnr-home"></i> <span>Dashboard</span></a></li>
-						<li><a href="{% url 'fundwallet'%}" class=""><i class="lnr lnr-code"></i> <span>Fund wallet</span></a></li>
-						<li><a href="{% url 'withdrawal'%}" class=""><i class="lnr lnr-cog"></i> <span>Withdraw</span></a></li>
-						<li><a href="{% url 'testimony'%}" class=""><i class="lnr lnr-alarm"></i> <span>Testimony</span></a></li>
+						<li><a href="{% url 'profile' %}" class="active"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
+						<li><a href="{% url 'fundwallet' %}" class=""><i class="fa fa-cart-arrow-down"></i> <span>Fund wallet</span></a></li>
+						<li><a href="{% url 'withdrawal' %}" class=""><i class="fa fa fa-key"></i> <span>Withdraw</span></a></li>
+						<li><a href="{% url 'testimony'%} " class=""><i class="fa fa-microphone"></i> <span>Testimony</span></a></li>
+						<li><a href="{% url 'referrer'%} " class=""><i class="fa fa-microphone"></i> <span>Referrer</span></a></li>
 						<li>
 							<a href="#subPages" data-toggle="collapse" class="collapsed"><i class="lnr lnr-file-empty"></i> <span>Profile</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
 							<div id="subPages" class="collapse ">
@@ -91,7 +92,7 @@
 								<div class="col-md-3">
 									<dl>
 										<dt>Please Note:</dt>
-										<dd>- For any one you refer to Galviny, you get 3% of thier First Investment only</dd>
+										<dd>- For any one you refer to Galviny, you get 3% of their First Investment only</dd>
 										<dd>- Copy your referral link and share among friends to get more profit </dd>
 										
 									</dl>
