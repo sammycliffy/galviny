@@ -72,9 +72,11 @@ def signup(request):
                 'uid': urlsafe_base64_encode(force_bytes(user.pk)).decode(),
                 'token': account_activation_token.make_token(user),
             })
-            if rerrer_link != '':
+            if referrer_link != '':
+                referrer_link = referrer_link.split('=')[-1]
                 Referrer.objects.create(
-                    referrer = referrer_link,
+                    referee = referrer_link,
+                    referred = user.username
                     
                 )
             send_mail(subject, message, 'Galviny', [user.email])
@@ -486,6 +488,7 @@ def profile(request):
 
 
 def referrer (request):
+   
     return render(request, 'app/referral.html')
 
 
