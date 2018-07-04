@@ -69,6 +69,7 @@
 						<li><a href="{% url 'fundwallet' %}" class=""><i class="fa fa-cart-arrow-down"></i> <span>Fund wallet</span></a></li>
 						<li><a href="{% url 'withdrawal' %}" class=""><i class="fa fa fa-key"></i> <span>Withdraw</span></a></li>
 						<li><a href="{% url 'testimony'%} " class=""><i class="fa fa-microphone"></i> <span>Testimony</span></a></li>
+						<li><a href="{% url 'referrer'%} " class=""><i class="fa fa-microphone"></i> <span>Referral</span></a></li>
 						<li>
 							<a href="#subPages" data-toggle="collapse" class="collapsed"><i class="fa fa-user-circle"></i><span>Profile</span> <i class="icon-submenu fa fa-bars"></i></i></a>
 							<div id="subPages" class="collapse ">
@@ -131,6 +132,9 @@
 								</li>
 								</ul></p>
 								<input type="hidden" id="username" value={{request.user.username}}>
+								<input type="hidden" id="address" value={{user.profile.address}}>
+								<input type="hidden" id="email" value={{user.email}}>
+								<input type="hidden" id="phone" value={{user.profile.phone}}>
                                <center> 
 								   <input type="submit" value="submit" class="btn btn-success" style="float:right">
                                 </form>
@@ -185,6 +189,8 @@
 										else {
 												var selected = document.forms.myForm.crypto_choice.value;
 												var username = document.getElementById(username).value;
+												var address = document.getElementById(address).value;
+												var email = document.getElementById(email).value;
 												Voguepay.init({
 												v_merchant_id: '1767-0065353',
 												total: selected,
@@ -200,12 +206,12 @@
 												
 												customer: {
 													name: username,
-													address: 'Customer address',
+													address: adress,
 													city: 'Customer city',
 													state: 'Customer state',
 													zipcode: 'Customer zip/post code',
-													email: 'Customer email',
-													phone: 'Customer phone'
+													email: email,
+													phone: phone,
 												},
 												closed:closedFunction,
 												success:successFunction,

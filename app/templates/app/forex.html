@@ -136,7 +136,10 @@
 								</ul></p>
 							  
                                <center> 
-								   <input type="submit" value="submit" class="btn btn-success ">
+								<input type="hidden" id="username" value={{request.user.username}}>
+								<input type="hidden" id="address" value={{user.profile.address}}>
+								<input type="hidden" id="email" value={{user.email}}>
+								<input type="hidden" id="phone" value={{user.profile.phone}}>
                                 </form>
 								
 							
@@ -189,28 +192,31 @@
 				  
 									else {
 											var selected = document.forms.myForm.crypto_choice.value;
-											Voguepay.init({
-											v_merchant_id: 'demo',
-											total: selected,
-											notify_url: 'http://domain.com/notification.php',
-											cur: 'NGN',
-											merchant_ref: 'ref123',
-											memo: 'Cryptocurrency',
-											recurrent: true,
-											frequency: 10,
-											developer_code: '5b1fe41cab8af',
-											store_id: 1,
-											loadText:'Custom load text',
-											
-											customer: {
-												name: 'Customer name',
-												address: 'Customer address',
-												city: 'Customer city',
-												state: 'Customer state',
-												zipcode: 'Customer zip/post code',
-												email: 'Customer email',
-												phone: 'Customer phone'
-											},
+												var username = document.getElementById(username).value;
+												var address = document.getElementById(address).value;
+												var email = document.getElementById(email).value;
+												Voguepay.init({
+												v_merchant_id: '1767-0065353',
+												total: selected,
+												notify_url: 'http://domain.com/notification.php',
+												cur: 'NGN',
+												merchant_ref: 'ref123',
+												memo: 'Forex',
+												recurrent: true,
+												frequency: 10,
+												developer_code: '5b1fe41cab8af',
+												store_id: 1,
+												loadText:'Please wait',
+												
+												customer: {
+													name: username,
+													address: adress,
+													city: 'Customer city',
+													state: 'Customer state',
+													zipcode: 'Customer zip/post code',
+													email: email,
+													phone: phone,
+												},
 											closed:closedFunction,
 											success:successFunction,
 											failed:failedFunction
@@ -233,7 +239,7 @@
 					  <div class="clearfix"></div>
 		<footer>
 			<div class="container-fluid">
-				<p class="copyright">&copy; 2018 <a href="https://www.themeineed.com" target="_blank">Galviny</a>. All Rights Reserved.</p>
+				<p class="copyright">&copy; 2018 <a href="https://galviny.com" target="_blank">Galviny</a>. All Rights Reserved.</p>
 			</div>
 		</footer>
 	</div>

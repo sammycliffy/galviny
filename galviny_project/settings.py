@@ -78,16 +78,16 @@ WSGI_APPLICATION = 'galviny_project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
-#DATABASES = {
- # 'default': {
- #  'ENGINE': 'django.db.backends.sqlite3',
- #'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#}
-#}
-
 DATABASES = {
-  'default': dj_database_url.config()
+ 'default': {
+  'ENGINE': 'django.db.backends.sqlite3',
+'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 }
+}
+
+#DATABASES = {
+ # 'default': dj_database_url.config()
+#}
 
 
 
@@ -135,6 +135,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = posixpath.join(*(BASE_DIR.split(os.path.sep) + ['static']))
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+
+PASSWORD_RESET_TIMEOUT_DAYS = 7
 
 EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_PORT = 587

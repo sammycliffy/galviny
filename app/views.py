@@ -488,7 +488,6 @@ def profile(request):
 
 
 def referrer (request):
-   
     return render(request, 'app/referral.html')
 
 
@@ -512,7 +511,6 @@ def fund_wallet(request):
 
 def withdrawal_failed(request):
     return render (request, 'app/withdrawal-failed.html')
-
 
 def withdrawal_success(request):
     try:
