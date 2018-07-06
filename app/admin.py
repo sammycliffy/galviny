@@ -22,7 +22,7 @@ class Testimony_admin(admin.ModelAdmin):
 
 
 class Referrer_admin(admin.ModelAdmin):
-    list_display = ['referee', 'referred', 'date',]
+    list_display = ['referee', 'referred', 'amount','date',]
 
 
 admin.site.register(Cryptocurrency, Crypto_admin)

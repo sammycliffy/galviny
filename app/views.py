@@ -488,6 +488,18 @@ def profile(request):
 
 
 def referrer (request):
+    total_referred = Referrer.objects.filter(referee = request.user.username)
+    for i in total_referred:
+        check_crypto = Cryptocurrency.objects.get(username = i.referred)
+        if check_crypto:
+           referrer_balance =  check_crypto.amount_lent  * 0.03
+           data = {
+               'referrer_amount':referrer_balance
+           }
+           Referrer.objects.filter(referee = request.user.username).update(
+               amount = referrer_balance
+           )
+           return render (request, 'app/referral.html',data)
     return render(request, 'app/referral.html')
 
 

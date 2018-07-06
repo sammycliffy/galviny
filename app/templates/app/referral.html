@@ -50,13 +50,7 @@
 						<li><a href="{% url 'testimony'%} " class=""><i class="fa fa-microphone"></i> <span>Testimony</span></a></li>
 						<li><a href="{% url 'referrer'%} " class="active"><i class="fa fa-microphone"></i> <span>Referral</span></a></li>
 						<li>
-							<a href="#subPages" data-toggle="collapse" class="collapsed"><i class="lnr lnr-file-empty"></i> <span>Profile</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
-							<div id="subPages" class="collapse ">
-								<ul class="nav">
-									<li><a href="" class="">Edit Profile</a></li>
-									<li><a href="" class="">Logout</a></li>
-								</ul>
-							</div>
+							
 						</li>
 						<li><a href="" class=""><i class="lnr lnr-dice"></i> <span>Contact us</span></a></li>
 					</ul>
@@ -81,7 +75,7 @@
 									<div class="metric">
 										<span class="icon"><i class="fa fa-download"></i></span>
 										<p>
-											<span class="number">&#8358;0.00</span>
+											<span class="number">&#8358;{{referrer_amount}}</span>
 											<span class="title">Referral Balance</span>
 										</p>
 									</div>
@@ -101,6 +95,7 @@
 								</div>
 								<div class="col-lg-12">
 									<h4>Referral Link: <h4 style="color:fuchsia">galviny.com/signup/?referrerusername={{request.user.username}}</h4></h4>
+									<a href="{% url 'withdrawal_success' %}" class="btn btn-success" > Withdraw</a>
 								</div>	
 					</div>
 					<!-- END OVERVIEW -->

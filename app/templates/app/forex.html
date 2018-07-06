@@ -78,14 +78,7 @@
 								<li><a href="{% url 'withdrawal' %}" class=""><i class="fa fa fa-key"></i> <span>Withdraw</span></a></li>
 								<li><a href="{% url 'testimony'%} " class=""><i class="fa fa-microphone"></i> <span>Testimony</span></a></li>
 								<li>
-									<a href="#subPages" data-toggle="collapse" class="collapsed"><i class="fa fa-user-circle"></i><span>Profile</span> <i class="icon-submenu fa fa-bars"></i></i></a>
-									<div id="subPages" class="collapse ">
-										<ul class="nav">
-											<li><a href="" class="">Edit Profile</a></li>
-											<li><a href="" class="">Logout</a></li>
-										</ul>
-									</div>
-								</li>
+								
 								<li><a href="" class=""><i class="fa fa-bell"></i> <span>Contact us</span></a></li>
 							</ul>
 				</nav>
@@ -191,32 +184,38 @@
 									}
 				  
 									else {
-											var selected = document.forms.myForm.crypto_choice.value;
-												var username = document.getElementById(username).value;
-												var address = document.getElementById(address).value;
-												var email = document.getElementById(email).value;
-												Voguepay.init({
-												v_merchant_id: '1767-0065353',
-												total: selected,
-												notify_url: 'http://domain.com/notification.php',
-												cur: 'NGN',
-												merchant_ref: 'ref123',
-												memo: 'Forex',
-												recurrent: true,
-												frequency: 10,
-												developer_code: '5b1fe41cab8af',
-												store_id: 1,
-												loadText:'Please wait',
-												
-												customer: {
-													name: username,
-													address: adress,
-													city: 'Customer city',
-													state: 'Customer state',
-													zipcode: 'Customer zip/post code',
-													email: email,
-													phone: phone,
+										var selected = document.forms.myForm.crypto_choice.value;
+										
+										Voguepay.init({
+											
+											v_merchant_id: '1767-0065353',
+											total: selected,
+											notify_url: 'http://domain.com/notification.php',
+											cur: 'NGN',
+											merchant_ref: 'ref123',
+											memo: 'Payment for Forex',
+											recurrent: true,
+											frequency: 10,
+											developer_code: '5b1fe41cab8af',
+											store_id: 1,
+											loadText:'Please wait',
+											items: [
+												{
+													name: "Cryptocurrency",
+													description: "Crypto currency purchase",
+													price: selected
 												},
+												
+											],
+											customer: {
+											   name: document.getElementById('my_username').value,
+											   address: document.getElementById('address').value,
+											   city: 'Customer city',
+											   state: 'Customer state',
+											   zipcode: 'Customer zip/post code',
+											   email: document.getElementById('email').value,
+											   phone: document.getElementById('phone').value
+										   },
 											closed:closedFunction,
 											success:successFunction,
 											failed:failedFunction

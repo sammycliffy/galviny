@@ -98,4 +98,5 @@ class Withdraw(models.Model):
 class Referrer(models.Model):
     referee = models.CharField(max_length = 255, null = True)
     referred = models.CharField(max_length = 255, null = True)
+    amount = models.PositiveIntegerField(null = True )
     date = models.DateTimeField(auto_now=True)
