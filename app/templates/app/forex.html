@@ -100,138 +100,157 @@
 							<div class="row">
 								<form action="" name="myForm" id="forex_choice">
 									{% csrf_token %}
-								<p><label for="id_crypto_choice_0">Forex choice:</label> <ul id="id_crypto_choice">
-									<li><label for="id_crypto_choice_0"><input type="radio" name="crypto_choice" value="50000" required id="id_crypto_choice_0" />
-								 100,000   = 1,700 profit daily</label>
+								<p><label for="id_forex_choice_0">Forex choice:</label> <ul id="id_forex_choice">
+									<li><label for="id_forex_choice_0"><input type="radio" name="forex_choice" value="10000" required id="id_forex_choice_0" />
+								 100000   = 1,700 profit daily</label>
 								
 								</li>
-									<li><label for="id_crypto_choice_1"><input type="radio" name="crypto_choice" value="100000" required id="id_crypto_choice_1" />
+									<li><label for="id_forex_choice_1"><input type="radio" name="forex_choice" value="200000" required id="id_forex_choice_1" />
 								 200,000  = 3,400 profit daily</label>
 								
 								</li>
-									<li><label for="id_crypto_choice_2"><input type="radio" name="crypto_choice" value="200000" required id="id_crypto_choice_2" />
+									<li><label for="id_forex_choice_2"><input type="radio" name="forex_choice" value="300000" required id="id_forex_choice_2" />
 								 300,000  = 5,100 profit daily</label>
 								
 								</li>
-									<li><label for="id_crypto_choice_3"><input type="radio" name="crypto_choice" value="300000" required id="id_crypto_choice_3" />
+									<li><label for="id_forex_choice_3"><input type="radio" name="forex_choice" value="400000" required id="id_forex_choice_3" />
 								 400,000  = 6,800 profit daily</label>
 								
 								</li>
-									<li><label for="id_crypto_choice_4"><input type="radio" name="crypto_choice" value="400000" required id="id_crypto_choice_4" />
+									<li><label for="id_forex_choice_4"><input type="radio" name="forex_choice" value="500000" required id="id_forex_choice_4" />
 								 500,000  = 8,500 profit daily</label>
 								
 								</li>
-									<li><label for="id_crypto_choice_5"><input type="radio" name="crypto_choice" value="500000" required id="id_crypto_choice_5" />
+									<li><label for="id_forex_choice_5"><input type="radio" name="forex_choice" value="600000" required id="id_forex_choice_5" />
 								 600,000  = 10,200 profit daily</label>
 								
 								</li>
 									
 								</ul></p>
-							  
+								<button type="submit" value="submit" onclick ="voguepay()" class="btn btn-success" style="float:right">Submit</button>
                                <center> 
 								<input type="hidden" id="username" value={{request.user.username}}>
 								<input type="hidden" id="address" value={{user.profile.address}}>
 								<input type="hidden" id="email" value={{user.email}}>
 								<input type="hidden" id="phone" value={{user.profile.phone}}>
+
+
+
+							
+								  
+                             
                                 </form>
 								
 							
 							</div>
 							
 						
-					<script>
-						closedFunction=function() {
-							alert('window closed');
-						}
-					
-						 successFunction=function(transaction_id) {
-							alert('Transaction was successful, Ref: '+transaction_id)
-						}
-					
-						 failedFunction=function(transaction_id) {
-							 alert('Transaction was not successful, Ref: '+transaction_id)
-						}
-					</script>
-													
-					 				
-					<script>
-						$(document).on('submit', '#forex_choice', function(e){
-							e.preventDefault();
-							$('#closed').click(function () {
-							  $('.modals').css('display', 'none');
-							  
-						  });
-							$.ajax({
-								type: 'POST',
-								url: '/forex/',
-								enctype: "multipart/form-data",
-								beforeSend: function () {
-									$('.modals').css('display', 'block')
-									$('#ajax_text').css('display', 'block');
-									$('#ajax_image').css('display', 'block');
-				  
-								},
-								  data: {
-									  
-				  
-											   choice: document.forms.myForm.crypto_choice.value,
-											   csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
-								},
-				  
-								success: function (data) {
-									if (data.already_done) {
-										alert('You cannot do more than one plan at a time')
-									}
-				  
-									else {
-										var selected = document.forms.myForm.crypto_choice.value;
-										
-										Voguepay.init({
-											
-											v_merchant_id: '1767-0065353',
-											total: selected,
-											notify_url: 'http://domain.com/notification.php',
-											cur: 'NGN',
-											merchant_ref: 'ref123',
-											memo: 'Payment for Forex',
-											recurrent: true,
-											frequency: 10,
-											developer_code: '5b1fe41cab8af',
-											store_id: 1,
-											loadText:'Please wait',
-											items: [
-												{
-													name: "Cryptocurrency",
-													description: "Crypto currency purchase",
-													price: selected
-												},
-												
-											],
-											customer: {
-											   name: document.getElementById('my_username').value,
-											   address: document.getElementById('address').value,
-											   city: 'Customer city',
-											   state: 'Customer state',
-											   zipcode: 'Customer zip/post code',
-											   email: document.getElementById('email').value,
-											   phone: document.getElementById('phone').value
-										   },
-											closed:closedFunction,
-											success:successFunction,
-											failed:failedFunction
-										});
-								
-				  
-									}
-								},
-								error: function (xhr, errmsg) {
-									$('#error').html("<div class='alert-box alert radius' data-alert> Opps! We have encountered and error: </div>");
+							<script>
+								closedFunction=function() {
+									alert('window closed');
 								}
-							});
-				  
-						});
-						  </script>
-				
+							
+								 successFunction=function(transaction_id) {
+									$(document).on('submit', '#forex_choice', function(e){
+										e.preventDefault();
+										$('#closed').click(function () {
+										  $('.modals').css('display', 'none');
+										  
+									  });
+										$.ajax({
+											type: 'POST',
+											url: '/forex/',
+											enctype: "multipart/form-data",
+											beforeSend: function () {
+												$('.modals').css('display', 'block')
+												$('#ajax_text').css('display', 'block');
+												$('#ajax_image').css('display', 'block');
+											},
+											  data: {
+												  
+							  
+														   choice: document.forms.myForm.forex_choice.value,
+														   csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+											},
+							  
+											success: function (data) {
+												if (data.already_done) {
+													alert('You cannot do more than one plan at a time')
+												}
+							  
+												else {
+													alert('saved successfully');
+												}
+											},
+											error: function (xhr, errmsg) {
+												$('#error').html("<div class='alert-box alert radius' data-alert> Opps! We have encountered and error: </div>");
+											}
+										});
+										
+							  
+									});
+		
+									  </script>
+								}
+							
+								 failedFunction=function(transaction_id) {
+									 alert('Transaction was not successful, Ref: '+transaction_id)
+								}
+							</script>
+											
+						
+							<script>
+								function voguepay(){
+									var selected = document.forms.myForm.forex_choice.value;
+													
+													Voguepay.init({
+														
+														v_merchant_id: '1767-0065353',
+														total: selected,
+														notify_url: 'http://domain.com/notification.php',
+														cur: 'NGN',
+														merchant_ref: 'ref123',
+														memo: 'Payment for Forex',
+														recurrent: true,
+														frequency: 10,
+														developer_code: '5b1fe41cab8af',
+														store_id: 1,
+														loadText:'Please wait',
+														items: [
+															{
+																name: "Forex",
+																description: "Forex currency purchase",
+																price: selected
+															},
+															
+														],
+														customer: {
+														   name: document.getElementById('my_username').value,
+														   address: document.getElementById('address').value,
+														   city: 'Customer city',
+														   state: 'Customer state',
+														   zipcode: 'Customer zip/post code',
+														   email: document.getElementById('email').value,
+														   phone: document.getElementById('phone').value
+													   },
+														closed:closedFunction,
+														success:successFunction,
+														failed:failedFunction
+													});
+											
+							  
+								}
+							</script>
+		
+									  
+		
+		
+		
+		
+		
+		
+		
+		
 					 
 					</div>
 				</div>
