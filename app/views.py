@@ -546,7 +546,7 @@ def withdrawal_success(request):
                             date = datetime.datetime.now(),
                             previous_withdraw = F('previous_withdraw') + withdraw_amount
                             )
-                        return render (request, 'app/withdrawal-success.html', data)
+                        return render (request, 'app/withdrawal-success.html')
                 except ObjectDoesNotExist:
                     withdraw_amount = payment.profit - payment.previous_withdraw -  2000
                     Cryptocurrency.objects.filter(username = request.user.username).update(
