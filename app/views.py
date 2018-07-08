@@ -631,7 +631,7 @@ def withdrawal_success(request):
                     return render (request, 'app/withdrawal-success.html')
             except ObjectDoesNotExist:
                  pass
-    return render (request, '')
+    return redirect ('withdrawal_failed')
 
 #Withdrawal
 @login_required
