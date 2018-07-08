@@ -66,6 +66,7 @@ class Forex(models.Model):
     deposit_date = models.DateTimeField(auto_now=True)
     lend_date = models.DateTimeField(null=True, blank=True)
     amount_lent = models.PositiveIntegerField(null=True, default=0)
+    previous_withdraw = models.PositiveIntegerField(null = True, default = 0)
     def __str__(self):
         return self.username
 
@@ -78,6 +79,7 @@ class Oil(models.Model):
     deposit_date = models.DateTimeField(auto_now=True)
     lend_date = models.DateTimeField(null=True, blank=True)
     amount_lent = models.PositiveIntegerField(null=True, default=0)
+    previous_withdraw = models.PositiveIntegerField(null = True, default = 0)
     def __str__(self):
         return self.username
 
