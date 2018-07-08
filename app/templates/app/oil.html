@@ -88,162 +88,161 @@
 					<div class="panel panel-headline">
 						<div class="panel-heading">
                             <h2 class="panel-title">You have selected <strong style="color:rgb(17, 192, 17);">Oil &amp; Gas</strong></h2>
-                            <h4 style="color:rgb(150, 21, 12);">Please select  oil &amp; gas plan system</h4>
+                            <h4 style="color:rgb(150, 21, 12);">Please select  Oil &amp; gas plan system</h4>
 								</div>
 						<div class="panel-body">
 							<div class="row">
-								<form action="" name="myForm" id="oil_form">
+								<form action="" name="myForm" id="crypto_choice">
 									{% csrf_token %}
-								<p><label for="id_oil_choice_0">Oil & Gas choice:</label> <ul id="id_oil_choice">
-										<li><label for="id_oil_choice_0"><input type="radio" name="oil_choice" value="20000" required id="id_oil_choice_0" />
+								<p><label for="id_crypto_choice_0">Oil & Gas choice:</label> <ul id="id_crypto_choice">
+										<li><label for="id_crypto_choice_0"><input type="radio" name="crypto_choice" value="20000" required id="id_crypto_choice_0" />
 											20,000   = 450 profit daily</label>
 										   
 										   </li>
-									<li><label for="id_oil_choice_0"><input type="radio" name="oil_choice" value="40000" required id="id_oil_choice_0" />
+									<li><label for="id_crypto_choice_0"><input type="radio" name="crypto_choice" value="40000" required id="id_crypto_choice_0" />
 								 40,000   = 900 profit daily</label>
 								
 								</li>
-									<li><label for="id_oil_choice_1"><input type="radio" name="oil_choice" value="60000" required id="id_oil_choice_1" />
+									<li><label for="id_crypto_choice_1"><input type="radio" name="crypto_choice" value="60000" required id="id_crypto_choice_1" />
 								 60,000  = 1,350 profit daily</label>
 								
 								</li>
-									<li><label for="id_oil_choice_2"><input type="radio" name="oil_choice" value="80000" required id="id_oil_choice_2" />
+									<li><label for="id_crypto_choice_2"><input type="radio" name="crypto_choice" value="80000" required id="id_crypto_choice_2" />
 								 80,000  = 1,800 profit daily</label>
 								
 								</li>
-									<li><label for="id_oil_choice_3"><input type="radio" name="oil_choice" value="100000" required id="id_oil_choice_3" />
+									<li><label for="id_crypto_choice_3"><input type="radio" name="crypto_choice" value="100000" required id="id_crypto_choice_3" />
 								 100,000  = 2,500 profit daily</label>
 								
 								</li>
-									<li><label for="id_oil_choice_4"><input type="radio" name="oil_choice" value="200000" required id="id_oil_choice_4" />
+									<li><label for="id_crypto_choice_4"><input type="radio" name="crypto_choice" value="200000" required id="id_crypto_choice_4" />
 								 200,000  = 4,500 profit daily</label>
 								
 								</li>
-									<li><label for="id_oil_choice_5"><input type="radio" name="oil_choice" value="300000" required id="id_oil_choice_5" />
+									<li><label for="id_crypto_choice_5"><input type="radio" name="crypto_choice" value="300000" required id="id_crypto_choice_5" />
 								 300,000  = 6,750 profit daily</label>
 								
                                 </li>
-                                <li><label for="id_oil_choice_5"><input type="radio" name="oil_choice" value="400000" required id="id_oil_choice_5" />
+                                <li><label for="id_crypto_choice_5"><input type="radio" name="crypto_choice" value="400000" required id="id_crypto_choice_5" />
                                     400,000  = 9,000 profit daily</label>
                                    
                                    </li>
 									
 								</ul></p>
-							  
+								<input type="hidden" id="my_username" value={{request.user.username}}>
+								<input type="hidden" id="address" value={{user.profile.address}}>
+								<input type="hidden" id="email" value={{user.email}}>
+								<input type="hidden" id="phone" value={{user.profile.phone}}>
                                <center> 
-									   
-								<button type="submit" value="submit" onclick ="voguepay()" class="btn btn-success" style="float:right">Submit</button>
-						
+								   
+								   <input type="submit" value="submit"  class="btn btn-success" style="float:right">
+								  
                                 </form>
 								
-							
+								<form action="">
+									<input type="hidden">
+								</form>
 							</div>
 							
 						
-							<script>
-								closedFunction=function() {
-									alert('window closed');
-								}
+					<script>
+						closedFunction=function() {
+							alert('window closed');
+						}
+					
+						 successFunction=function(transaction_id) {
+							alert('done successfully');
+
 							
-								 successFunction=function(transaction_id) {
-									$(document).on('submit', '#oil_choice', function(e){
-										e.preventDefault();
-										$('#closed').click(function () {
-										  $('.modals').css('display', 'none');
+						}
+					
+						 failedFunction=function(transaction_id) {
+							 alert('Transaction was not successful, Ref: '+transaction_id)
+						}
+					</script>
+									
+				
+					<script>
+
+							var selected = document.forms.myForm.crypto_choice.value;
+							$(document).on('submit', '#crypto_choice', function(e){
+								e.preventDefault();
+								$('#closed').click(function () {
+								  $('.modals').css('display', 'none');
+								  
+							  });
+								$.ajax({
+									type: 'POST',
+									url: '/oil/',
+									enctype: "multipart/form-data",
+									beforeSend: function () {
+										$('.modals').css('display', 'block')
+										$('#ajax_text').css('display', 'block');
+										$('#ajax_image').css('display', 'block');
+									},
+									  data: {
 										  
-									  });
-										$.ajax({
-											type: 'POST',
-											url: '/oil/',
-											enctype: "multipart/form-data",
-											beforeSend: function () {
-												$('.modals').css('display', 'block')
-												$('#ajax_text').css('display', 'block');
-												$('#ajax_image').css('display', 'block');
-											},
-											  data: {
-												  
-							  
-														   choice: document.forms.myForm.oil_choice.value,
-														   csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
-											},
-							  
-											success: function (data) {
-												if (data.already_done) {
-													alert('You cannot do more than one plan at a time')
-												}
-							  
-												else {
-													alert('saved successfully');
-												}
-											},
-											error: function (xhr, errmsg) {
-												$('#error').html("<div class='alert-box alert radius' data-alert> Opps! We have encountered and error: </div>");
-											}
-										});
-										
-							  
-									});
-		
-									  </script>
-								}
-							
-								 failedFunction=function(transaction_id) {
-									 alert('Transaction was not successful, Ref: '+transaction_id)
-								}
-							</script>
-											
-						
-							<script>
-								function voguepay(){
-									var selected = document.forms.myForm.oil_choice.value;
+					  
+												   choice: document.forms.myForm.crypto_choice.value,
+												   csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+									},
+					  
+									success: function (data) {
+										if (data.already_done) {
+											alert('You cannot do more than one plan at a time')
+										}
+					  
+										else {
+											var selected = document.forms.myForm.crypto_choice.value;
+											Voguepay.init({
+												
+												v_merchant_id: '1767-0065353',
+												total: selected,
+												notify_url: 'http://domain.com/notification.php',
+												cur: 'NGN',
+												merchant_ref: 'ref123',
+												memo: 'Payment for Oil and Gas',
+												recurrent: true,
+												frequency: 10,
+												developer_code: '5b1fe41cab8af',
+												store_id: 1,
+												loadText:'Please wait',
+												items: [
+													{
+														name: "Oil & Gas",
+														description: "Oil and Gas purchase",
+														price: selected
+													},
 													
-													Voguepay.init({
-														
-														v_merchant_id: '1767-0065353',
-														total: selected,
-														notify_url: 'http://domain.com/notification.php',
-														cur: 'NGN',
-														merchant_ref: 'ref123',
-														memo: 'Payment for Oil and Gas',
-														recurrent: true,
-														frequency: 10,
-														developer_code: '5b1fe41cab8af',
-														store_id: 1,
-														loadText:'Please wait',
-														items: [
-															{
-																name: "Oil and Gas",
-																description: "Oil and Gas purchase",
-																price: selected
-															},
-															
-														],
-														customer: {
-														   name: document.getElementById('my_username').value,
-														   address: document.getElementById('address').value,
-														   city: 'Customer city',
-														   state: 'Customer state',
-														   zipcode: 'Customer zip/post code',
-														   email: document.getElementById('email').value,
-														   phone: document.getElementById('phone').value
-													   },
-														closed:closedFunction,
-														success:successFunction,
-														failed:failedFunction
-													});
-											
-							  
-								}
-							</script>
-		
-									  
-		
-		
-		
-		
-		
-		
+												],
+												customer: {
+												   name: document.getElementById('my_username').value,
+												   address: document.getElementById('address').value,
+												   city: 'Customer city',
+												   state: 'Customer state',
+												   zipcode: 'Customer zip/post code',
+												   email: document.getElementById('email').value,
+												   phone: document.getElementById('phone').value
+											   },
+												closed:closedFunction,
+												success:successFunction,
+												failed:failedFunction
+											});
+									
+										}
+									},
+									error: function (xhr, errmsg) {
+										$('#error').html("<div class='alert-box alert radius' data-alert> Opps! We have encountered and error: </div>");
+									}
+								});
+								
+					  
+							});
+						
+					</script>
+
+							 
+
 		
 		
 					</div>

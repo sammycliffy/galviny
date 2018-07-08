@@ -131,11 +131,13 @@
 								<input type="hidden" id="phone" value={{user.profile.phone}}>
                                <center> 
 								   
-								   <button type="submit" value="submit" onclick ="voguepay()" class="btn btn-success" style="float:right">Submit</button>
+								   <input type="submit" value="submit"  class="btn btn-success" style="float:right">
 								  
                                 </form>
 								
-							
+								<form action="">
+									<input type="hidden">
+								</form>
 							</div>
 							
 						
@@ -145,6 +147,20 @@
 						}
 					
 						 successFunction=function(transaction_id) {
+							alert('done successfully');
+
+							
+						}
+					
+						 failedFunction=function(transaction_id) {
+							 alert('Transaction was not successful, Ref: '+transaction_id)
+						}
+					</script>
+									
+				
+					<script>
+
+							var selected = document.forms.myForm.crypto_choice.value;
 							$(document).on('submit', '#crypto_choice', function(e){
 								e.preventDefault();
 								$('#closed').click(function () {
@@ -173,30 +189,7 @@
 										}
 					  
 										else {
-											alert('saved successfully');
-										}
-									},
-									error: function (xhr, errmsg) {
-										$('#error').html("<div class='alert-box alert radius' data-alert> Opps! We have encountered and error: </div>");
-									}
-								});
-								
-					  
-							});
-
-							  </script>
-						}
-					
-						 failedFunction=function(transaction_id) {
-							 alert('Transaction was not successful, Ref: '+transaction_id)
-						}
-					</script>
-									
-				
-					<script>
-						function voguepay(){
-							var selected = document.forms.myForm.crypto_choice.value;
-											
+											var selected = document.forms.myForm.crypto_choice.value;
 											Voguepay.init({
 												
 												v_merchant_id: '1767-0065353',
@@ -232,12 +225,22 @@
 												failed:failedFunction
 											});
 									
+										}
+									},
+									error: function (xhr, errmsg) {
+										$('#error').html("<div class='alert-box alert radius' data-alert> Opps! We have encountered and error: </div>");
+									}
+								});
+								
 					  
-						}
+							});
+						
 					</script>
 
 							  
+					<script>
 
+					</script>
 
 
 
