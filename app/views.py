@@ -178,7 +178,7 @@ def profile(request):
             if profile.amount_lent == 50000 and paid_date <= end_date:
                 profit = 1200 * profit_days
                 real_profit = profit - profile.previous_withdraw
-                if real_profilt < 0:
+                if real_profit < 0:
                     real_profit = 0
                     Cryptocurrency.objects.filter(username = request.user.username).update(
                     profit = real_profit
