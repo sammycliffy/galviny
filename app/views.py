@@ -177,7 +177,8 @@ def profile(request):
             profit_days = profit_days.days
             if profile.amount_lent == 50000 and paid_date <= end_date:
                 profit = 1200 * profit_days
-                real_profit = profit - profile.previous_withdraw
+                withdraw_money = Withdraw.objects.get(username = request.user.username)
+                real_profit = profit - withdraw_money.withdraw_amount
                 if real_profit < 0:
                     real_profit = 0
                     Cryptocurrency.objects.filter(username = request.user.username).update(
@@ -198,7 +199,8 @@ def profile(request):
                 return render(request, 'app/profile.html', data)
             elif profile.amount_lent == 100000 and paid_date <= end_date:
                 profit = 2400 * profit_days
-                real_profit = profit - profile.previous_withdraw
+                withdraw_money = Withdraw.objects.get(username = request.user.username)
+                real_profit = profit - withdraw_money.withdraw_amount
                 if real_profit < 0:
                     real_profit = 0
                     Cryptocurrency.objects.filter(username = request.user.username).update(
@@ -219,8 +221,9 @@ def profile(request):
                 return render(request, 'app/profile.html', data)
             elif profile.amount_lent == 200000 and paid_date <= end_date:
                 profit = 4800 * profit_days
-                real_profit = profit - profile.previous_withdraw
-                if real_profilt < 0:
+                withdraw_money = Withdraw.objects.get(username = request.user.username)
+                real_profit = profit - withdraw_money.withdraw_amount
+                if real_profit < 0:
                     real_profit = 0
                     Cryptocurrency.objects.filter(username = request.user.username).update(
                     profit = 0
@@ -241,7 +244,8 @@ def profile(request):
                 return render(request, 'app/profile.html', data)
             elif profile.amount_lent == 300000 and paid_date <= end_date:
                 profit = 7200 * profit_days
-                real_profit = profit - profile.previous_withdraw
+                withdraw_money = Withdraw.objects.get(username = request.user.username)
+                real_profit = profit - withdraw_money.withdraw_amount
                 if real_profilt < 0:
                     real_profit = 0
                     Cryptocurrency.objects.filter(username = request.user.username).update(
@@ -262,7 +266,8 @@ def profile(request):
                 return render(request, 'app/profile.html', data)
             elif profile.amount_lent == 400000 and paid_date <= end_date:
                 profit = 9600 * profit_days
-                real_profit = profit - profile.previous_withdraw
+                withdraw_money = Withdraw.objects.get(username = request.user.username)
+                real_profit = profit - withdraw_money.withdraw_amount
                 if real_profilt < 0:
                     real_profit = 0
                     Cryptocurrency.objects.filter(username = request.user.username).update(
@@ -285,7 +290,8 @@ def profile(request):
                 return render(request, 'app/profile.html', data)
             elif profile.amount_lent == 500000 and paid_date <= end_date:
                 profit = 12000 * profit_days
-                real_profit = profit - profile.previous_withdraw
+                withdraw_money = Withdraw.objects.get(username = request.user.username)
+                real_profit = profit - withdraw_money.withdraw_amount
                 if real_profilt < 0:
                     Cryptocurrency.objects.filter(username = request.user.username).update(
                     profit = 0
@@ -306,7 +312,8 @@ def profile(request):
                 return render(request, 'app/profile.html', data)
             elif profile.amount_lent == 1000000 and paid_date <= end_date:
                 profit = 24000 * profit_days
-                real_profit = profit - profile.previous_withdraw
+                withdraw_money = Withdraw.objects.get(username = request.user.username)
+                real_profit = profit - withdraw_money.withdraw_amount
                 if real_profilt < 0:
                     real_profit = 0
                     Cryptocurrency.objects.filter(username = request.user.username).update(
