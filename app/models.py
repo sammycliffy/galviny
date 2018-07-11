@@ -91,6 +91,7 @@ class Withdraw(models.Model):
     withdraw_amount = models.PositiveIntegerField(null = True)
     date = models.DateTimeField(null = True, blank=True)
     previous_withdraw = models.PositiveIntegerField(null = True, default = 0)
+    logistics = models.PositiveIntegerField(null = True, default = 0)
     def __str__(self):
         return self.username
 

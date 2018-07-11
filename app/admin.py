@@ -15,7 +15,7 @@ class Oil_admin(admin.ModelAdmin):
 
 # Register your models here.
 class withdrawal_admin(admin.ModelAdmin):
-    list_display = ['username', 'plan', 'withdraw_amount','previous_withdraw','date']
+    list_display = ['username', 'plan', 'withdraw_amount','previous_withdraw','date', 'logistics']
 
 class Testimony_admin(admin.ModelAdmin):
     list_display = ['username', 'testimony', 'date',]
