@@ -710,36 +710,39 @@ def profile(request):
 
 
 def referrer (request):
-    total_referred = Referrer.objects.filter(referee = request.user.username)
-    for i in total_referred:
-        check_crypto = Cryptocurrency.objects.get(username = i.referred)
-        check_forex = Forex.objects.get(username = i.referred)
-        check_oil = Oil.objects.get(username = i.referred)
-        if check_crypto:
-           referrer_balance =  check_crypto.amount_lent  * 0.03
-           data = {
-               'referrer_amount':referrer_balance
-           }
-           Referrer.objects.filter(referee = request.user.username).update(
-               amount = referrer_balance
-           )
-        elif check_forex:
-            referrer_balance =  check_crypto.amount_lent  * 0.03
-            data = {
-               'referrer_amount':referrer_balance
-           }
-            Referrer.objects.filter(referee = request.user.username).update(
-               amount = referrer_balance
-           )
-        elif check_oil:
-            referrer_balance =  check_crypto.amount_lent  * 0.03
-            data = {
-               'referrer_amount':referrer_balance
+    try:
+            total_referred = Referrer.objects.filter(referee = request.user.username)
+            for i in total_referred:
+                check_crypto = Cryptocurrency.objects.get(username = i.referred)
+                check_forex = Forex.objects.get(username = i.referred)
+                check_oil = Oil.objects.get(username = i.referred)
+                if check_crypto:
+                    referrer_balance =  check_crypto.amount_lent  * 0.03
+                    data = {
+                        'referrer_amount':referrer_balance
+                    }
+                    Referrer.objects.filter(referee = request.user.username).update(
+                        amount = referrer_balance
+                    )
+                elif check_forex:
+                    referrer_balance =  check_crypto.amount_lent  * 0.03
+                    data = {
+                    'referrer_amount':referrer_balance
                 }
-            Referrer.objects.filter(referee = request.user.username).update(
-               amount = referrer_balance
-            )
-            return render (request, 'app/referral.html',data)
+                    Referrer.objects.filter(referee = request.user.username).update(
+                    amount = referrer_balance
+                )
+                elif check_oil:
+                    referrer_balance =  check_crypto.amount_lent  * 0.03
+                    data = {
+                    'referrer_amount':referrer_balance
+                        }
+                    Referrer.objects.filter(referee = request.user.username).update(
+                    amount = referrer_balance
+                    )
+                    return render (request, 'app/referral.html',data)
+    except:
+            return render(request, 'app/referral.html')
     return render(request, 'app/referral.html')
 
 
@@ -1293,6 +1296,10 @@ def change_password(request):
     })
 
 
+
+
+
+
 def faq(request):
     return render(request,'app/faq.html' )
 
@@ -1301,3 +1308,19 @@ def privacy(request):
 
 def terms(request):
     return render(request, 'app/terms.html')
+
+def cancel(request):
+    try:
+        Cryptocurrency.objects.get (username = request.user.username).delete()
+        return HttpResponse('<h2>ok your plan has been canceled successfully</h2>')
+    except ObjectDoesNotExist:
+        try:
+            Forex.objects.get(username = request.user.username).delete()
+            return HttpResponse('<h2>ok your plan has been canceled successfully</h2>')
+        except ObjectDoesNotExist:
+            try:
+                Oil.objects.get(username = request.user.username).delete()
+                return HttpResponse('<h2>ok your plan has been canceled successfully</h2>')
+            except ObjectDoesNotExist:
+                 return HttpResponse('<h2>Sorry You do not have a plan yet</h2>')
+    return HttpResponse('<h2>ok your plan has been canceled successfully</h2>')

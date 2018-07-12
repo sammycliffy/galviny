@@ -14,6 +14,7 @@ class Profile (models.Model):
     sex = models.CharField(max_length=255, null=True)
     bank = models.CharField(max_length=255, null=True)
     account_name = models.CharField(max_length = 255, null=True)
+    occupation = models.CharField(max_length = 255, null=True)
     account_number = models.CharField(max_length = 255, null=True)
     email_confirmed = models.BooleanField(default=False)
     def __str__(self):

@@ -24,7 +24,7 @@ class SignUpForm(UserCreationForm):
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ('firstname', 'lastname', 'address','age', 'sex','phone', 'account_name','account_number','bank',)
+        fields = ('firstname', 'lastname', 'address','age', 'sex','occupation','phone', 'account_name','account_number','bank',)
 
 class WalletForm (forms.Form):
     STATUS_CHOICES = (
