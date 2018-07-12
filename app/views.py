@@ -193,7 +193,8 @@ def profile(request):
                                 'wallet_balance':profile.choice,
                                 'date':paid_date,
                                 'profit':real_profit,
-                                'amount':profile.amount_lent
+                                'amount':profile.amount_lent,
+                                'withdraw':profile.previous_withdraw,
                                 
                             } 
                 return render(request, 'app/profile.html', data)
@@ -214,7 +215,8 @@ def profile(request):
                                 'wallet_balance':profile.choice,
                                 'date':paid_date,
                                 'profit':real_profit,
-                                'amount':profile.amount_lent
+                                'amount':profile.amount_lent,
+                                 'withdraw':profile.previous_withdraw,
                                 
                             } 
                 return render(request, 'app/profile.html', data)
@@ -236,7 +238,8 @@ def profile(request):
                                 'wallet_balance':profile.choice,
                                 'date':paid_date,
                                 'profit':real_profit,
-                                'amount':profile.amount_lent
+                                'amount':profile.amount_lent,
+                                 'withdraw':profile.previous_withdraw,
                                 
                             } 
               
@@ -259,7 +262,8 @@ def profile(request):
                                 'wallet_balance':profile.choice,
                                 'date':paid_date,
                                 'profit':real_profit,
-                                'amount':profile.amount_lent
+                                'amount':profile.amount_lent,
+                                 'withdraw':profile.previous_withdraw,
                                 
                 }
                 return render(request, 'app/profile.html', data)
@@ -281,7 +285,8 @@ def profile(request):
                                 'wallet_balance':profile.choice,
                                 'date':paid_date,
                                 'profit':real_profit,
-                                'amount':profile.amount_lent
+                                'amount':profile.amount_lent,
+                                 'withdraw':profile.previous_withdraw,
                                 
                             } 
 
@@ -304,7 +309,8 @@ def profile(request):
                                 'wallet_balance':profile.choice,
                                 'date':paid_date,
                                 'profit':real_profit,
-                                'amount':profile.amount_lent
+                                'amount':profile.amount_lent,
+                                 'withdraw':profile.previous_withdraw,
                                 
                             } 
               
@@ -327,7 +333,8 @@ def profile(request):
                                 'wallet_balance':profile.choice,
                                 'date':paid_date,
                                 'profit':real_profit,
-                                'amount':profile.amount_lent
+                                'amount':profile.amount_lent,
+                                 'withdraw':profile.previous_withdraw,
                                 
                             } 
               
@@ -372,7 +379,8 @@ def profile(request):
                                     'wallet_balance':profile.choice,
                                     'date':paid_date,
                                     'profit':real_profit,
-                                    'amount':profile.amount_lent
+                                    'amount':profile.amount_lent,
+                                     'withdraw':profile.previous_withdraw,
                                     
                                 } 
                     return render(request, 'app/profile.html', data)
@@ -394,7 +402,8 @@ def profile(request):
                                     'wallet_balance':profile.choice,
                                     'date':paid_date,
                                     'profit':real_profit,
-                                    'amount':profile.amount_lent
+                                    'amount':profile.amount_lent,
+                                     'withdraw':profile.previous_withdraw,
                                     
                                 } 
                     return render(request, 'app/profile.html', data)
@@ -416,7 +425,8 @@ def profile(request):
                                     'wallet_balance':profile.choice,
                                     'date':paid_date,
                                     'profit':real_profit,
-                                    'amount':profile.amount_lent
+                                    'amount':profile.amount_lent,
+                                     'withdraw':profile.previous_withdraw,
                                     
                                 } 
                     return render(request, 'app/profile.html', data)
@@ -438,7 +448,8 @@ def profile(request):
                                     'wallet_balance':profile.choice,
                                     'date':paid_date,
                                     'profit':real_profit,
-                                    'amount':profile.amount_lent
+                                    'amount':profile.amount_lent,
+                                     'withdraw':profile.previous_withdraw,
                                     
                                 } 
                     return render(request, 'app/profile.html', data)
@@ -460,7 +471,8 @@ def profile(request):
                                     'wallet_balance':profile.choice,
                                     'date':paid_date,
                                     'profit':real_profit,
-                                    'amount':profile.amount_lent
+                                    'amount':profile.amount_lent,
+                                     'withdraw':profile.previous_withdraw,
                                     
                                 } 
                     return render(request, 'app/profile.html', data)
@@ -482,7 +494,8 @@ def profile(request):
                                     'wallet_balance':profile.choice,
                                     'date':paid_date,
                                     'profit':real_profit,
-                                    'amount':profile.amount_lent
+                                    'amount':profile.amount_lent,
+                                     'withdraw':profile.previous_withdraw,
                                     
                                 } 
                     return render(request, 'app/profile.html', data)
@@ -524,7 +537,8 @@ def profile(request):
                                             'wallet_balance':profile.choice,
                                             'date':paid_date,
                                             'profit':real_profit,
-                                            'amount':profile.amount_lent
+                                            'amount':profile.amount_lent,
+                                             'withdraw':profile.previous_withdraw,
                                             
                                         } 
                             return render(request, 'app/profile.html', data)
@@ -546,7 +560,8 @@ def profile(request):
                                             'wallet_balance':profile.choice,
                                             'date':paid_date,
                                             'profit':real_profit,
-                                            'amount':profile.amount_lent
+                                            'amount':profile.amount_lent,
+                                             'withdraw':profile.previous_withdraw,
                                             
                                         } 
                             return render(request, 'app/profile.html', data)
@@ -568,7 +583,8 @@ def profile(request):
                                             'wallet_balance':profile.choice,
                                             'date':paid_date,
                                             'profit':real_profit,
-                                            'amount':profile.amount_lent
+                                            'amount':profile.amount_lent,
+                                             'withdraw':profile.previous_withdraw,
                                             
                                         } 
                             return render(request, 'app/profile.html', data)
@@ -590,7 +606,8 @@ def profile(request):
                                             'wallet_balance':profile.choice,
                                             'date':paid_date,
                                             'profit':real_profit,
-                                            'amount':profile.amount_lent
+                                            'amount':profile.amount_lent,
+                                             'withdraw':profile.previous_withdraw,
                                             
                                         } 
                             return render(request, 'app/profile.html', data)
@@ -612,7 +629,8 @@ def profile(request):
                                             'wallet_balance':profile.choice,
                                             'date':paid_date,
                                             'profit':real_profit,
-                                            'amount':profile.amount_lent
+                                            'amount':profile.amount_lent,
+                                             'withdraw':profile.previous_withdraw,
                                             
                                         } 
                             return render(request, 'app/profile.html', data)
@@ -634,7 +652,8 @@ def profile(request):
                                             'wallet_balance':profile.choice,
                                             'date':paid_date,
                                             'profit':real_profit,
-                                            'amount':profile.amount_lent
+                                            'amount':profile.amount_lent,
+                                             'withdraw':profile.previous_withdraw,
                                             
                                         } 
                             return render(request, 'app/profile.html', data)
@@ -656,7 +675,8 @@ def profile(request):
                                             'wallet_balance':profile.choice,
                                             'date':paid_date,
                                             'profit':real_profit,
-                                            'amount':profile.amount_lent
+                                            'amount':profile.amount_lent,
+                                             'withdraw':profile.previous_withdraw,
                                             
                                         } 
                             return render(request, 'app/profile.html', data)
@@ -692,6 +712,8 @@ def referrer (request):
     total_referred = Referrer.objects.filter(referee = request.user.username)
     for i in total_referred:
         check_crypto = Cryptocurrency.objects.get(username = i.referred)
+        check_forex = Forex.objects.get(username = i.referred)
+        check_oil = Oil.objects.get(username = i.referred)
         if check_crypto:
            referrer_balance =  check_crypto.amount_lent  * 0.03
            data = {
@@ -700,7 +722,23 @@ def referrer (request):
            Referrer.objects.filter(referee = request.user.username).update(
                amount = referrer_balance
            )
-           return render (request, 'app/referral.html',data)
+        elif check_forex:
+            referrer_balance =  check_crypto.amount_lent  * 0.03
+            data = {
+               'referrer_amount':referrer_balance
+           }
+            Referrer.objects.filter(referee = request.user.username).update(
+               amount = referrer_balance
+           )
+        elif check_oil:
+            referrer_balance =  check_crypto.amount_lent  * 0.03
+            data = {
+               'referrer_amount':referrer_balance
+                }
+            Referrer.objects.filter(referee = request.user.username).update(
+               amount = referrer_balance
+            )
+            return render (request, 'app/referral.html',data)
     return render(request, 'app/referral.html')
 
 
