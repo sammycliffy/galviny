@@ -7,11 +7,11 @@ class Crypto_admin(admin.ModelAdmin):
 
 # Register your models here.
 class Forex_admin(admin.ModelAdmin):
-    list_display = ['username', 'choice', 'confirmed','profit','lent','lend_date']
+    list_display = ['username', 'choice', 'confirmed','profit','lent','lend_date', 'amount_lent', 'previous_withdraw']
 
 # Register your models here.
 class Oil_admin(admin.ModelAdmin):
-    list_display = ['username', 'choice', 'confirmed','profit','lent','lend_date']
+    list_display =['username', 'choice', 'confirmed','profit','lent','lend_date', 'amount_lent', 'previous_withdraw']
 
 # Register your models here.
 class withdrawal_admin(admin.ModelAdmin):
