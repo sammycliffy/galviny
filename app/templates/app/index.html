@@ -501,4 +501,48 @@
   
 </script>
 
+
+</main>
+<script>
+  $(document).on('submit', '#newsletter_form', function(e){
+    e.preventDefault();
+    $('#closed').click(function () {
+      $('.modals').css('display', 'none');
+      
+    });
+    $.ajax({
+      type: 'POST',
+      url: '/newsletter/',
+      enctype: "multipart/form-data",
+      beforeSend: function () {
+        $('.modals').css('display', 'block')
+        $('#ajax_text').css('display', 'block');
+        $('#ajax_image').css('display', 'block');
+      },
+        data: {
+          
+
+               email: $('#news_email').val(),
+               csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val(),
+      },
+
+      success: function (data) {
+        if (data.already_done) {
+          alert('You cannot do more than one plan at a time')
+        }
+
+        else {
+         alert('Thanks for suscribing to our newsletter')
+        }
+      },
+      error: function (xhr, errmsg) {
+        $('#error').html("<div class='alert-box alert radius' data-alert> Opps! We have encountered and error: </div>");
+      }
+    });
+    
+
+  });
+
+</script>
+
 {% endblock %}

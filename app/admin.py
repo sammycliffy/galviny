@@ -1,5 +1,5 @@
 from django.contrib import admin
-from app.models import Cryptocurrency, Forex, Oil, Withdraw, Testimony, Referrer
+from app.models import Cryptocurrency, Forex, Oil, Withdraw, Testimony, Referrer, Newsletter
 
 # Register your models here.
 class Crypto_admin(admin.ModelAdmin):
@@ -24,6 +24,10 @@ class Testimony_admin(admin.ModelAdmin):
 class Referrer_admin(admin.ModelAdmin):
     list_display = ['referee', 'referred', 'amount','date',]
 
+class Newsletter_admin(admin.ModelAdmin):
+    list_display = ['email']
+
+
 
 admin.site.register(Cryptocurrency, Crypto_admin)
 admin.site.register(Forex, Forex_admin)
@@ -31,3 +35,5 @@ admin.site.register(Oil, Oil_admin)
 admin.site.register(Withdraw, withdrawal_admin)
 admin.site.register(Testimony, Testimony_admin)
 admin.site.register(Referrer, Referrer_admin)
+admin.site.register(Newsletter, Newsletter_admin)
+

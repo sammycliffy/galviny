@@ -3,7 +3,7 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from .forms import SignUpForm, ProfileForm, WalletForm
 from django.http import HttpResponse
-from app.models import Testimony, Cryptocurrency, Forex, Oil, Withdraw, Referrer
+from app.models import Testimony, Cryptocurrency, Forex, Oil, Withdraw, Referrer, Newsletter
 from django.utils.encoding import force_text
 from django.utils.http import urlsafe_base64_decode
 from app.token import account_activation_token
@@ -1334,6 +1334,14 @@ def contact(request):
         real_message = '{}, Sender_email: {}, Sender_name: {}'
         sending_message = real_message.format(message,email,name)
         send_mail(subject, sending_message, name, ['contact.galviny@gmail.com'])
+    return HttpResponse('sent successfully')
+    
+def newsletter(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        Newsletter.objects.create(
+            email = email
+        )
     return HttpResponse('sent successfully')
     
           
