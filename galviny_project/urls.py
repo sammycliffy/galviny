@@ -48,5 +48,7 @@ urlpatterns = [
     url(r'^privacy/$', views.privacy, name='privacy'),
     url(r'^terms/$', views.terms, name='terms'),
     url(r'^cancel/$', views.cancel, name='cancel'),
+    url(r'^contact/$', views.contact, name='contact'),
 ]
+
         

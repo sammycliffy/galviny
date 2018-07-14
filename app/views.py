@@ -779,7 +779,7 @@ def withdrawal_success(request):
                         logistics = 2000
             payments = Cryptocurrency.objects.get(username = request.user.username, lent=True)
             withdraw_amount = payments.profit - payments.previous_withdraw -  logistics
-            if withdraw_amount <= 0:
+            if withdraw_amount <= 1000:
                 return redirect('withdrawal_failed')
             check_withdraw =  Withdraw.objects.filter(username = request.user.username)
             if check_withdraw:
@@ -1324,3 +1324,17 @@ def cancel(request):
             except ObjectDoesNotExist:
                  return HttpResponse('<h2>Sorry You do not have a plan yet</h2>')
     return HttpResponse('<h2>ok your plan has been canceled successfully</h2>')
+
+def contact(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        subject = request.POST.get('subject')
+        message = request.POST.get('message')
+        real_message = '{}, Sender_email: {}, Sender_name: {}'
+        sending_message = real_message.format(message,name,email)
+        send_mail(subject, sending_message, name, ['contact.galviny@gmail.com'])
+    return HttpResponse('sent successfully')
+    
+          
+        
