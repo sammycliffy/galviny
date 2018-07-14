@@ -1332,7 +1332,7 @@ def contact(request):
         subject = request.POST.get('subject')
         message = request.POST.get('message')
         real_message = '{}, Sender_email: {}, Sender_name: {}'
-        sending_message = real_message.format(message,name,email)
+        sending_message = real_message.format(message,email,name)
         send_mail(subject, sending_message, name, ['contact.galviny@gmail.com'])
     return HttpResponse('sent successfully')
     
