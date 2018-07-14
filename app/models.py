@@ -104,3 +104,8 @@ class Referrer(models.Model):
     referred = models.CharField(max_length = 255, null = True)
     amount = models.PositiveIntegerField(null = True )
     date = models.DateTimeField(auto_now=True)
+
+
+class Newsletter(models.Model):
+    email = models.EmailField(null = True)
+    date = models.DateField(auto_now=True)
