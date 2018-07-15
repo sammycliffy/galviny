@@ -177,168 +177,102 @@ def profile(request):
             profit_days = profit_days.days
             if profile.amount_lent == 50000 and paid_date <= end_date:
                 profit = 1200 * profit_days
-                withdraw_money = Withdraw.objects.get(username = request.user.username)
-                real_profit = profit - profile.previous_withdraw - withdraw_money.logistics
-                if real_profit < 0:
-                    real_profit = 0
-                    Cryptocurrency.objects.filter(username = request.user.username).update(
-                    profit = real_profit
-                )
-                else:
-                    Cryptocurrency.objects.filter(username = request.user.username).update(
-                    profit = real_profit
+                Cryptocurrency.objects.filter(username = request.user.username).update(
+                    profit = profit
                 )
                 data = {
                             
                                 'wallet_balance':profile.choice,
                                 'date':paid_date,
-                                'profit':real_profit,
-                                'amount':profile.amount_lent,
-                                'withdraw':profile.previous_withdraw,
+                                'profit':profit,
+                                'amount':profile.amount_lent
                                 
                             } 
                 return render(request, 'app/profile.html', data)
             elif profile.amount_lent == 100000 and paid_date <= end_date:
                 profit = 2400 * profit_days
-                withdraw_money = Withdraw.objects.get(username = request.user.username)
-                real_profit = profit - profile.previous_withdraw - withdraw_money.logistics
-                if real_profit < 0:
-                    real_profit = 0
-                    Cryptocurrency.objects.filter(username = request.user.username).update(
-                    profit = real_profit
-                )
-                else:
-                    Cryptocurrency.objects.filter(username = request.user.username).update(
-                    profit = real_profit
-                )
                 data = {
                             
                                 'wallet_balance':profile.choice,
                                 'date':paid_date,
-                                'profit':real_profit,
-                                'amount':profile.amount_lent,
-                                 'withdraw':profile.previous_withdraw,
+                                'profit':profit,
+                                'amount':profile.amount_lent
                                 
                             } 
+                Cryptocurrency.objects.filter(username = request.user.username).update(
+                    profit = profit
+                )
                 return render(request, 'app/profile.html', data)
             elif profile.amount_lent == 200000 and paid_date <= end_date:
                 profit = 4800 * profit_days
-                withdraw_money = Withdraw.objects.get(username = request.user.username)
-                real_profit = profit - profile.previous_withdraw - withdraw_money.logistics
-                if real_profit < 0:
-                    real_profit = 0
-                    Cryptocurrency.objects.filter(username = request.user.username).update(
-                    profit = 0
-                )
-                else:
-                    Cryptocurrency.objects.filter(username = request.user.username).update(
-                    profit = real_profit
-                )
                 data = {
                             
                                 'wallet_balance':profile.choice,
                                 'date':paid_date,
-                                'profit':real_profit,
-                                'amount':profile.amount_lent,
-                                 'withdraw':profile.previous_withdraw,
+                                'profit':profit,
+                                'amount':profile.amount_lent
                                 
                             } 
-              
+                Cryptocurrency.objects.filter(username = request.user.username).update(
+                    profit = profit
+                )
                 return render(request, 'app/profile.html', data)
             elif profile.amount_lent == 300000 and paid_date <= end_date:
                 profit = 7200 * profit_days
-                withdraw_money = Withdraw.objects.get(username = request.user.username)
-                real_profit = profit - profile.previous_withdraw - withdraw_money.logistics
-                if real_profit < 0:
-                    real_profit = 0
-                    Cryptocurrency.objects.filter(username = request.user.username).update(
-                    profit = real_profit
-                )
-                else:
-                    Cryptocurrency.objects.filter(username = request.user.username).update(
-                    profit = real_profit
-                )
                 data = {
                             
                                 'wallet_balance':profile.choice,
                                 'date':paid_date,
-                                'profit':real_profit,
-                                'amount':profile.amount_lent,
-                                 'withdraw':profile.previous_withdraw,
+                                'profit':profit,
+                                'amount':profile.amount_lent
                                 
-                }
+                            } 
+                Cryptocurrency.objects.filter(username = request.user.username).update(
+                    profit = profit
+                )
                 return render(request, 'app/profile.html', data)
             elif profile.amount_lent == 400000 and paid_date <= end_date:
                 profit = 9600 * profit_days
-                withdraw_money = Withdraw.objects.get(username = request.user.username)
-                real_profit = profit - profile.previous_withdraw - withdraw_money.logistics
-                if real_profit < 0:
-                    real_profit = 0
-                    Cryptocurrency.objects.filter(username = request.user.username).update(
-                    profit = real_profit
-                )
-                else:
-                    Cryptocurrency.objects.filter(username = request.user.username).update(
-                    profit = real_profit
-                )
                 data = {
                             
                                 'wallet_balance':profile.choice,
                                 'date':paid_date,
-                                'profit':real_profit,
-                                'amount':profile.amount_lent,
-                                 'withdraw':profile.previous_withdraw,
+                                'profit':profit,
+                                'amount':profile.amount_lent
                                 
                             } 
 
-               
-                return render(request, 'app/profile.html', data)
+                Cryptocurrency.objects.filter(username = request.user.username).update(
+                    profit = profit
+                )
+                return render(request, 'app/withdrawal.html', data)
             elif profile.amount_lent == 500000 and paid_date <= end_date:
                 profit = 12000 * profit_days
-                withdraw_money = Withdraw.objects.get(username = request.user.username)
-                real_profit = profit - profile.previous_withdraw - withdraw_money.logistics
-                if real_profit < 0:
-                    Cryptocurrency.objects.filter(username = request.user.username).update(
-                    profit = 0
-                )
-                else:
-                    Cryptocurrency.objects.filter(username = request.user.username).update(
-                    profit = real_profit
-                )
                 data = {
                             
                                 'wallet_balance':profile.choice,
                                 'date':paid_date,
-                                'profit':real_profit,
-                                'amount':profile.amount_lent,
-                                 'withdraw':profile.previous_withdraw,
+                                'profit':profit,
+                                'amount':profile.amount_lent
                                 
                             } 
-              
+                Cryptocurrency.objects.filter(username = request.user.username).update(
+                    profit = profit
+                )
                 return render(request, 'app/profile.html', data)
             elif profile.amount_lent == 1000000 and paid_date <= end_date:
                 profit = 24000 * profit_days
-                withdraw_money = Withdraw.objects.get(username = request.user.username)
-                real_profit = profit - profile.previous_withdraw - withdraw_money.logistics
-                if real_profit < 0:
-                    real_profit = 0
-                    Cryptocurrency.objects.filter(username = request.user.username).update(
-                    profit = real_profit
-                )
-                else:
-                    Cryptocurrency.objects.filter(username = request.user.username).update(
-                    profit = real_profit
-                )
                 data = {
                             
                                 'wallet_balance':profile.choice,
                                 'date':paid_date,
-                                'profit':real_profit,
-                                'amount':profile.amount_lent,
-                                 'withdraw':profile.previous_withdraw,
+                                'profit':profit,
+                                'amount':profile.amount_lent
                                 
                             } 
-              
+                Cryptocurrency.objects.filter(username = request.user.username).update(
+                    profit = profit
+                )
                 return render(request, 'app/profile.html', data)
 
         else:
@@ -350,7 +284,6 @@ def profile(request):
                     'profit':0.00
                 }
             return render(request, 'app/profile.html',data)
-    
 
     except ObjectDoesNotExist:
         try:
@@ -724,6 +657,7 @@ def referrer (request):
                     Referrer.objects.filter(referee = request.user.username).update(
                         amount = referrer_balance
                     )
+                    return render (request, 'app/referral.html',data)
                 elif check_forex:
                     referrer_balance =  check_crypto.amount_lent  * 0.03
                     data = {
@@ -732,6 +666,7 @@ def referrer (request):
                     Referrer.objects.filter(referee = request.user.username).update(
                     amount = referrer_balance
                 )
+                    return render (request, 'app/referral.html',data)
                 elif check_oil:
                     referrer_balance =  check_crypto.amount_lent  * 0.03
                     data = {
