@@ -73,7 +73,7 @@
 						<li>
 							
 						</li>
-						<li><a href="{% url 'index' %}" class=""><i class="fa fa-bell"></i> <span>Contact us</span></a></li>
+						<li><a href="{% url 'index' %}" target="_blank" class=""><i class="fa fa-bell"></i> <span>Contact us</span></a></li>
 					</ul>
 				</nav>
 			</div>
@@ -120,7 +120,7 @@
 								 500,000  = 12,000 profit daily</label>
 								
 								</li>
-									<li><label for="id_crypto_choice_6"><input type="radio" name="crypto_choice" value="10000000" required id="id_crypto_choice_6" />
+									<li><label for="id_crypto_choice_6"><input type="radio" name="crypto_choice" value="1000000" required id="id_crypto_choice_6" />
 								 1,000,000  = 24,000 profit daily</label>
 								
 								</li>
@@ -147,7 +147,7 @@
 						}
 					
 						 successFunction=function(transaction_id) {
-							alert('done successfully');
+							alert('Thanks for the payment, you wll be confirmed shortly')
 
 							
 						}
@@ -224,7 +224,7 @@
 												success:successFunction,
 												failed:failedFunction
 											});
-											alert('Thanks for the payment, you wll be confirmed shortly')
+											
 									
 										}
 									},
