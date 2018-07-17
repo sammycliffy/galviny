@@ -193,6 +193,7 @@ def profile(request):
                             } 
                 return render(request, 'app/profile.html', data)
             elif profile.amount_lent == 100000 and paid_date <= end_date:
+                print(profile.previous_withdraw)
                 profit = 2400 * profit_days - profile.previous_withdraw - profile.logistics
                 data = {
                             
@@ -208,6 +209,8 @@ def profile(request):
                 )
                 return render(request, 'app/profile.html', data)
             elif profile.amount_lent == 200000 and paid_date <= end_date:
+                profile = Cryptocurrency.objects.get(username = request.user.username)
+                print(profile.previous_withdraw)
                 profit = 4800 * profit_days - profile.previous_withdraw - profile.logistics
                 data = {
                             
@@ -223,6 +226,7 @@ def profile(request):
                 )
                 return render(request, 'app/profile.html', data)
             elif profile.amount_lent == 300000 and paid_date <= end_date:
+                print(profile.previous_withdraw)
                 profit = 7200 * profit_days - profile.logistics
                 data = {
                             
