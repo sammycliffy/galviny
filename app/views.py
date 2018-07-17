@@ -190,7 +190,8 @@ def profile(request):
                                 'wallet_balance':profile.choice,
                                 'date':paid_date,
                                 'profit':profit,
-                                'amount':profile.amount_lent
+                                'amount':profile.amount_lent,
+                                'withdrawal':profile.previous_withdraw + logistics
                                 
                             } 
                 return render(request, 'app/profile.html', data)
@@ -204,7 +205,8 @@ def profile(request):
                                 'wallet_balance':profile.choice,
                                 'date':paid_date,
                                 'profit':profit,
-                                'amount':profile.amount_lent
+                                'amount':profile.amount_lent,
+                                'withdrawal':profile.previous_withdraw + logistics
                                 
                             } 
                 Cryptocurrency.objects.filter(username = request.user.username).update(
@@ -221,7 +223,8 @@ def profile(request):
                                 'wallet_balance':profile.choice,
                                 'date':paid_date,
                                 'profit':profit,
-                                'amount':profile.amount_lent
+                                'amount':profile.amount_lent,
+                                'withdrawal':profile.previous_withdraw + logistics
                                 
                             } 
                 Cryptocurrency.objects.filter(username = request.user.username).update(
@@ -238,7 +241,8 @@ def profile(request):
                                 'wallet_balance':profile.choice,
                                 'date':paid_date,
                                 'profit':profile.profit,
-                                'amount':profile.amount_lent
+                                'amount':profile.amount_lent,
+                                'withdrawal':profile.previous_withdraw + logistics
                                 
                             } 
                 Cryptocurrency.objects.filter(username = request.user.username).update(
@@ -255,7 +259,8 @@ def profile(request):
                                 'wallet_balance':profile.choice,
                                 'date':paid_date,
                                  'profit':profile.profit,
-                                'amount':profile.amount_lent
+                                'amount':profile.amount_lent,
+                                'withdrawal':profile.previous_withdraw + logistics
                                 
                             } 
 
@@ -273,7 +278,8 @@ def profile(request):
                                 'wallet_balance':profile.choice,
                                 'date':paid_date,
                                  'profit':profile.profit,
-                                'amount':profile.amount_lent
+                                'amount':profile.amount_lent,
+                                'withdrawal':profile.previous_withdraw + logistics
                                 
                             } 
                 Cryptocurrency.objects.filter(username = request.user.username).update(
@@ -290,7 +296,8 @@ def profile(request):
                                 'wallet_balance':profile.choice,
                                 'date':paid_date,
                                 'profit':profit,
-                                'amount':profile.amount_lent
+                                'amount':profile.amount_lent,
+                                'withdrawal':profile.previous_withdraw + logistics
                                 
                             } 
                 Cryptocurrency.objects.filter(username = request.user.username).update(
