@@ -705,7 +705,7 @@ def withdrawal_failed(request):
 def withdrawal_success(request):
     try:
         payment = Cryptocurrency.objects.get(username = request.user.username, lent=True)        
-        expiry_date = payment.lend_date + timedelta(days = 60)
+        expiry_date = payment.lend_date + timedelta(days = 5)
         before_ten_days = payment.lend_date + timedelta(days=10)
         current_date = timezone.now()
         if current_date < expiry_date:
@@ -717,14 +717,18 @@ def withdrawal_success(request):
             if withdraw_amount <= 1000:
                 return redirect('withdrawal_failed')
             check_withdraw =  Withdraw.objects.filter(username = request.user.username)
-            if check_withdraw:
+            elif check_withdraw:
                 Withdraw.objects.filter(username = request.user.username).update(
                     username = request.user.username,
                     withdraw_amount = withdraw_amount,
                     plan = 'cryptocurrency',
                     date = datetime.datetime.now(),
                     previous_withdraw = F('previous_withdraw') + withdraw_amount,
-                    logistics = F('logistics') + logistics
+                    logistics = logistics
+                    )
+                Cryptocurrency.objects.filter(username = request.user.username).update(
+                        profit = 0,
+                        previous_withdraw = F('previous_withdraw') + withdraw_amount
                     )
             else:
                 Withdraw.objects.create(
@@ -733,12 +737,14 @@ def withdrawal_success(request):
                     plan = 'cryptocurrency',
                     previous_withdraw = withdraw_amount,
                     date = datetime.datetime.now(),
-                    logistics = F('logistics') + logistics
+                    logistics =  logistics
                 )
 
-            Cryptocurrency.objects.filter(username = request.user.username).update(
-                previous_withdraw = F('previous_withdraw') + withdraw_amount)
-            return render (request, 'app/withdrawal-success.html')                
+                Cryptocurrency.objects.filter(username = request.user.username).update(
+                    previous_withdraw = F('previous_withdraw') + withdraw_amount,
+                    profit = 0
+                    )
+                return render (request, 'app/withdrawal-success.html')                
     except ObjectDoesNotExist:
         try:
                 payment = Forex.objects.get(username = request.user.username, lent=True)        
