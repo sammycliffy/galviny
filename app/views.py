@@ -178,10 +178,7 @@ def profile(request):
             before_ten_days = profile.lend_date + timedelta(days=10)
             current_date = timezone.now()
             if profile.amount_lent == 50000 and paid_date <= end_date:
-                logistics = 200
-                if current_date < before_ten_days:
-                        logistics = 2000
-                profit = 1200 * profit_days - profile.previous_withdraw - logistics
+                profit = 1200 * profit_days - profile.previous_withdraw - profile.logistics
                 Cryptocurrency.objects.filter(username = request.user.username).update(
                     profit = profit
                 )
@@ -196,10 +193,7 @@ def profile(request):
                             } 
                 return render(request, 'app/profile.html', data)
             elif profile.amount_lent == 100000 and paid_date <= end_date:
-                logistics = 200
-                if current_date < before_ten_days:
-                        logistics = 2000
-                profit = 2400 * profit_days - profile.previous_withdraw - logistics
+                profit = 2400 * profit_days - profile.previous_withdraw - profile.logistics
                 data = {
                             
                                 'wallet_balance':profile.choice,
@@ -214,10 +208,7 @@ def profile(request):
                 )
                 return render(request, 'app/profile.html', data)
             elif profile.amount_lent == 200000 and paid_date <= end_date:
-                logistics = 200
-                if current_date < before_ten_days:
-                        logistics = 2000
-                profit = 4800 * profit_days - profile.previous_withdraw - logistics
+                profit = 4800 * profit_days - profile.previous_withdraw - profile.logistics
                 data = {
                             
                                 'wallet_balance':profile.choice,
@@ -232,10 +223,7 @@ def profile(request):
                 )
                 return render(request, 'app/profile.html', data)
             elif profile.amount_lent == 300000 and paid_date <= end_date:
-                logistics = 200
-                if current_date < before_ten_days:
-                        logistics = 2000
-                profit = 7200 * profit_days
+                profit = 7200 * profit_days - profile.logistics
                 data = {
                             
                                 'wallet_balance':profile.choice,
@@ -250,10 +238,7 @@ def profile(request):
                 )
                 return render(request, 'app/profile.html', data)
             elif profile.amount_lent == 400000 and paid_date <= end_date:
-                logistics = 200
-                if current_date < before_ten_days:
-                        logistics = 2000
-                profit = 9600 * profit_days
+                profit = 9600 * profit_days - profile.logistics
                 data = {
                             
                                 'wallet_balance':profile.choice,
@@ -272,7 +257,7 @@ def profile(request):
                 logistics = 200
                 if current_date < before_ten_days:
                         logistics = 2000
-                profit = 12000 * profit_days
+                profit = 12000 * profit_days - profile.logistics
                 data = {
                             
                                 'wallet_balance':profile.choice,
@@ -757,8 +742,8 @@ def withdrawal_success(request):
                     logistics = logistics
                     )
                 Cryptocurrency.objects.filter(username = request.user.username).update(
-                        profit = 0,
-                        previous_withdraw = F('previous_withdraw') + withdraw_amount
+                        previous_withdraw = F('previous_withdraw') + withdraw_amount,
+                        logistics = F('logistics') + logistics
                     )
             else:
                 Withdraw.objects.create(
@@ -772,7 +757,7 @@ def withdrawal_success(request):
 
                 Cryptocurrency.objects.filter(username = request.user.username).update(
                     previous_withdraw = F('previous_withdraw') + withdraw_amount,
-                    profit = 0
+                    logistics = F('logistics') + logistics
                     )
                 return render (request, 'app/withdrawal-success.html')                
     except ObjectDoesNotExist:
@@ -787,7 +772,7 @@ def withdrawal_success(request):
                                 logistics = 2000
                     payments = Forex.objects.get(username = request.user.username, lent=True)
                     withdraw_amount = payments.profit - payments.previous_withdraw -  logistics
-                    if withdraw_amount <= 0:
+                    if withdraw_amount <= 1000:
                         return redirect('withdrawal_failed')
                     check_withdraw =  Withdraw.objects.filter(username = request.user.username)
                     if check_withdraw:

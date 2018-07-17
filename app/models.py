@@ -54,6 +54,7 @@ class Cryptocurrency(models.Model):
     lend_date = models.DateTimeField(null=True, blank=True)
     amount_lent = models.PositiveIntegerField(null=True, default=0)
     previous_withdraw = models.PositiveIntegerField(null = True, default = 0)
+    logistics = models.PositiveIntegerField(null = True, default = 0)
 
     def __str__(self):
         return self.username

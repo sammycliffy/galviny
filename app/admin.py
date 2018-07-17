@@ -3,7 +3,7 @@ from app.models import Cryptocurrency, Forex, Oil, Withdraw, Testimony, Referrer
 
 # Register your models here.
 class Crypto_admin(admin.ModelAdmin):
-    list_display = ['username', 'choice', 'confirmed','profit','lent','lend_date', 'amount_lent', 'previous_withdraw']
+    list_display = ['username', 'choice', 'confirmed','profit','lent','lend_date', 'amount_lent', 'previous_withdraw', 'logistics']
 
 # Register your models here.
 class Forex_admin(admin.ModelAdmin):
