@@ -195,7 +195,7 @@ def profile(request):
                             
                                 'wallet_balance':profile.choice,
                                 'date':paid_date,
-                                'profit':profit,
+                                'profit':profile.profit,
                                 'amount':profile.amount_lent
                                 
                             } 
@@ -209,7 +209,7 @@ def profile(request):
                             
                                 'wallet_balance':profile.choice,
                                 'date':paid_date,
-                                'profit':profit,
+                                'profit':profile.profit,
                                 'amount':profile.amount_lent
                                 
                             } 
@@ -223,7 +223,7 @@ def profile(request):
                             
                                 'wallet_balance':profile.choice,
                                 'date':paid_date,
-                                'profit':profit,
+                                'profit':profile.profit,
                                 'amount':profile.amount_lent
                                 
                             } 
@@ -237,7 +237,7 @@ def profile(request):
                             
                                 'wallet_balance':profile.choice,
                                 'date':paid_date,
-                                'profit':profit,
+                                 'profit':profile.profit,
                                 'amount':profile.amount_lent
                                 
                             } 
@@ -252,7 +252,7 @@ def profile(request):
                             
                                 'wallet_balance':profile.choice,
                                 'date':paid_date,
-                                'profit':profit,
+                                 'profit':profile.profit,
                                 'amount':profile.amount_lent
                                 
                             } 
@@ -714,9 +714,9 @@ def withdrawal_success(request):
                         logistics = 2000
             payments = Cryptocurrency.objects.get(username = request.user.username, lent=True)
             withdraw_amount = payments.profit - payments.previous_withdraw -  logistics
+            check_withdraw =  Withdraw.objects.filter(username = request.user.username)
             if withdraw_amount <= 1000:
                 return redirect('withdrawal_failed')
-            check_withdraw =  Withdraw.objects.filter(username = request.user.username)
             elif check_withdraw:
                 Withdraw.objects.filter(username = request.user.username).update(
                     username = request.user.username,
