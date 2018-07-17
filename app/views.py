@@ -188,7 +188,7 @@ def profile(request):
                                 'date':paid_date,
                                 'profit':profit,
                                 'amount':profile.amount_lent,
-                                'withdrawal':profile.previous_withdraw + logistics
+                                'withdrawal':profile.previous_withdraw + profile.logistics
                                 
                             } 
                 return render(request, 'app/profile.html', data)
@@ -200,7 +200,7 @@ def profile(request):
                                 'date':paid_date,
                                 'profit':profit,
                                 'amount':profile.amount_lent,
-                                'withdrawal':profile.previous_withdraw + logistics
+                                'withdrawal':profile.previous_withdraw + profile.logistics
                                 
                             } 
                 Cryptocurrency.objects.filter(username = request.user.username).update(
@@ -215,7 +215,7 @@ def profile(request):
                                 'date':paid_date,
                                 'profit':profit,
                                 'amount':profile.amount_lent,
-                                'withdrawal':profile.previous_withdraw + logistics
+                                'withdrawal':profile.previous_withdraw + profile.logistics
                                 
                             } 
                 Cryptocurrency.objects.filter(username = request.user.username).update(
@@ -230,7 +230,7 @@ def profile(request):
                                 'date':paid_date,
                                 'profit':profile.profit,
                                 'amount':profile.amount_lent,
-                                'withdrawal':profile.previous_withdraw + logistics
+                                'withdrawal':profile.previous_withdraw + profile.logistics
                                 
                             } 
                 Cryptocurrency.objects.filter(username = request.user.username).update(
@@ -245,7 +245,7 @@ def profile(request):
                                 'date':paid_date,
                                  'profit':profile.profit,
                                 'amount':profile.amount_lent,
-                                'withdrawal':profile.previous_withdraw + logistics
+                               'withdrawal':profile.previous_withdraw + profile.logistics
                                 
                             } 
 
@@ -264,7 +264,7 @@ def profile(request):
                                 'date':paid_date,
                                  'profit':profile.profit,
                                 'amount':profile.amount_lent,
-                                'withdrawal':profile.previous_withdraw + logistics
+                                'withdrawal':profile.previous_withdraw + profile.logistics
                                 
                             } 
                 Cryptocurrency.objects.filter(username = request.user.username).update(
@@ -282,7 +282,7 @@ def profile(request):
                                 'date':paid_date,
                                 'profit':profit,
                                 'amount':profile.amount_lent,
-                                'withdrawal':profile.previous_withdraw + logistics
+                                'withdrawal':profile.previous_withdraw + profile.logistics
                                 
                             } 
                 Cryptocurrency.objects.filter(username = request.user.username).update(
