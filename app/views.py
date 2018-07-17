@@ -175,8 +175,13 @@ def profile(request):
             current_day = timezone.now()
             profit_days = current_day - paid_date
             profit_days = profit_days.days
+            before_ten_days = profile.lend_date + timedelta(days=10)
+            current_date = timezone.now()
             if profile.amount_lent == 50000 and paid_date <= end_date:
-                profit = 1200 * profit_days
+                logistics = 200
+                if current_date < before_ten_days:
+                        logistics = 2000
+                profit = 1200 * profit_days - profile.previous_withdraw - logistics
                 Cryptocurrency.objects.filter(username = request.user.username).update(
                     profit = profit
                 )
@@ -190,12 +195,15 @@ def profile(request):
                             } 
                 return render(request, 'app/profile.html', data)
             elif profile.amount_lent == 100000 and paid_date <= end_date:
-                profit = 2400 * profit_days
+                logistics = 200
+                if current_date < before_ten_days:
+                        logistics = 2000
+                profit = 2400 * profit_days - profile.previous_withdraw - logistics
                 data = {
                             
                                 'wallet_balance':profile.choice,
                                 'date':paid_date,
-                                'profit':profile.profit,
+                                'profit':profit,
                                 'amount':profile.amount_lent
                                 
                             } 
@@ -204,12 +212,15 @@ def profile(request):
                 )
                 return render(request, 'app/profile.html', data)
             elif profile.amount_lent == 200000 and paid_date <= end_date:
-                profit = 4800 * profit_days
+                logistics = 200
+                if current_date < before_ten_days:
+                        logistics = 2000
+                profit = 4800 * profit_days - profile.previous_withdraw - logistics
                 data = {
                             
                                 'wallet_balance':profile.choice,
                                 'date':paid_date,
-                                'profit':profile.profit,
+                                'profit':profit,
                                 'amount':profile.amount_lent
                                 
                             } 
@@ -218,6 +229,9 @@ def profile(request):
                 )
                 return render(request, 'app/profile.html', data)
             elif profile.amount_lent == 300000 and paid_date <= end_date:
+                logistics = 200
+                if current_date < before_ten_days:
+                        logistics = 2000
                 profit = 7200 * profit_days
                 data = {
                             
@@ -232,6 +246,9 @@ def profile(request):
                 )
                 return render(request, 'app/profile.html', data)
             elif profile.amount_lent == 400000 and paid_date <= end_date:
+                logistics = 200
+                if current_date < before_ten_days:
+                        logistics = 2000
                 profit = 9600 * profit_days
                 data = {
                             
@@ -247,6 +264,9 @@ def profile(request):
                 )
                 return render(request, 'app/withdrawal.html', data)
             elif profile.amount_lent == 500000 and paid_date <= end_date:
+                logistics = 200
+                if current_date < before_ten_days:
+                        logistics = 2000
                 profit = 12000 * profit_days
                 data = {
                             
@@ -262,6 +282,9 @@ def profile(request):
                 return render(request, 'app/profile.html', data)
             elif profile.amount_lent == 1000000 and paid_date <= end_date:
                 profit = 24000 * profit_days
+                logistics = 200
+                if current_date < before_ten_days:
+                        logistics = 2000
                 data = {
                             
                                 'wallet_balance':profile.choice,
