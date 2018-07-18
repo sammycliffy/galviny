@@ -207,6 +207,9 @@ def profile(request):
             elif profile.amount_lent == 200000 and paid_date <= end_date:
                 profile = Cryptocurrency.objects.get(username = request.user.username)
                 profit = 4800 * profit_days - profile.previous_withdraw - profile.logistics
+                if profit <=0:
+                    profit = 0
+
                 data = {
                             
                                 'wallet_balance':profile.choice,
