@@ -171,7 +171,7 @@ def profile(request):
         if profile.lent == 'True':
             paid_date = profile.lend_date    
             choice = profile.choice
-            end_date = paid_date + timedelta(days=60)
+            end_date = paid_date + timedelta(days=5)
             current_day = timezone.now()
             profit_days = current_day - paid_date
             profit_days = profit_days.days
@@ -198,6 +198,9 @@ def profile(request):
                 profit = 2400 * profit_days - profile.previous_withdraw - profile.logistics
                 if profit <=0:
                     profit = 0
+                Cryptocurrency.objects.filter(username = request.user.username).update(
+                    profit = profit
+                )
                 data = {
                             
                                 'wallet_balance':profile.choice,
@@ -233,6 +236,9 @@ def profile(request):
                 profit = 7200 * profit_days - profile.logistics
                 if profit <=0:
                     profit = 0
+                Cryptocurrency.objects.filter(username = request.user.username).update(
+                    profit = profit
+                )
                 data = {
                             
                                 'wallet_balance':profile.choice,
@@ -248,6 +254,9 @@ def profile(request):
                 profit = 9600 * profit_days - profile.logistics
                 if profit <=0:
                     profit = 0
+                Cryptocurrency.objects.filter(username = request.user.username).update(
+                    profit = profit
+                )
                 data = {
                             
                                 'wallet_balance':profile.choice,
@@ -264,6 +273,9 @@ def profile(request):
                 if profit <=0:
                     profit = 0
                 profit = 12000 * profit_days - profile.logistics
+                Cryptocurrency.objects.filter(username = request.user.username).update(
+                    profit = profit
+                )
                 data = {
                             
                                 'wallet_balance':profile.choice,
@@ -279,6 +291,9 @@ def profile(request):
                 profit = 24000 * profit_days
                 if profit <=0:
                     profit = 0
+                Cryptocurrency.objects.filter(username = request.user.username).update(
+                    profit = profit
+                )
                 data = {
                             
                                 'wallet_balance':profile.choice,
