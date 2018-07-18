@@ -181,7 +181,7 @@ def profile(request):
                 profit = 1200 * profit_days - profile.previous_withdraw - profile.logistics
                 if profit <=0:
                     profit = 0
-                Cryptocurrency.objects.get(username = request.user.username).update(
+                Cryptocurrency.objects.filter(username = request.user.username).update(
                     profit = profit
                 )
                 data = {
@@ -214,7 +214,7 @@ def profile(request):
                 profit = 4800 * profit_days - profile.previous_withdraw - profile.logistics
                 if profit <=0:
                     profit = 0
-                Cryptocurrency.objects.get(username = request.user.username).update(
+                Cryptocurrency.objects.filter(username = request.user.username).update(
                     profit = profit
                 )
 
