@@ -20,7 +20,7 @@ from app import views
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
-    url('admin/', admin.site.urls,),
+    url('huikpa/', admin.site.urls,),
     url(r'^$',views.index, name="home"),
     url(r'^index/$',views.index, name="index"),
     url(r'^signup/$', views.signup, name="signup" ),
