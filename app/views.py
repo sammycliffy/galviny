@@ -742,40 +742,40 @@ def withdrawal_success(request):
         if current_date < expiry_date:
             logistics = 200
             if current_date <= before_ten_days:
-                        logistics = 2000
-            payments = Cryptocurrency.objects.get(username = request.user.username, lent=True)
+                logistics = 2000
             withdraw_amount = payments.profit - payments.previous_withdraw -  logistics
             check_withdraw =  Withdraw.objects.filter(username = request.user.username)
             if withdraw_amount <= 1000:
                 return redirect('withdrawal_failed')
-            elif check_withdraw:
-                Withdraw.objects.filter(username = request.user.username).update(
-                    username = request.user.username,
-                    withdraw_amount = withdraw_amount,
-                    plan = 'cryptocurrency',
-                    date = datetime.datetime.now(),
-                    previous_withdraw = F('previous_withdraw') + withdraw_amount,
-                    logistics = logistics
-                    )
-                Cryptocurrency.objects.filter(username = request.user.username).update(
-                        previous_withdraw = F('previous_withdraw') + withdraw_amount,
-                        logistics = F('logistics') + logistics
-                    )
             else:
-                Withdraw.objects.create(
-                    username = request.user.username,
-                    withdraw_amount = withdraw_amount,
-                    plan = 'cryptocurrency',
-                    previous_withdraw = withdraw_amount,
-                    date = datetime.datetime.now(),
-                    logistics =  logistics
-                )
-
-                Cryptocurrency.objects.filter(username = request.user.username).update(
-                    previous_withdraw = F('previous_withdraw') + withdraw_amount,
-                    logistics = F('logistics') + logistics
+                if check_withdraw:
+                    Withdraw.objects.filter(username = request.user.username).update(
+                        username = request.user.username,
+                        withdraw_amount = withdraw_amount,
+                        plan = 'cryptocurrency',
+                        date = datetime.datetime.now(),
+                        previous_withdraw = F('previous_withdraw') + withdraw_amount,
+                        logistics = logistics
+                        )
+                    Cryptocurrency.objects.filter(username = request.user.username).update(
+                            previous_withdraw = F('previous_withdraw') + withdraw_amount,
+                            logistics = logistics
+                        )
+                else:
+                    Withdraw.objects.create(
+                        username = request.user.username,
+                        withdraw_amount = withdraw_amount,
+                        plan = 'cryptocurrency',
+                        previous_withdraw = withdraw_amount,
+                        date = datetime.datetime.now(),
+                        logistics =  logistics
                     )
-                return render (request, 'app/withdrawal-success.html')                
+
+                    Cryptocurrency.objects.filter(username = request.user.username).update(
+                        previous_withdraw = F('previous_withdraw') + withdraw_amount,
+                        logistics =  logistics
+                        )
+                    return render (request, 'app/withdrawal-success.html')                
     except ObjectDoesNotExist:
         try:
                 payment = Forex.objects.get(username = request.user.username, lent=True)        
@@ -798,7 +798,7 @@ def withdrawal_success(request):
                             plan = 'Forex',
                             date = datetime.datetime.now(),
                             previous_withdraw = F('previous_withdraw') + withdraw_amount,
-                            logistics = F('logistics') + logistics
+                            logistics =  logistics
                             )
                     else:
                         Withdraw.objects.create(
