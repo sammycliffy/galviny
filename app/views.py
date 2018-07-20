@@ -745,7 +745,7 @@ def withdrawal_success(request):
                 logistics = 2000
             withdraw_amount = payment.profit - payment.previous_withdraw -  logistics
             check_withdraw =  Withdraw.objects.filter(username = request.user.username)
-            if withdraw_amount <= 1000:
+            if withdraw_amount < 1000:
                 return redirect('withdrawal_failed')
             else:
                 if check_withdraw:
