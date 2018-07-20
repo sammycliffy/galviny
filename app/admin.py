@@ -1,5 +1,7 @@
 from django.contrib import admin
 from app.models import Cryptocurrency, Forex, Oil, Withdraw, Testimony, Referrer, Newsletter
+from django.contrib.auth.models import Group
+
 
 # Register your models here.
 class Crypto_admin(admin.ModelAdmin):
@@ -26,6 +28,7 @@ class Referrer_admin(admin.ModelAdmin):
 
 class Newsletter_admin(admin.ModelAdmin):
     list_display = ['email']
+
 
 
 
