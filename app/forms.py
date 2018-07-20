@@ -48,38 +48,5 @@ class WalletForm (forms.Form):
 
 
 
-from django.forms import ModelForm
-from django import forms
-from django.contrib.auth.models import Group, User
 
-class GroupAdminForm(ModelForm):
-    class Meta:
-        model = Group
-    
-    group_users = forms.ModelMultipleChoiceField(label=u'Usuários deste Grupo', queryset=User.objects.all())
 
-    def __init__(self, *args, **kwargs):
-        super(GroupAdminForm, self).__init__(*args, **kwargs)
-        users_id = list()
-        # Avoid 'No exception supplied' 
-        try: 
-            users = self.instance.group.user_set.all()
-            for u in users:
-                users_id.append(u.id)
-            if self.fields.has_key('group_users'):
-                self.fields['group_users'].initial = users_id
-        except Exception:
-            pass
-
-    def clean(self):
-        group = self.cleaned_data['group']
-        group.save()
-        if group.user_set.all():
-            group.user_set.clear()
-        try:
-            users = self.cleaned_data['group_users']
-            for user in users:
-                group.user_set.add(user)
-        except:
-            return self.cleaned_data
-        return self.cleaned_data
