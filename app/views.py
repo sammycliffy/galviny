@@ -744,11 +744,11 @@ def withdrawal_success(request):
             if current_date <= before_ten_days:
                 logistics = 2000
             withdraw_amount = payment.profit - payment.previous_withdraw -  logistics
-            check_withdraw =  Withdraw.objects.filter(username = request.user.username)
+            
             if withdraw_amount < 1000:
                 return redirect('withdrawal_failed')
             else:
-                if check_withdraw:
+                if  Withdraw.objects.filter(username = request.user.username):
                     Withdraw.objects.filter(username = request.user.username).update(
                         username = request.user.username,
                         withdraw_amount = withdraw_amount,
