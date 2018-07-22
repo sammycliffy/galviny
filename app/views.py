@@ -173,9 +173,8 @@ def profile(request):
             choice = profile.choice
             end_date = paid_date + timedelta(days=5)
             current_day = timezone.now()
-            #profit_days = current_day - paid_date
-            #profit_days = profit_days.days
-            profit_days = 10
+            profit_days = current_day - paid_date
+            profit_days = profit_days.days
             before_ten_days = profile.lend_date + timedelta(days=10)
             current_date = timezone.now()
             if profile.amount_lent == 50000 and paid_date <= end_date:
