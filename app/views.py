@@ -743,9 +743,7 @@ def withdrawal_success(request):
         if current_date <= before_ten_days:
                 logistics = 2000
         withdraw_amount = payment.profit - payment.previous_withdraw -  logistics    
-        if withdraw_amount < 1000:
-                return redirect('withdrawal_failed')
-        else:
+        if withdraw_amount >= 1000:
                 if  Withdraw.objects.filter(username = request.user.username):
                     Withdraw.objects.filter(username = request.user.username).update(
                         username = request.user.username,
@@ -773,7 +771,9 @@ def withdrawal_success(request):
                         previous_withdraw = F('previous_withdraw') + withdraw_amount,
                         logistics =  logistics
                         )
-                    return render (request, 'app/withdrawal-success.html')                
+                    return render (request, 'app/withdrawal-success.html')        
+        else:
+             return redirect('withdrawal_failed')        
     except ObjectDoesNotExist:
         try:
                 payment = Forex.objects.get(username = request.user.username, lent=True)        
