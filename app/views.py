@@ -179,7 +179,7 @@ def profile(request):
             current_date = timezone.now()
             if profile.amount_lent == 50000 and paid_date <= end_date:
                 #profit = 1200 * profit_days - profile.previous_withdraw - profile.logistics
-                profit = 10000
+                profit = 10000 - profile.previous_withdraw - profile.logistics
                 if profit <=0:
                     profit = 0
                 Cryptocurrency.objects.filter(username = request.user.username).update(
