@@ -173,13 +173,13 @@ def profile(request):
             choice = profile.choice
             end_date = paid_date + timedelta(days=5)
             current_day = timezone.now()
-            profit_days = current_day - paid_date
-            profit_days = profit_days.days
+            #profit_days = current_day - paid_date
+            #profit_days = profit_days.days
+            profit_days = 10
             before_ten_days = profile.lend_date + timedelta(days=10)
             current_date = timezone.now()
             if profile.amount_lent == 50000 and paid_date <= end_date:
-                #profit = 1200 * profit_days - profile.previous_withdraw - profile.logistics
-                profit = 50000 * profit_days - profile.previous_withdraw - profile.logistics
+                profit = 1200 * profit_days - profile.previous_withdraw - profile.logistics
                 if profit <=0:
                     profit = 0
                 Cryptocurrency.objects.filter(username = request.user.username).update(
@@ -744,7 +744,9 @@ def withdrawal_success(request):
         if current_date <= before_ten_days:
                 logistics = 2000
         withdraw_amount = payment.profit - payment.previous_withdraw -  logistics    
-        if withdraw_amount >= 1000:
+        if withdraw_amount < 0:
+                return redirect('withdrawal_failed')
+        else:
                 if  Withdraw.objects.filter(username = request.user.username):
                     Withdraw.objects.filter(username = request.user.username).update(
                         username = request.user.username,
@@ -772,9 +774,7 @@ def withdrawal_success(request):
                         previous_withdraw = F('previous_withdraw') + withdraw_amount,
                         logistics =  logistics
                         )
-                    return render (request, 'app/withdrawal-success.html')        
-        else:
-             return redirect('withdrawal_failed')        
+                    return render (request, 'app/withdrawal-success.html')                
     except ObjectDoesNotExist:
         try:
                 payment = Forex.objects.get(username = request.user.username, lent=True)        
