@@ -739,15 +739,13 @@ def withdrawal_success(request):
         expiry_date = payment.lend_date + timedelta(days = 5)
         before_ten_days = payment.lend_date + timedelta(days=10)
         current_date = timezone.now()
-        if current_date < expiry_date:
-            logistics = 200
-            if current_date <= before_ten_days:
+        logistics = 200
+        if current_date <= before_ten_days:
                 logistics = 2000
-            withdraw_amount = payment.profit - payment.previous_withdraw -  logistics
-            
-            if withdraw_amount < 1000:
+        withdraw_amount = payment.profit - payment.previous_withdraw -  logistics    
+        if withdraw_amount < 1000:
                 return redirect('withdrawal_failed')
-            else:
+        else:
                 if  Withdraw.objects.filter(username = request.user.username):
                     Withdraw.objects.filter(username = request.user.username).update(
                         username = request.user.username,
