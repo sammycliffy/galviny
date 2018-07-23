@@ -742,10 +742,12 @@ def withdrawal_success(request):
         logistics = 200
         if current_date <= before_ten_days:
                 logistics = 2000
-        withdraw_amount = payment.profit - payment.previous_withdraw -  logistics    
-        if withdraw_amount < 0:
+        withdraw_amount = payment.profit - payment.previous_withdraw -  logistics   
+        if withdraw_amount <= 1000:
                 return redirect('withdrawal_failed')
+       
         else:
+             
                 if  Withdraw.objects.filter(username = request.user.username):
                     Withdraw.objects.filter(username = request.user.username).update(
                         username = request.user.username,
@@ -755,7 +757,6 @@ def withdrawal_success(request):
                         previous_withdraw = F('previous_withdraw') + withdraw_amount,
                         logistics = logistics
                         )
-                    
                     message = '{} made a withdrawal of {} with account number {}'
                     subject = 'Withdrawal'
                     sending = message.format(request.user.username,withdraw_amount, request.user.profile.account_number)
@@ -764,6 +765,7 @@ def withdrawal_success(request):
                             previous_withdraw = F('previous_withdraw') + withdraw_amount,
                             logistics = logistics
                         )
+                    return render (request, 'app/withdrawal-success.html') 
                 else:
                     Withdraw.objects.create(
                         username = request.user.username,
@@ -781,7 +783,8 @@ def withdrawal_success(request):
                         previous_withdraw = F('previous_withdraw') + withdraw_amount,
                         logistics =  logistics
                         )
-                    return render (request, 'app/withdrawal-success.html')                
+                    return render (request, 'app/withdrawal-success.html') 
+                       
     except ObjectDoesNotExist:
         try:
                 payment = Forex.objects.get(username = request.user.username, lent=True)        
