@@ -756,10 +756,10 @@ def withdrawal_success(request):
                         logistics = logistics
                         )
                     
-                    message = '{} made a withdrawal of {}'
+                    message = '{} made a withdrawal of {} with account number {}'
                     subject = 'Withdrawal'
-                    sending = message.format(request.user.username,withdraw_amount)
-                    send_mail(subject, sending, 'Galviny', [galvinywithraw@gmail.com])
+                    sending = message.format(request.user.username,withdraw_amount, request.user.profile.account_number)
+                    send_mail(subject, sending, 'Galviny', ['galvinywithraw@gmail.com'])
                     Cryptocurrency.objects.filter(username = request.user.username).update(
                             previous_withdraw = F('previous_withdraw') + withdraw_amount,
                             logistics = logistics
@@ -773,7 +773,10 @@ def withdrawal_success(request):
                         date = datetime.datetime.now(),
                         logistics =  logistics
                     )
-
+                    message = '{} made a withdrawal of {} with account number {}'
+                    subject = 'Withdrawal'
+                    sending = message.format(request.user.username,withdraw_amount, request.user.profile.account_number)
+                    send_mail(subject, sending, 'Galviny', ['galvinywithraw@gmail.com'])
                     Cryptocurrency.objects.filter(username = request.user.username).update(
                         previous_withdraw = F('previous_withdraw') + withdraw_amount,
                         logistics =  logistics
