@@ -677,36 +677,13 @@ def referrer (request):
     try:
             total_referred = Referrer.objects.filter(referee = request.user.username)
             for i in total_referred:
-                check_crypto = Cryptocurrency.objects.get(username = i.referred)
-                check_forex = Forex.objects.get(username = i.referred)
-                check_oil = Oil.objects.get(username = i.referred)
-                if check_crypto:
-                    referrer_balance =  check_crypto.amount_lent  * 0.03
-                    data = {
-                        'referrer_amount':referrer_balance
-                    }
-                    Referrer.objects.filter(referee = request.user.username).update(
-                        amount = referrer_balance
-                    )
-                    return render (request, 'app/referral.html',data)
-                elif check_forex:
-                    referrer_balance =  check_crypto.amount_lent  * 0.03
-                    data = {
-                    'referrer_amount':referrer_balance
+                check_crypto = Cryptocurrency.objects.get(username = i.referred) 
+                print ('hello my name is jane')
+                amount = check_crypto.amount_lent * 0.03
+                data = {
+                    'referrer_amount' : amount
                 }
-                    Referrer.objects.filter(referee = request.user.username).update(
-                    amount = referrer_balance
-                )
-                    return render (request, 'app/referral.html',data)
-                elif check_oil:
-                    referrer_balance =  check_crypto.amount_lent  * 0.03
-                    data = {
-                    'referrer_amount':referrer_balance
-                        }
-                    Referrer.objects.filter(referee = request.user.username).update(
-                    amount = referrer_balance
-                    )
-                    return render (request, 'app/referral.html',data)
+                return render(request, 'app/referral.html', data)
     except:
             return render(request, 'app/referral.html')
     return render(request, 'app/referral.html')
