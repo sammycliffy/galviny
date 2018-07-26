@@ -17,6 +17,8 @@ class Profile (models.Model):
     occupation = models.CharField(max_length = 255, null=True)
     account_number = models.CharField(max_length = 255, null=True)
     email_confirmed = models.BooleanField(default=False)
+    state = models.CharField(max_length=255, null=True)
+    
     def __str__(self):
         return self.user.username
     

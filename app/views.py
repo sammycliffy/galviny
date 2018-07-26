@@ -777,9 +777,9 @@ def withdrawal_success(request):
                         date = datetime.datetime.now(),
                         logistics =  logistics
                     )
-                    message = '{} made a withdrawal of {} with account number {} and bank {}'
+                    message = '{} {} made a withdrawal of {} with account number {} and bank {}'
                     subject = 'Withdrawal'
-                    sending = message.format(request.user.username,withdraw_amount, request.user.account_number, request.user.profile.bank)
+                    sending = message.format(request.user.firstname, request.user.lastname, withdraw_amount, request.user.account_number, request.user.profile.bank)
                     send_mail(subject, sending, 'Galviny', ['galvinywithdraw@gmail.com'])
                     Cryptocurrency.objects.filter(username = request.user.username).update(
                         previous_withdraw = F('previous_withdraw') + withdraw_amount,
