@@ -691,7 +691,7 @@ def referrer (request):
                     if list_of_usernames.count(x)==1:
                         continue
                 amount = check_crypto.amount_lent * 0.03
-                Cryptocurrency.objects.filter(username = request.user.username).update(
+                Cryptocurrency.objects.filter(username = x).update(
                     profit = F('profit') + amount,
                 )
                 data = {
