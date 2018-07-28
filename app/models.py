@@ -111,3 +111,9 @@ class Referrer(models.Model):
 class Newsletter(models.Model):
     email = models.EmailField(null = True)
     date = models.DateField(auto_now=True)
+
+class Expired_Referrer(models.Model):
+    referee = models.CharField(max_length = 255, null = True)
+    referred = models.CharField(max_length = 255, null = True)
+    amount = models.PositiveIntegerField(null = True )
+    date = models.DateTimeField(auto_now=True)

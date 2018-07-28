@@ -3,7 +3,7 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from .forms import SignUpForm, ProfileForm, WalletForm
 from django.http import HttpResponse
-from app.models import Testimony, Cryptocurrency, Forex, Oil, Withdraw, Referrer, Newsletter
+from app.models import Testimony, Cryptocurrency, Forex, Oil, Withdraw, Referrer, Newsletter, Expired_Referrer
 from django.utils.encoding import force_text
 from django.utils.http import urlsafe_base64_decode
 from app.token import account_activation_token
@@ -181,14 +181,15 @@ def profile(request):
                 profit = 1200 * profit_days - profile.previous_withdraw - profile.logistics
                 if profit <=0:
                     profit = 0
-                Cryptocurrency.objects.filter(username = request.user.username).update(
+                    Cryptocurrency.objects.filter(username = request.user.username).update(
                     profit = profit
                 )
+                income = Cryptocurrency.objects.get(username = request.user.username)
                 data = {
                             
                                 'wallet_balance':profile.choice,
                                 'date':paid_date,
-                                'profit':profit,
+                                'profit':income.profit,
                                 'amount':profile.amount_lent,
                                 'withdrawal':profile.previous_withdraw + profile.logistics
                                 
@@ -201,11 +202,12 @@ def profile(request):
                 Cryptocurrency.objects.filter(username = request.user.username).update(
                     profit = profit
                 )
+                income = Cryptocurrency.objects.get(username = request.user.username)
                 data = {
                             
                                 'wallet_balance':profile.choice,
                                 'date':paid_date,
-                                'profit':profit,
+                                'profit':income.profit,
                                 'amount':profile.amount_lent,
                                 'withdrawal':profile.previous_withdraw + profile.logistics
                                 
@@ -220,12 +222,12 @@ def profile(request):
                 Cryptocurrency.objects.filter(username = request.user.username).update(
                     profit = profit
                 )
-
+                income = Cryptocurrency.objects.get(username = request.user.username)
                 data = {
                             
                                 'wallet_balance':profile.choice,
                                 'date':paid_date,
-                                'profit':profit,
+                                'profit':income.profit,
                                 'amount':profile.amount_lent,
                                 'withdrawal':profile.previous_withdraw + profile.logistics
                                 
@@ -239,11 +241,12 @@ def profile(request):
                 Cryptocurrency.objects.filter(username = request.user.username).update(
                     profit = profit
                 )
+                income = Cryptocurrency.objects.get(username = request.user.username)
                 data = {
                             
                                 'wallet_balance':profile.choice,
                                 'date':paid_date,
-                                'profit':profile.profit,
+                                'profit':income.profit,
                                 'amount':profile.amount_lent,
                                 'withdrawal':profile.previous_withdraw + profile.logistics
                                 
@@ -257,11 +260,12 @@ def profile(request):
                 Cryptocurrency.objects.filter(username = request.user.username).update(
                     profit = profit
                 )
+                income = Cryptocurrency.objects.get(username = request.user.username)
                 data = {
                             
                                 'wallet_balance':profile.choice,
                                 'date':paid_date,
-                                 'profit':profile.profit,
+                                 'profit':income.profit,
                                 'amount':profile.amount_lent,
                                'withdrawal':profile.previous_withdraw + profile.logistics
                                 
@@ -276,11 +280,12 @@ def profile(request):
                 Cryptocurrency.objects.filter(username = request.user.username).update(
                     profit = profit
                 )
+                income = Cryptocurrency.objects.get(username = request.user.username)
                 data = {
                             
                                 'wallet_balance':profile.choice,
                                 'date':paid_date,
-                                 'profit':profile.profit,
+                                 'profit':income.profit,
                                 'amount':profile.amount_lent,
                                 'withdrawal':profile.previous_withdraw + profile.logistics
                                 
@@ -294,11 +299,12 @@ def profile(request):
                 Cryptocurrency.objects.filter(username = request.user.username).update(
                     profit = profit
                 )
+                income = Cryptocurrency.objects.get(username = request.user.username)
                 data = {
                             
                                 'wallet_balance':profile.choice,
                                 'date':paid_date,
-                                'profit':profit,
+                                'profit':income.profit,
                                 'amount':profile.amount_lent,
                                 'withdrawal':profile.previous_withdraw + profile.logistics
                                 
@@ -676,14 +682,25 @@ def profile(request):
 def referrer (request):
     try:
             total_referred = Referrer.objects.filter(referee = request.user.username)
+            list_of_usernames = []
             for i in total_referred:
-                check_crypto = Cryptocurrency.objects.get(username = i.referred) 
-                print ('hello my name is jane')
+                check_crypto = Cryptocurrency.objects.get(username = i.referred)     
+                list_of_usernames.append(i.referred)
+                for x in list_of_usernames:
+                    print(list_of_usernames.count(x))
+                    if list_of_usernames.count(x)==1:
+                        continue
                 amount = check_crypto.amount_lent * 0.03
+                Cryptocurrency.objects.filter(username = request.user.username).update(
+                    profit = F('profit') + amount,
+                )
                 data = {
-                    'referrer_amount' : amount
-                }
+                            'referrer_amount' : amount
+                        }
+                
                 return render(request, 'app/referral.html', data)
+
+                
     except:
             return render(request, 'app/referral.html')
     return render(request, 'app/referral.html')
