@@ -171,7 +171,7 @@ def profile(request):
         if profile.lent == 'True':
             paid_date = profile.lend_date    
             choice = profile.choice
-            end_date = paid_date + timedelta(days=5)
+            end_date = paid_date + timedelta(days=60)
             current_day = timezone.now()
             profit_days = current_day - paid_date
             profit_days = profit_days.days
@@ -682,6 +682,7 @@ def profile(request):
 def referrer (request):
     try:
             total_referred = Referrer.objects.filter(referee = request.user.username)
+            persons_referred = Referrer.objects.filter(referee = request.user.username).count()
             list_of_usernames = []
             for i in total_referred:
                 check_crypto = Cryptocurrency.objects.get(username = i.referred)     
@@ -695,7 +696,8 @@ def referrer (request):
                     profit = F('profit') + amount,
                 )
                 data = {
-                            'referrer_amount' : amount
+                            'referrer_amount' : amount,
+                            'persons':persons_referred
                         }
                 
                 return render(request, 'app/referral.html', data)
