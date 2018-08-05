@@ -15,6 +15,7 @@
 	<!-- MAIN CSS -->
 	<link rel="stylesheet" href="{% static 'app/css/main.css'%}">
 	<!-- FOR DEMO PURPOSES ONLY. You should remove this in your project -->
+	<script src="https://js.paystack.co/v1/inline.js"></script>
 	<script src="{% static 'app/js/voguepay.js'%}"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<!-- GOOGLE FONTS -->
@@ -96,7 +97,7 @@
 									{% csrf_token %}
 		
 								<p><label for="id_crypto_choice_0">Crypto choice:</label> <ul id="id_crypto_choice">
-									<li><label for="id_crypto_choice_0"><input type="radio" name="crypto_choice" value="1000" required id="id_crypto_choice_0" />
+									<li><label for="id_crypto_choice_0"><input type="radio" name="crypto_choice" value="10000" required id="id_crypto_choice_0" />
 								 50,000   = 1,200 profit daily</label>
 								
 								</li>
@@ -190,40 +191,31 @@
 					  
 										else {
 											var selected = document.forms.myForm.crypto_choice.value;
-											Voguepay.init({
-												
-												v_merchant_id: '1767-0065353',
-												total: selected,
-												notify_url: 'http://galviny.com',
-												cur: 'NGN',
-												merchant_ref: 'ref123',
-												memo: 'Payment for Cryptocurrency',
-												recurrent: true,
-												frequency: 10,
-												developer_code: '5b1fe41cab8af',
-												store_id: 1,
-												loadText:'Please wait',
-												items: [
-													{
-														name: "Cryptocurrency",
-														description: "Crypto currency purchase",
-														price: selected
-													},
-													
-												],
-												customer: {
-												   name: document.getElementById('my_username').value,
-												   address: document.getElementById('address').value,
-												   city: 'e.g Port Harcourt',
-												   state: 'e.g Rivers State',
-												   zipcode: '500272',
-												   email: document.getElementById('email').value,
-												   phone: document.getElementById('phone').value
-											   },
-												closed:closedFunction,
-												success:successFunction,
-												failed:failedFunction
-											});
+											var handler = PaystackPop.setup({
+												key: 'pk_live_48330b41ab156e79ff98a0d8209ad3a19aed050d',
+												email: document.getElementById('email').value,
+												amount: selected,
+												ref: ''+Math.floor((Math.random() * 1000000000) + 1), // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
+												firstname: document.getElementById('my_username').value,
+												lastname: '',
+												// label: "Optional string that replaces customer email"
+												metadata: {
+												   custom_fields: [
+													  {
+														  display_name: "Mobile Number",
+														  variable_name: "mobile_number",
+														  value: document.getElementById('phone').value
+													  }
+												   ]
+												},
+												callback: function(response){
+													alert('success. transaction ref is ' + response.reference);
+												},
+												onClose: function(){
+													alert('window closed');
+												}
+											  });
+											  handler.openIframe();
 											
 									
 										}
@@ -239,7 +231,8 @@
 					</script>
 
 							 
-
+					
+					
 
 
 
