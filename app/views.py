@@ -184,12 +184,11 @@ def profile(request):
                     Cryptocurrency.objects.filter(username = request.user.username).update(
                     profit = profit
                 )
-                income = Cryptocurrency.objects.get(username = request.user.username)
                 data = {
                             
                                 'wallet_balance':profile.choice,
                                 'date':paid_date,
-                                'profit':income.profit,
+                                'profit':profit,
                                 'amount':profile.amount_lent,
                                 'withdrawal':profile.previous_withdraw + profile.logistics
                                 
@@ -202,12 +201,11 @@ def profile(request):
                 Cryptocurrency.objects.filter(username = request.user.username).update(
                     profit = profit
                 )
-                income = Cryptocurrency.objects.get(username = request.user.username)
                 data = {
                             
                                 'wallet_balance':profile.choice,
                                 'date':paid_date,
-                                'profit':income.profit,
+                                'profit':profit,
                                 'amount':profile.amount_lent,
                                 'withdrawal':profile.previous_withdraw + profile.logistics
                                 
@@ -222,12 +220,11 @@ def profile(request):
                 Cryptocurrency.objects.filter(username = request.user.username).update(
                     profit = profit
                 )
-                income = Cryptocurrency.objects.get(username = request.user.username)
                 data = {
                             
                                 'wallet_balance':profile.choice,
                                 'date':paid_date,
-                                'profit':income.profit,
+                                'profit':profit,
                                 'amount':profile.amount_lent,
                                 'withdrawal':profile.previous_withdraw + profile.logistics
                                 
@@ -241,12 +238,11 @@ def profile(request):
                 Cryptocurrency.objects.filter(username = request.user.username).update(
                     profit = profit
                 )
-                income = Cryptocurrency.objects.get(username = request.user.username)
                 data = {
                             
                                 'wallet_balance':profile.choice,
                                 'date':paid_date,
-                                'profit':income.profit,
+                                'profit':profit,
                                 'amount':profile.amount_lent,
                                 'withdrawal':profile.previous_withdraw + profile.logistics
                                 
@@ -260,12 +256,11 @@ def profile(request):
                 Cryptocurrency.objects.filter(username = request.user.username).update(
                     profit = profit
                 )
-                income = Cryptocurrency.objects.get(username = request.user.username)
                 data = {
                             
                                 'wallet_balance':profile.choice,
                                 'date':paid_date,
-                                 'profit':income.profit,
+                                 'profit':profit,
                                 'amount':profile.amount_lent,
                                'withdrawal':profile.previous_withdraw + profile.logistics
                                 
@@ -281,12 +276,11 @@ def profile(request):
                 Cryptocurrency.objects.filter(username = request.user.username).update(
                     profit = profit
                 )
-                income = Cryptocurrency.objects.get(username = request.user.username)
                 data = {
                             
                                 'wallet_balance':profile.choice,
                                 'date':paid_date,
-                                 'profit':income.profit,
+                                 'profit':profit,
                                 'amount':profile.amount_lent,
                                 'withdrawal':profile.previous_withdraw + profile.logistics
                                 
@@ -300,12 +294,11 @@ def profile(request):
                 Cryptocurrency.objects.filter(username = request.user.username).update(
                     profit = profit
                 )
-                income = Cryptocurrency.objects.get(username = request.user.username)
                 data = {
                             
                                 'wallet_balance':profile.choice,
                                 'date':paid_date,
-                                'profit':income.profit,
+                                'profit':profit,
                                 'amount':profile.amount_lent,
                                 'withdrawal':profile.previous_withdraw + profile.logistics
                                 
