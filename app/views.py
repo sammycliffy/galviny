@@ -274,9 +274,10 @@ def profile(request):
                 
                 return render(request, 'app/withdrawal.html', data)
             elif profile.amount_lent == 500000 and paid_date <= end_date:
+                profit = 12000 * profit_days - profile.logistics
                 if profit <=0:
                     profit = 0
-                profit = 12000 * profit_days - profile.logistics
+                
                 Cryptocurrency.objects.filter(username = request.user.username).update(
                     profit = profit
                 )
@@ -761,7 +762,8 @@ def withdrawal_success(request):
                     send_mail(subject, sending, 'Galviny', ['galvinywithdraw@gmail.com'])
                     Cryptocurrency.objects.filter(username = request.user.username).update(
                             previous_withdraw = F('previous_withdraw') + withdraw_amount,
-                            logistics = logistics
+                            logistics = logistics,
+                            profit = 0
                         )
                     return render (request, 'app/withdrawal-success.html') 
                 else:
@@ -779,7 +781,8 @@ def withdrawal_success(request):
                     send_mail(subject, sending, 'Galviny', ['galvinywithdraw@gmail.com'])
                     Cryptocurrency.objects.filter(username = request.user.username).update(
                         previous_withdraw = F('previous_withdraw') + withdraw_amount,
-                        logistics =  logistics
+                        logistics =  logistics,
+                        profit = 0
                         )
                     return render (request, 'app/withdrawal-success.html') 
                        
