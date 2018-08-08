@@ -286,7 +286,7 @@ def profile(request):
                             
                                 'wallet_balance':profile.choice,
                                 'date':paid_date,
-                                 'profit':income.profit,
+                                 'profit':profit,
                                 'amount':profile.amount_lent,
                                 'withdrawal':profile.previous_withdraw + profile.logistics
                                 
