@@ -92,8 +92,6 @@ def signup(request):
 
 
 
-
-
 @login_required
 def cryptocurrency(request):
     if request.method == "POST":
