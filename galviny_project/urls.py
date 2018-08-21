@@ -51,6 +51,7 @@ urlpatterns = [
     url(r'^cancel/$', views.cancel, name='cancel'),
     url(r'^contact/$', views.contact, name='contact'),
     url(r'^newsletter/$', views.newsletter, name='newsletter'),
+    url(r'^referralwithdrawal/$', views.referral_withdrawal, name='referral_withdrawal'),
 ]
 
         
