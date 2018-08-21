@@ -80,10 +80,10 @@ def signup(request):
                     referee = referrer_link,
                     referred = user.username
                 )
-            # Payable_referral.objects.create(
-              #      username = request.user.username,
-              #      previous_username = referrer_link
-              #  )
+                Payable_referral.objects.create(
+                    username = request.user.username,
+                    previous_username = referrer_link
+                )
             send_mail(subject, message, 'Galviny', [user.email])
             return HttpResponse('<h2>Check your email, activation link has been sent. click on the link to continue</h2>')
             raw_password = form.cleaned_data.get('password1')
@@ -270,7 +270,7 @@ def profile(request):
                                     } 
 
                         
-                        return render(request, 'app/withdrawal.html', data)
+                        return render(request, 'app/profile.html', data)
                     elif profile.amount_lent == 500000 and paid_date:
                         profit = 12000 * profit_days - profile.logistics
                         if profit <=0:
