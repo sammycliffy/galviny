@@ -107,7 +107,7 @@ class Referrer(models.Model):
     amount = models.PositiveIntegerField(null = True )
     date = models.DateTimeField(auto_now=True)
 
-class payable_referral(models.Model):
+class Payable_referral(models.Model):
     username = models.CharField(max_length= 255, null= True)
     amount = models.PositiveIntegerField(null= True)
     previous_username = models.CharField(max_length = 255, null=True)
