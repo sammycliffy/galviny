@@ -45,9 +45,9 @@ class Testimony(models.Model):
     confirmed = models.BooleanField(default=False)
 
 class Payable(models.Model):
-    usernames = models.CharField(max_length= 255, null= True)
-    amounts = models.PositiveIntegerField(null= True)
-    previous_usernames = models.CharField(max_length = 255, null=True)
+    username = models.CharField(max_length= 255, null= True)
+    amount = models.PositiveIntegerField(null= True)
+    previous_username = models.CharField(max_length = 255, null=True)
 
 class Cryptocurrency(models.Model):
     username = models.CharField(max_length = 255, null = True)
