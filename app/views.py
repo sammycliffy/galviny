@@ -3,7 +3,7 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from .forms import SignUpForm, ProfileForm, WalletForm
 from django.http import HttpResponse
-from app.models import Testimony, Cryptocurrency, Forex, Oil, Withdraw, Referrer, Newsletter, Expired_Referrer, Payable_referral
+from app.models import Testimony, Cryptocurrency, Forex, Oil, Withdraw, Referrer, Newsletter, Expired_Referrer 
 from django.utils.encoding import force_text
 from django.utils.http import urlsafe_base64_decode
 from app.token import account_activation_token
@@ -80,10 +80,10 @@ def signup(request):
                     referee = referrer_link,
                     referred = user.username
                 )
-                Payable_referral.objects.create(
-                    username = request.user.username,
-                    previous_username = referrer_link
-                )
+                #Payable_referral.objects.create(
+                #    username = request.user.username,
+                #    previous_username = referrer_link
+                #)
             send_mail(subject, message, 'Galviny', [user.email])
             return HttpResponse('<h2>Check your email, activation link has been sent. click on the link to continue</h2>')
             raw_password = form.cleaned_data.get('password1')
@@ -345,10 +345,10 @@ def referrer (request):
                     if list_of_usernames.count(x)==1:
                         continue
                 amount = check_crypto.amount_lent * 0.03
-                check_number = Payable_referral.objects.filter(previous_username = i.referred).count()
-                if check_number < 2:
-                    referrer_amount = Payable_referral.objects.filter(username = request.user.username).update(amount= amount)
-                referrer_amount = Referrer.objects.filter(username = request.user.username)
+                #check_number = Payable_referral.objects.filter(previous_username = i.referred).count()
+                #if check_number < 2:
+                #    referrer_amount = Payable_referral.objects.filter(username = request.user.username).update(amount= amount)
+                #referrer_amount = Referrer.objects.filter(username = request.user.username)
                 data = {
                             'referrer_amount' : referrer_amount.amount,
                             'persons':persons_referred
@@ -981,10 +981,10 @@ def newsletter(request):
     
 
 def referral_withdrawal(request):
-    payment = Payable_referral.objects.filter(username = request.user.username)
-    if payment.amount <= 1000:
-        return redirect('withdrawal_failed')
-    else:
+   # payment = Payable_referral.objects.filter(username = request.user.username)
+   # if payment.amount <= 1000:
+   #     return redirect('withdrawal_failed')
+   # else:
         Withdraw.objects.create(
                             username = request.user.username,
                             withdraw_amount = payment.amount,
