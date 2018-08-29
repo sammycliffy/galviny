@@ -3,7 +3,7 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from .forms import SignUpForm, ProfileForm, WalletForm
 from django.http import HttpResponse
-from app.models import Testimony, Cryptocurrency, Forex, Oil, Withdraw, Referrer, Newsletter, Expired_Referrer 
+from app.models import Testimony, Cryptocurrency, Forex, Oil, Withdraw, Referrer, Newsletter, Expired_Referrer, Payable_referral 
 from django.utils.encoding import force_text
 from django.utils.http import urlsafe_base64_decode
 from app.token import account_activation_token
@@ -80,10 +80,10 @@ def signup(request):
                     referee = referrer_link,
                     referred = user.username
                 )
-                #Payable_referral.objects.create(
-                #    username = request.user.username,
-                #    previous_username = referrer_link
-                #)
+                Payable_referral.objects.create(
+                    username = request.user.username,
+                    previous_username = referrer_link
+                )
             send_mail(subject, message, 'Galviny', [user.email])
             return HttpResponse('<h2>Check your email, activation link has been sent. click on the link to continue</h2>')
             raw_password = form.cleaned_data.get('password1')
