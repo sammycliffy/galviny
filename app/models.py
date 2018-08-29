@@ -44,7 +44,7 @@ class Testimony(models.Model):
     date = models.DateField(auto_now=True)
     confirmed = models.BooleanField(default=False)
 
-class Payable_referred(models.Model):
+class Payable_referral(models.Model):
     username = models.CharField(max_length= 255, null= True)
     amount = models.PositiveIntegerField(null= True)
     previous_username = models.CharField(max_length = 255, null=True)
