@@ -15,7 +15,6 @@ gunicorn==19.7.1
 kombu==4.2.1
 pipenv==2018.5.18
 pkg-resources==0.0.0
-psycopg2==2.7.3.2
 pygame==1.9.3
 pytz==2017.3
 redis==2.10.3
