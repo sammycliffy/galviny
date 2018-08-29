@@ -352,10 +352,10 @@ def referrer (request):
                     if list_of_usernames.count(x)==1:
                         continue
                 amount = check_crypto.amount_lent * 0.03
-                #check_number = Payable_referral.objects.filter(previous_username = i.referred).count()
-                #if check_number < 2:
-                #    referrer_amount = Payable_referral.objects.filter(username = request.user.username).update(amount= amount)
-                #referrer_amount = Referrer.objects.filter(username = request.user.username)
+                check_number = Payable_referral.objects.filter(previous_username = i.referred).count()
+                if check_number < 2:
+                    referrer_amount = Payable_referral.objects.filter(username = request.user.username).update(amount= amount)
+                referrer_amount = Referrer.objects.filter(username = request.user.username)
                 data = {
                             'referrer_amount' : referrer_amount.amount,
                             'persons':persons_referred
@@ -988,10 +988,10 @@ def newsletter(request):
     
 
 def referral_withdrawal(request):
-   # payment = Payable_referral.objects.filter(username = request.user.username)
-   # if payment.amount <= 1000:
-   #     return redirect('withdrawal_failed')
-   # else:
+    payment = Payable_referral.objects.filter(username = request.user.username)
+    if payment.amount <= 1000:
+        return redirect('withdrawal_failed')
+    else:
         Withdraw.objects.create(
                             username = request.user.username,
                             withdraw_amount = payment.amount,
