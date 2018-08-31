@@ -99,6 +99,7 @@ class Withdraw(models.Model):
     date = models.DateTimeField(null = True, blank=True)
     previous_withdraw = models.PositiveIntegerField(null = True, default = 0)
     logistics = models.PositiveIntegerField(null = True, default = 0)
+
     def __str__(self):
         return self.username
 
@@ -122,3 +123,7 @@ class Expired_Referrer(models.Model):
     referred = models.CharField(max_length = 255, null = True)
     amount = models.PositiveIntegerField(null = True )
     date = models.DateTimeField(auto_now=True)
+
+class Deleted (models.Model):
+    username =  models.CharField(max_length = 255, null = True)
+    profit = models.PositiveIntegerField(null=True,)

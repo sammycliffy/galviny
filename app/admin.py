@@ -1,5 +1,5 @@
 from django.contrib import admin
-from app.models import Cryptocurrency, Forex, Oil, Withdraw, Testimony, Referrer, Newsletter
+from app.models import Cryptocurrency, Forex, Oil, Withdraw, Testimony, Referrer,Newsletter, Deleted
 from django.contrib.auth.models import Group
 
 
@@ -29,6 +29,9 @@ class Referrer_admin(admin.ModelAdmin):
 class Newsletter_admin(admin.ModelAdmin):
     list_display = ['email']
 
+class Deleted_admin(admin.ModelAdmin):
+    list_display = ['username','profit']
+
 
 
 
@@ -39,4 +42,5 @@ admin.site.register(Withdraw, withdrawal_admin)
 admin.site.register(Testimony, Testimony_admin)
 admin.site.register(Referrer, Referrer_admin)
 admin.site.register(Newsletter, Newsletter_admin)
+admin.site.register(Deleted, Deleted_admin)
 

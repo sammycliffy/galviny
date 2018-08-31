@@ -3,7 +3,7 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from .forms import SignUpForm, ProfileForm, WalletForm
 from django.http import HttpResponse
-from app.models import Testimony, Cryptocurrency, Forex, Oil, Withdraw, Referrer, Newsletter, Expired_Referrer, Payable_referral 
+from app.models import Testimony, Cryptocurrency, Forex, Oil, Withdraw, Referrer, Newsletter, Expired_Referrer, Payable_referral, Deleted 
 from django.utils.encoding import force_text
 from django.utils.http import urlsafe_base64_decode
 from app.token import account_activation_token
@@ -180,8 +180,7 @@ def profile(request):
             profit_days = current_day - paid_date
             profit_days = profit_days.days
             before_ten_days = profile.lend_date + timedelta(days=10)
-            current_date = timezone.now()
-            if paid_date <= end_date:
+            if current_day < end_date:
                     if profile.amount_lent == 50000:
                         profit = 1200 * profit_days - profile.previous_withdraw - profile.logistics
                         Cryptocurrency.objects.filter(username = request.user.username).update(
@@ -316,7 +315,22 @@ def profile(request):
                         
                         return render(request, 'app/profile.html', data)
             else:
-                Cryptocurrency.objects.get(username = request.user.username).delete()
+                delete = Cryptocurrency.objects.get(username = request.user.username)
+                try:
+                    new_p = Deleted.objects.get(username=request.user.username)
+                    data = {
+                                        'profit':new_p.profit,    
+                                    } 
+                        
+                    return render(request, 'app/profile.html', data)
+                except ObjectDoesNotExist:
+                    deleted = Deleted.objects.create(username=request.user.username, profit=delete.profit)
+                    new_p = Deleted.objects.get(username=request.user.username)
+                    data = {
+                                        'profit':new_p.profit,    
+                                    } 
+                        
+                    return render(request, 'app/profile.html', data)
         else:
                     profile = Cryptocurrency.objects.get(username = request.user.username, confirmed=True)
                     data = {
@@ -328,7 +342,13 @@ def profile(request):
                     return render(request, 'app/profile.html',data)
            
     except ObjectDoesNotExist:
-        pass
+        if  Deleted.objects.get(username = request.user.username):
+            new_p = Deleted.objects.get(username=request.user.username)
+            data = {
+                                        'profit':new_p.profit,    
+                                    } 
+                        
+            return render(request, 'app/profile.html', data)
     data = {
             
                     'amount':0.00,
@@ -447,402 +467,68 @@ def withdrawal_success(request):
                     return render (request, 'app/withdrawal-success.html') 
                        
     except ObjectDoesNotExist:
-        try:
-                payment = Forex.objects.get(username = request.user.username, lent=True)        
-                expiry_date = payment.lend_date + timedelta(days = 60)
-                before_ten_days = payment.lend_date + timedelta(days=10)
-                current_date = timezone.now()
-                if current_date < expiry_date:
-                    logistics = 200
-                    if current_date <= before_ten_days:
-                                logistics = 2000
-                    payments = Forex.objects.get(username = request.user.username, lent=True)
-                    withdraw_amount = payment.profit - payment.previous_withdraw -  logistics
-                    if withdraw_amount <= 1000:
-                        return redirect('withdrawal_failed')
-                    check_withdraw =  Withdraw.objects.filter(username = request.user.username)
-                    if check_withdraw:
-                        Withdraw.objects.filter(username = request.user.username).update(
-                            username = request.user.username,
-                            withdraw_amount = withdraw_amount,
-                            plan = 'Forex',
-                            date = datetime.datetime.now(),
-                            previous_withdraw = F('previous_withdraw') + withdraw_amount,
-                            logistics =  logistics
-                            )
-                    else:
-                        Withdraw.objects.create(
-                            username = request.user.username,
-                            withdraw_amount = withdraw_amount,
-                            plan = 'Forex',
-                            previous_withdraw = withdraw_amount,
-                            date = datetime.datetime.now()
+        if Deleted.objects.get(username=request.user.username):
+            new_p = Deleted.objects.get(username=request.user.username)
+            if  Withdraw.objects.filter(username = request.user.username):
+                    Withdraw.objects.filter(username = request.user.username).update(
+                        username = request.user.username,
+                        withdraw_amount = new_p.profit - 2000,
+                        plan = 'cryptocurrency',
+                        date = datetime.datetime.now(),
+                        previous_withdraw = F('previous_withdraw') + new_p.profit,
+                        logistics = 2000
                         )
-
-                    Forex.objects.filter(username = request.user.username).update(
-                        previous_withdraw = F('previous_withdraw') + withdraw_amount)
-                    return render (request, 'app/withdrawal-success.html')
-        except ObjectDoesNotExist:
-            try:
-                payment = Oil.objects.get(username = request.user.username, lent=True)        
-                expiry_date = payment.lend_date + timedelta(days = 60)
-                before_ten_days = payment.lend_date + timedelta(days=10)
-                current_date = timezone.now()
-                if current_date < expiry_date:
-                    logistics = 200
-                    if current_date <= before_ten_days:
-                                logistics = 2000
-                    payments = Oil.objects.get(username = request.user.username, lent=True)
-                    withdraw_amount = payments.profit - payments.previous_withdraw -  logistics
-                    if withdraw_amount <= 0:
-                        return redirect('withdrawal_failed')
-                    check_withdraw =  Withdraw.objects.filter(username = request.user.username)
-                    if check_withdraw:
-                        Withdraw.objects.filter(username = request.user.username).update(
-                            username = request.user.username,
-                            withdraw_amount = withdraw_amount,
-                            plan = 'Oil',
-                            date = datetime.datetime.now(),
-                            previous_withdraw = F('previous_withdraw') + withdraw_amount
-                            )
-                    else:
-                        Withdraw.objects.create(
-                            username = request.user.username,
-                            withdraw_amount = withdraw_amount,
-                            plan = 'Oil',
-                            previous_withdraw = withdraw_amount,
-                            date = datetime.datetime.now()
-                        )
-
-                    Oil.objects.filter(username = request.user.username).update(
-                        previous_withdraw = F('previous_withdraw') + withdraw_amount)
-                    return render (request, 'app/withdrawal-success.html')
-            except ObjectDoesNotExist:
-                 pass
-    return redirect ('withdrawal_failed')
-
+                     
+                    Referrer.objects.filter(referee = request.user.username).delete()
+                    message = '{} made a withdrawal of {} with account number {} and bank {}'
+                    subject = 'Withdrawal'
+                    real_amount = new_p.profit - 2000
+                    sending = message.format(request.user.username,real_amount, request.user.profile.account_number, request.user.profile.bank)
+                    send_mail(subject, sending, 'Galviny', ['galvinywithdraw@gmail.com'])
+                    Deleted.objects.get(username=request.user.username).delete()
+                    return render (request, 'app/withdrawal-success.html') 
+            else:
+                    Withdraw.objects.create(
+                        username = request.user.username,
+                        withdraw_amount = new_p.profit - 2000,
+                        plan = 'cryptocurrency',
+                        previous_withdraw = new_p.profit - 2000,
+                        date = datetime.datetime.now(),
+                        logistics =  2000
+                    )
+                    message = '{} {} made a withdrawal of {} with account number {} and bank {}'
+                    subject = 'Withdrawal'
+                    sending = message.format(request.user.profile.firstname, request.user.profile.lastname, withdraw_amount, request.user.profile.account_number, request.user.profile.bank)
+                    send_mail(subject, sending, 'Galviny', ['galvinywithdraw@gmail.com'])
+                    Referrer.objects.filter(referee = request.user.username).delete()
+                    Deleted.objects.get(username=request.user.username).delete()
+                    return render (request, 'app/withdrawal-success.html') 
+                
 #Withdrawal
 @login_required
 def withdrawal(request):
     try:
         profile = Cryptocurrency.objects.get(username = request.user.username)
-        if profile.lent == 'True':
-            paid_date = profile.lend_date    
-            choice = profile.choice
-            end_date = paid_date + timedelta(days=60)
-            current_day = timezone.now()
-            profit_days = current_day - paid_date
-            profit_days = profit_days.days
-            if profile.amount_lent == 50000 and paid_date <= end_date:
-                profit = 1200 * profit_days
-                Cryptocurrency.objects.filter(username = request.user.username).update(
-                    profit = profit
-                )
-                data = {
-                            
-                                'wallet_balance':profile.choice,
-                                'date':paid_date,
-                                'profit':profile.profit,
-                                'amount':profile.amount_lent
-                                
-                            } 
-                return render(request, 'app/withdrawal.html', data)
-            elif profile.amount_lent == 100000 and paid_date <= end_date:
-                profit = 2400 * profit_days
-                data = {
-                            
-                                'wallet_balance':profile.choice,
-                                'date':paid_date,
-                                'profit':profile.profit,
-                                'amount':profile.amount_lent
-                                
-                            } 
-                Cryptocurrency.objects.filter(username = request.user.username).update(
-                    profit = profit
-                )
-                return render(request, 'app/withdrawal.html', data)
-            elif profile.amount_lent == 200000 and paid_date <= end_date:
-                profit = 4800 * profit_days
-                data = {
-                            
-                                'wallet_balance':profile.choice,
-                                'date':paid_date,
-                                'profit':profile.profit,
-                                'amount':profile.amount_lent
-                                
-                            } 
-                Cryptocurrency.objects.filter(username = request.user.username).update(
-                    profit = profit
-                )
-                return render(request, 'app/withdrawal.html', data)
-            elif profile.amount_lent == 300000 and paid_date <= end_date:
-                profit = 7200 * profit_days
-                data = {
-                            
-                                'wallet_balance':profile.choice,
-                                'date':paid_date,
-                                'profit':profile.profit,
-                                'amount':profile.amount_lent
-                                
-                            } 
-                Cryptocurrency.objects.filter(username = request.user.username).update(
-                    profit = profit
-                )
-                return render(request, 'app/withdrawal.html', data)
-            elif profile.amount_lent == 400000 and paid_date <= end_date:
-                profit = 9600 * profit_days
-                data = {
-                            
-                                'wallet_balance':profile.choice,
-                                'date':paid_date,
-                                'profit':profile.profit,
-                                'amount':profile.amount_lent
-                                
-                            } 
-
-                Cryptocurrency.objects.filter(username = request.user.username).update(
-                    profit = profit
-                )
-                return render(request, 'app/withdrawal.html', data)
-            elif profile.amount_lent == 500000 and paid_date <= end_date:
-                profit = 12000 * profit_days
-                data = {
-                            
-                                'wallet_balance':profile.choice,
-                                'date':paid_date,
-                                'profit':profile.profit,
-                                'amount':profile.amount_lent
-                                
-                            } 
-                Cryptocurrency.objects.filter(username = request.user.username).update(
-                    profit = profit
-                )
-                return render(request, 'app/withdrawal.html', data)
-            elif profile.amount_lent == 1000000 and paid_date <= end_date:
-                profit = 24000 * profit_days
-                data = {
-                            
-                                'wallet_balance':profile.choice,
-                                'date':paid_date,
-                                'profit':profile.profit,
-                                'amount':profile.amount_lent
-                                
-                            } 
-                Cryptocurrency.objects.filter(username = request.user.username).update(
-                    profit = profit
-                )
-                return render(request, 'app/withdrawal.html', data)
-
-        else:
-            profile = Cryptocurrency.objects.get(username = request.user.username, confirmed=True)
-            data = {
-                    'wallet_balance':profile.choice,
-                    'amount':0.00,
-                    'date':'No money lent',
-                    'profit':0.00
-                }
-            return render(request, 'app/withdrawal.html',data)
-    
-
+        data = {
+                                    
+                                        'wallet_balance':profile.choice,
+                                        'date':profile.paid_date,
+                                        'profit':profile.profit,
+                                        'amount':profile.amount_lent,
+                                        'withdrawal':profile.previous_withdraw + profile.logistics
+                                        
+                                    } 
+        return render(request, 'app/withdrawal.html',data)
     except ObjectDoesNotExist:
         try:
-            profile = Forex.objects.get(username = request.user.username)
-            if profile.lent == 'True':
-                paid_date = profile.lend_date    
-                choice = profile.choice
-                end_date = paid_date + timedelta(days=90)
-                current_day = timezone.now()
-                profit_days = current_day - paid_date
-                profit_days = profit_days.days
-                if profile.amount_lent == 100000 and paid_date <= end_date:
-                    profit = 1700 * profit_days
-                    data = {
-                                
-                                    'wallet_balance':profile.choice,
-                                    'date':paid_date,
-                                    'profit':profit,
-                                    'amount':profile.amount_lent
-                                    
-                                } 
-                    return render(request, 'app/withdrawal.html', data)
-                elif profile.amount_lent == 200000 and paid_date <= end_date:
-                    profit = 3400 * profit_days
-                    data = {
-                                
-                                    'wallet_balance':profile.choice,
-                                    'date':paid_date,
-                                    'profit':profit,
-                                    'amount':profile.amount_lent
-                                    
-                                } 
-                    return render(request, 'app/withdrawal.html', data)
-                elif profile.amount_lent == 300000 and paid_date <= end_date:
-                    profit = 5100 * profit_days
-                    data = {
-                                
-                                    'wallet_balance':profile.choice,
-                                    'date':paid_date,
-                                    'profit':profit,
-                                    'amount':profile.amount_lent
-                                    
-                                } 
-                    return render(request, 'app/withdrawal.html', data)
-                elif profile.amount_lent == 400000 and paid_date <= end_date:
-                    profit = 6800 * profit_days
-                    data = {
-                                
-                                    'wallet_balance':profile.choice,
-                                    'date':paid_date,
-                                    'profit':profit,
-                                    'amount':profile.amount_lent
-                                    
-                                } 
-                    return render(request, 'app/withdrawal.html', data)
-                elif profile.amount_lent == 500000 and paid_date <= end_date:
-                    profit = 8500 * profit_days
-                    data = {
-                                
-                                    'wallet_balance':profile.choice,
-                                    'date':paid_date,
-                                    'profit':profit,
-                                    'amount':profile.amount_lent
-                                    
-                                } 
-                    return render(request, 'app/withdrawal.html', data)
-                elif profile.amount_lent == 600000 and paid_date <= end_date:
-                    profit = 10200 * profit_days
-                    data = {
-                                
-                                    'wallet_balance':profile.choice,
-                                    'date':paid_date,
-                                    'profit':profit,
-                                    'amount':profile.amount_lent
-                                    
-                                } 
-                    return render(request, 'app/withdrawal.html', data)
-            else:
-                profile = Forex.objects.get(username = request.user.username, confirmed=True)
+                new_p = Deleted.objects.get(username=request.user.username)
                 data = {
-                        'wallet_balance':profile.choice,
-                        'amount':0.00,
-                        'date':'No money lent',
-                        'profit':0.00
-                    }
-                return render(request, 'app/withdrawal.html',data)
-        
+                                        'wallet_balance':new_p.profit,    
+                                    }         
+                return render(request, 'app/withdrawal.html', data)
         except ObjectDoesNotExist:
-                try:
-                    profile = Oil.objects.get(username = request.user.username)
-                    if profile.lent == 'True':
-                        paid_date = profile.lend_date    
-                        choice = profile.choice
-                        end_date = paid_date + timedelta(days=60)
-                        current_day = timezone.now()
-                        profit_days = current_day - paid_date
-                        profit_days = profit_days.days
-                        if profile.amount_lent == 20000 and paid_date <= end_date:
-                            profit = 450 * profit_days
-                            data = {
-                                        
-                                            'wallet_balance':profile.choice,
-                                            'date':paid_date,
-                                            'profit':profit,
-                                            'amount':profile.amount_lent
-                                            
-                                        } 
-                            return render(request, 'app/withdrawal.html', data)
-                        elif profile.amount_lent == 40000 and paid_date <= end_date:
-                            profit = 900 * profit_days
-                            data = {
-                                        
-                                            'wallet_balance':profile.choice,
-                                            'date':paid_date,
-                                            'profit':profit,
-                                            'amount':profile.amount_lent
-                                            
-                                        } 
-                            return render(request, 'app/withdrawal.html', data)
-                        elif profile.amount_lent == 80000 and paid_date <= end_date:
-                            profit = 1800 * profit_days
-                            data = {
-                                        
-                                            'wallet_balance':profile.choice,
-                                            'date':paid_date,
-                                            'profit':profit,
-                                            'amount':profile.amount_lent
-                                            
-                                        } 
-                            return render(request, 'app/withdrawal.html', data)
-                        elif profile.amount_lent == 100000 and paid_date <= end_date:
-                            profit = 2250 * profit_days
-                            data = {
-                                        
-                                            'wallet_balance':profile.choice,
-                                            'date':paid_date,
-                                            'profit':profit,
-                                            'amount':profile.amount_lent
-                                            
-                                        } 
-                            return render(request, 'app/withdrawal.html', data)
-                        elif profile.amount_lent == 200000 and paid_date <= end_date:
-                            profit = 4500 * profit_days
-                            data = {
-                                        
-                                            'wallet_balance':profile.choice,
-                                            'date':paid_date,
-                                            'profit':profit,
-                                            'amount':profile.amount_lent
-                                            
-                                        } 
-                            return render(request, 'app/withdrawal.html', data)
-                        elif profile.amount_lent == 300000 and paid_date <= end_date:
-                            profit = 6750 * profit_days
-                            data = {
-                                        
-                                            'wallet_balance':profile.choice,
-                                            'date':paid_date,
-                                            'profit':profit,
-                                            'amount':profile.amount_lent
-                                            
-                                        } 
-                            return render(request, 'app/withdrawal.htmll', data)
-                        elif profile.amount_lent == 4000000 and paid_date <= end_date:
-                            profit = 9000 * profit_days
-                            data = {
-                                        
-                                            'wallet_balance':profile.choice,
-                                            'date':paid_date,
-                                            'profit':profit,
-                                            'amount':profile.amount_lent
-                                            
-                                        } 
-                            return render(request, 'app/withdrawal.html', data)
-                    else:
-                        profile = Oil.objects.get(username = request.user.username, confirmed=True)
-                        data = {
-                                'wallet_balance':profile.choice,
-                                'amount':0.00,
-                                'date':'No money lent',
-                                'profit':0.00
-                            }
-                        return render(request, 'app/withdrawal.html',data)
-                except ObjectDoesNotExist:  
-                    data = {
-                                'wallet_balance':0.00,
-                                'amount':0.00,
-                                'date':'No money lent',
-                                'profit':0.00
-                            }
-                    return render(request, 'app/withdrawal.html',data)
-    data = {
-                                'wallet_balance':0.00,
-                                'amount':0.00,
-                                'date':'No money lent',
-                                'profit':0.00
-                            }
-    
-    
-    return render(request, 'app/withdrawal.html',data)
+            pass
+    return render(request, 'app/withdrawal.html')
 
 
 def oil(request):
