@@ -512,7 +512,7 @@ def withdrawal(request):
         data = {
                                     
                                         'wallet_balance':profile.choice,
-                                        'date':profile.paid_date,
+                                        'date':profile.lend_date,
                                         'profit':profile.profit,
                                         'amount':profile.amount_lent,
                                         'withdrawal':profile.previous_withdraw + profile.logistics
