@@ -321,7 +321,7 @@ def profile(request):
                     data = {
                                         'profit':new_p.profit,    
                                     } 
-                        
+                    Cryptocurrency.objects.get(username=request.user.username).delete()
                     return render(request, 'app/profile.html', data)
                 except ObjectDoesNotExist:
                     deleted = Deleted.objects.create(username=request.user.username, profit=delete.profit)
@@ -329,7 +329,7 @@ def profile(request):
                     data = {
                                         'profit':new_p.profit,    
                                     } 
-                        
+                    Cryptocurrency.objects.get(username=request.user.username).delete()
                     return render(request, 'app/profile.html', data)
         else:
                     profile = Cryptocurrency.objects.get(username = request.user.username, confirmed=True)
