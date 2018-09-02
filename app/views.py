@@ -342,13 +342,16 @@ def profile(request):
                     return render(request, 'app/profile.html',data)
            
     except ObjectDoesNotExist:
-        if  Deleted.objects.get(username = request.user.username):
-            new_p = Deleted.objects.get(username=request.user.username)
-            data = {
-                                        'profit':new_p.profit,    
-                                    } 
-                        
-            return render(request, 'app/profile.html', data)
+        try:
+            if  Deleted.objects.get(username = request.user.username):
+                new_p = Deleted.objects.get(username=request.user.username)
+                data = {
+                                            'profit':new_p.profit,    
+                                        } 
+                            
+                return render(request, 'app/profile.html', data)
+        except ObjectDoesNotExist:
+            pass
     data = {
             
                     'amount':0.00,
