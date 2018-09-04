@@ -127,3 +127,8 @@ class Expired_Referrer(models.Model):
 class Deleted (models.Model):
     username =  models.CharField(max_length = 255, null = True)
     profit = models.PositiveIntegerField(null=True,)
+
+class Referral_Payment(models.Model):
+    username = models.CharField(max_length= 255, null= True)
+    amount = models.PositiveIntegerField(null= True)
+    previous_username = models.CharField(max_length = 255, null=True)
