@@ -3,7 +3,7 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from .forms import SignUpForm, ProfileForm, WalletForm
 from django.http import HttpResponse
-from app.models import Testimony, Cryptocurrency, Forex, Oil, Withdraw, Referrer, Newsletter, Expired_Referrer, Payable_referral, Deleted 
+from app.models import Testimony, Cryptocurrency, Forex, Oil, Withdraw, Referrer, Newsletter, Expired_Referrer, Payable_referral, Deleted, Referral_Payment 
 from django.utils.encoding import force_text
 from django.utils.http import urlsafe_base64_decode
 from app.token import account_activation_token
@@ -80,7 +80,7 @@ def signup(request):
                     referee = referrer_link,
                     referred = user.username
                 )
-                Payable_referral.objects.create(
+                Referral_Payment.objects.create(
                     username = request.user.username,
                     previous_username = referrer_link
                 )
@@ -375,9 +375,9 @@ def referrer (request):
                     if list_of_usernames.count(x)==1:
                         continue
                 amount = check_crypto.amount_lent * 0.03
-                check_number = Payable_referral.objects.filter(previous_username = i.referred).count()
+                check_number = Referral_Payment.objects.filter(previous_username = i.referred).count()
                 if check_number < 2:
-                    referrer_amount = Payable_referral.objects.filter(username = request.user.username).update(amount= amount)
+                    referrer_amount = Referral_Payment.objects.filter(username = request.user.username).update(amount= amount)
                 referrer_amount = Referrer.objects.filter(username = request.user.username)
                 data = {
                             'referrer_amount' : referrer_amount.amount,
@@ -677,7 +677,7 @@ def newsletter(request):
     
 
 def referral_withdrawal(request):
-    payment = Payable_referral.objects.filter(username = request.user.username)
+    payment = Referral_Payment.objects.filter(username = request.user.username)
     if payment.amount <= 1000:
         return redirect('withdrawal_failed')
     else:
