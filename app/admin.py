@@ -1,5 +1,5 @@
 from django.contrib import admin
-from app.models import Cryptocurrency, Forex, Oil, Withdraw, Testimony, Referrer,Newsletter, Deleted
+from app.models import Cryptocurrency, Forex, Oil, Withdraw, Testimony, Referrer,Newsletter, Deleted, Referral_Payment
 from django.contrib.auth.models import Group
 
 
@@ -32,6 +32,12 @@ class Newsletter_admin(admin.ModelAdmin):
 class Deleted_admin(admin.ModelAdmin):
     list_display = ['username','profit']
 
+class Deleted_admin(admin.ModelAdmin):
+    list_display = ['username','profit']
+
+class Referral_Pyament_admin(admin.ModelAdmin):
+    list_display = ['username','amount', 'previous_username']
+
 
 
 
@@ -43,4 +49,5 @@ admin.site.register(Testimony, Testimony_admin)
 admin.site.register(Referrer, Referrer_admin)
 admin.site.register(Newsletter, Newsletter_admin)
 admin.site.register(Deleted, Deleted_admin)
+admin.site.register(Referral_Payment, Referral_Pyament_admin)
 

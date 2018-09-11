@@ -65,6 +65,7 @@ def signup(request):
             user.refresh_from_db()  # load the profile instance created by the signal
             user.is_active = False
             user.save()
+            #username = self.cleaned_data.get('email')
             current_site = get_current_site(request)
             subject = 'Activate Your MySite Account'
             message = render_to_string('app/account_activation_email.html', {
@@ -363,33 +364,30 @@ def profile(request):
 
 
 def referrer (request):
-    try:
+
             total_referred = Referrer.objects.filter(referee = request.user.username)
             persons_referred = Referrer.objects.filter(referee = request.user.username).count()
             list_of_usernames = []
-            for i in total_referred:
-                check_crypto = Cryptocurrency.objects.get(username = i.referred)     
-                list_of_usernames.append(i.referred)
-                for x in list_of_usernames:
-                    print(list_of_usernames.count(x))
-                    if list_of_usernames.count(x)==1:
-                        continue
-                amount = check_crypto.amount_lent * 0.03
-                check_number = Referral_Payment.objects.filter(previous_username = i.referred).count()
-                if check_number < 2:
-                    referrer_amount = Referral_Payment.objects.filter(username = request.user.username).update(amount= amount)
-                referrer_amount = Referrer.objects.filter(username = request.user.username)
-                data = {
-                            'referrer_amount' : referrer_amount.amount,
+            for referred in total_referred:
+                check_crypto = Cryptocurrency.objects.filter(username = referred.referred)     
+                for i in check_crypto:
+                    amount = i.amount_lent * 0.03
+                    check_number = Referral_Payment.objects.filter(previous_username = referred.referred).count()
+                    if check_number < 1:
+                        referrer_amount = Referral_Payment.objects.filter(username = request.user.username).update(amount= amount)
+                        referrer_amount = Referral_Payment.objects.filter(username = request.user.username)
+                        referrer_amount = Referral_Payment.objects.filter(username=request.user.username)
+                        aggregation = referrer_amount.aggregate(amount=Sum('amount'))
+                        result = aggregation.get('amount', 0)
+
+                        data = {
+                            'referrer_amount' : result,
                             'persons':persons_referred
                         }
                 
-                return render(request, 'app/referral.html', data)
-
-                
-    except:
+                    return render(request, 'app/referral.html', data)
             return render(request, 'app/referral.html')
-    return render(request, 'app/referral.html')
+   
 
 
 def profile_completion(request):
