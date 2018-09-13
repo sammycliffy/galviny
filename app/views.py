@@ -82,7 +82,7 @@ def signup(request):
                     referred = user.username
                 )
                 Referral_Payment.objects.create(
-                    username = request.user.username,
+                    username = form.cleaned_data['username'],
                     previous_username = referrer_link
                 )
             send_mail(subject, message, 'Galviny', [user.email])
@@ -372,8 +372,10 @@ def referrer (request):
                 check_crypto = Cryptocurrency.objects.filter(username = referred.referred)     
                 for i in check_crypto:
                     amount = i.amount_lent * 0.03
+                    print(amount)
                     check_number = Referral_Payment.objects.filter(previous_username = referred.referred).count()
-                    if check_number < 1:
+                    print (check_number)
+                    if check_number <= 1:
                         referrer_amount = Referral_Payment.objects.filter(username = request.user.username).update(amount= amount)
                         referrer_amount = Referral_Payment.objects.filter(username = request.user.username)
                         referrer_amount = Referral_Payment.objects.filter(username=request.user.username)
@@ -385,7 +387,7 @@ def referrer (request):
                             'persons':persons_referred
                         }
                 
-                    return render(request, 'app/referral.html', data)
+                        return render(request, 'app/referral.html', data)
             return render(request, 'app/referral.html')
    
 
