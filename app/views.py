@@ -75,8 +75,10 @@ def signup(request):
                 'token': account_activation_token.make_token(user),
             })
             referrer_link = referrer_link.split('=')[-1]
-            exists =  Referrer.objects.filter(referred__iexact=referrer_link).exists()
-            if referrer_link != '' and exists != True:
+            check_start = referrer_link.startswith('/')
+            print(check_start)
+            exists =  Referrer.objects.filter(referred__iexact=user.username).exists()
+            if check_start != True and exists != True:
                 Referrer.objects.create(
                     referee = referrer_link,
                     referred = user.username
