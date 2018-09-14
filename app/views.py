@@ -371,15 +371,12 @@ def referrer (request):
             for referred in total_referred:
                 check_crypto = Cryptocurrency.objects.filter(username = referred.referred)     
                 for i in check_crypto:
-                    amount = i.amount_lent * 0.03
-                    print(amount)
+                    referred_amount = i.amount_lent * 0.03
+                    print(referred_amount)
                     check_number = Referral_Payment.objects.filter(previous_username = referred.referred).count()
                     print (check_number)
                     if check_number <= 1:
-                        referrer_amount = Referral_Payment.objects.filter(username = request.user.username, previous_username=referred.referred).update(amount= amount)
-                        for i in referrer_amount:
-                            print (i.amount)
-                        referrer_amount = Referral_Payment.objects.filter(username = request.user.username)
+                        referrer_amount = Referral_Payment.objects.filter(username = request.user.username, previous_username=referred.referred).update(amount= referred_amount)
                         referrer_amount = Referral_Payment.objects.filter(username=request.user.username)
                         aggregation = referrer_amount.aggregate(amount=Sum('amount'))
                         result = aggregation.get('amount', 0)
