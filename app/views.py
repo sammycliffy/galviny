@@ -377,7 +377,7 @@ def referrer (request):
                     print (check_number)
                     if check_number <= 1:
                         referrer_amount = Referral_Payment.objects.filter(previous_username = request.user.username).update(amount= referred_amount)
-                        referrer_amount = Referral_Payment.objects.filter(username=request.user.username)
+                        referrer_amount = Referral_Payment.objects.filter(previous_username=request.user.username)
                         aggregation = referrer_amount.aggregate(amount=Sum('amount'))
                         result = aggregation.get('amount', 0)
 
