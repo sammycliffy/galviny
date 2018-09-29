@@ -817,7 +817,7 @@ def withdrawal_success(request):
                     Cryptocurrency.objects.filter(username = request.user.username).update(
                         previous_withdraw = F('previous_withdraw') + withdraw_amount,
                         logistics =  logistics,
-                        profit = 0.0
+                        profit = 0
                         )
                     message = '{} {} made a withdrawal of {} with account number {} and bank {}'
                     subject = 'Withdrawal'
