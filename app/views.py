@@ -793,17 +793,17 @@ def withdrawal_success(request):
                         previous_withdraw = F('previous_withdraw') + withdraw_amount,
                         logistics = logistics
                         )
+                    Cryptocurrency.objects.filter(username = request.user.username).update(
+                            previous_withdraw = F('previous_withdraw') + withdraw_amount,
+                            logistics = logistics,
+                            profit = 0
+                        )
                     Referrer.objects.filter(referee = request.user.username).delete()
                     message = '{} made a withdrawal of {} with account number {} and bank {}'
                     subject = 'Withdrawal'
                     real_amount = withdraw_amount - logistics
                     sending = message.format(request.user.username,real_amount, request.user.profile.account_number, request.user.profile.bank)
                     send_mail(subject, sending, 'Galviny', ['galvinywithdraw@gmail.com'])
-                    Cryptocurrency.objects.filter(username = request.user.username).update(
-                            previous_withdraw = F('previous_withdraw') + withdraw_amount,
-                            logistics = logistics,
-                            profit = 0.0
-                        )
                     return render (request, 'app/withdrawal-success.html') 
                 else:
                     Withdraw.objects.create(
@@ -814,16 +814,16 @@ def withdrawal_success(request):
                         date = datetime.datetime.now(),
                         logistics =  logistics
                     )
-                    message = '{} {} made a withdrawal of {} with account number {} and bank {}'
-                    subject = 'Withdrawal'
-                    sending = message.format(request.user.profile.firstname, request.user.profile.lastname, withdraw_amount, request.user.profile.account_number, request.user.profile.bank)
-                    send_mail(subject, sending, 'Galviny', ['galvinywithdraw@gmail.com'])
-                    Referrer.objects.filter(referee = request.user.username).delete()
                     Cryptocurrency.objects.filter(username = request.user.username).update(
                         previous_withdraw = F('previous_withdraw') + withdraw_amount,
                         logistics =  logistics,
                         profit = 0.0
                         )
+                    message = '{} {} made a withdrawal of {} with account number {} and bank {}'
+                    subject = 'Withdrawal'
+                    sending = message.format(request.user.profile.firstname, request.user.profile.lastname, withdraw_amount, request.user.profile.account_number, request.user.profile.bank)
+                    send_mail(subject, sending, 'Galviny', ['galvinywithdraw@gmail.com'])
+                    Referrer.objects.filter(referee = request.user.username).delete()
                     return render (request, 'app/withdrawal-success.html') 
                        
     except ObjectDoesNotExist:
@@ -1034,7 +1034,7 @@ def newsletter(request):
     
 
 def referral_withdrawal(request):
-    payment = Referral_Payment.objects.filter(username = request.user.username)
+    payment = Referral_Payment.objects.get(username = request.user.username)
     if payment.amount <= 1000:
         return redirect('withdrawal_failed')
     else:
