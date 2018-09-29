@@ -883,7 +883,7 @@ def withdrawal_success(request):
                         return render (request, 'app/withdrawal-success.html') 
         except ObjectDoesNotExist:
             try:
-                payment = Forex.objects.get(username = request.user.username, lent=True)        
+                payment = Oil.objects.get(username = request.user.username, lent=True)        
                 expiry_date = payment.lend_date + timedelta(days = 5)
                 before_ten_days = payment.lend_date + timedelta(days=10)
                 current_date = timezone.now()
@@ -899,12 +899,12 @@ def withdrawal_success(request):
                             Withdraw.objects.filter(username = request.user.username).update(
                                 username = request.user.username,
                                 withdraw_amount = withdraw_amount,
-                                plan = 'Forex',
+                                plan = 'Oil',
                                 date = datetime.datetime.now(),
                                 previous_withdraw = F('previous_withdraw') + withdraw_amount,
                                 logistics = logistics
                                 )
-                            Forex.objects.filter(username = request.user.username).update(
+                            Oil.objects.filter(username = request.user.username).update(
                                     previous_withdraw = F('previous_withdraw') + withdraw_amount,
                                     logistics = logistics,
                                     profit = 0
@@ -920,12 +920,12 @@ def withdrawal_success(request):
                             Withdraw.objects.create(
                                 username = request.user.username,
                                 withdraw_amount = withdraw_amount,
-                                plan = 'Forex',
+                                plan = 'Oil',
                                 previous_withdraw = withdraw_amount,
                                 date = datetime.datetime.now(),
                                 logistics =  logistics
                             )
-                            Forex.objects.filter(username = request.user.username).update(
+                            Oil.objects.filter(username = request.user.username).update(
                                 previous_withdraw = F('previous_withdraw') + withdraw_amount,
                                 logistics =  logistics,
                                 profit = 0
