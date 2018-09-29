@@ -1043,7 +1043,7 @@ def referral_withdrawal(request):
                             withdraw_amount = payment.amount,
                             date = datetime.datetime.now(),
                         )
-        Referrer.objects.filter(username = request.user.username).delete()
+        Referrer.objects.filter(referee = request.user.username).delete()
         message = '{} {} made a withdrawal of {} with account number {} and bank {}'
         subject = 'Withdrawal'
         sending = message.format(request.user.profile.firstname, request.user.profile.lastname, withdraw_amount, request.user.profile.account_number, request.user.profile.bank)
