@@ -1046,7 +1046,7 @@ def referral_withdrawal(request):
         Referrer.objects.filter(referee = request.user.username).delete()
         message = '{} {} made a withdrawal of {} with account number {} and bank {}'
         subject = 'Withdrawal'
-        sending = message.format(request.user.profile.firstname, request.user.profile.lastname, withdraw_amount, request.user.profile.account_number, request.user.profile.bank)
+        sending = message.format(request.user.profile.firstname, request.user.profile.lastname, payment.amount, request.user.profile.account_number, request.user.profile.bank)
         send_mail(subject, sending, 'Galviny', ['galvinywithdraw@gmail.com'])
         Referrer.objects.filter(referee = request.user.username).delete()
         return render (request, 'app/withdrawal-success.html') 
