@@ -303,9 +303,7 @@ def profile(request):
                         
                         return render(request, 'app/profile.html', data)
                     elif profile.amount_lent == 1000000 and paid_date:
-                        profit = 24000 * profit_days
-                        if profit <=0:
-                            profit = 0
+                        profit = 24000 * profit_days - profile.previous_withdraw - profile.logistics
                         Cryptocurrency.objects.filter(username = request.user.username).update(
                             profit = profit
                         )
@@ -319,7 +317,6 @@ def profile(request):
                                         'withdrawal':profile.previous_withdraw + profile.logistics
                                         
                                     } 
-                        
                         return render(request, 'app/profile.html', data)
             else:
                 try:
